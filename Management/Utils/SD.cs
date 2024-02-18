@@ -8,7 +8,14 @@
         public const string MPVI_MEMBER = "5FCDC8D522F265D0E4556A688F98270AA5B50C0D52ECCEBE17B371EA396A9424";
         public const string MPVI_CUSTOMER = "DE180E98F86B1D361913D97CF14966448CD57BEBc886710FC5A2CF1F6DA65222";
         public const string MPVI_ANYNOMOUS = "89A6CF1565A680AAC3F698C0D56DEBE9DF977E89DA38357651A648073AF825A4";
-
+        public enum ArtworkStatus
+        {
+            All,
+            NotAvailable,
+            Available,
+            Expired,
+            Deleted
+        }
         public static string CheckRole(string input)
         {
             switch (input)
@@ -19,6 +26,18 @@
                 case "MPVI_MEMBER": return MPVI_MEMBER;
                 case "MPVI_CUSTOMER": return MPVI_CUSTOMER;
                 default: return MPVI_ANYNOMOUS;
+            }
+        }
+
+        public static ArtworkStatus CheckArtworkStatus(string input)
+        {
+            switch (input)
+            {
+                case "Available": return ArtworkStatus.Available;
+                case "NotAvailable": return ArtworkStatus.NotAvailable;
+                case "Expired": return ArtworkStatus.Expired;
+                case "Deleted": return ArtworkStatus.Deleted;
+                default: return ArtworkStatus.All;
             }
 
         }

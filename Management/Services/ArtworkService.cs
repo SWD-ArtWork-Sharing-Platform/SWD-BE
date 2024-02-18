@@ -4,6 +4,8 @@ using Management.Models.DTO;
 using Management.Services.IService;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Management.Util;
 
 namespace Management.Services
 {
@@ -22,11 +24,26 @@ namespace Management.Services
             _configuration = configuration;
             _userManager = userManager;
         }
-        public async Task<ResponseDTO> CreateNewArtwork(ArtworkDTO artworkDTO)
+        public async Task<ResponseDTO> CreateNewArtwork(ArtworkDTO model)
         {
             try
             {
-
+                FArtwork artwork = _mapper.Map<FArtwork>(model);
+                if (model.Image != null)
+                {
+                    string fileName = artwork.Id + Path.GetExtension(model.Image.FileName);
+                    string localPathDirector = @"wwwroot\ProductImages\" + fileName;
+                    var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), localPathDirector);
+                    using (var fileStream = new FileStream(filePathDirectory, FileMode.Create))
+                    {
+                        model.Image.CopyTo(fileStream);
+                    }
+                    artwork.ImageUrl = "/ProductImages/" + fileName;
+                    artwork.ImageLocalPath = localPathDirector; 
+                }
+               await  _db.FArtworks.AddAsync(artwork);
+               await _db.SaveChangesAsync();
+                _response.Result = _mapper.Map<ArtworkDTO>(artwork);
             }
             catch (Exception ex)
             {
@@ -36,34 +53,141 @@ namespace Management.Services
             return _response;
         }
 
-        public Task<ResponseDTO> DeleteArtWorkByID(string id, bool confirm)
+        public async Task<ResponseDTO> DeleteArtWorkByID(string id, bool confirm)
         {
-            throw new NotImplementedException();
+            try
+            {
+                FArtwork artwork = await _db.FArtworks.FirstAsync(u => u.Id == id);
+
+                if (!string.IsNullOrEmpty(artwork.ImageLocalPath))
+                {
+                    var oldFilePathLocalDirectory = Path.Combine(Directory.GetCurrentDirectory(), artwork.ImageLocalPath);
+                    FileInfo file = new FileInfo(oldFilePathLocalDirectory);
+                    if (file.Exists)
+                    {
+                        file.Delete();
+                    }
+                }
+
+                _db.Remove(artwork);
+                _db.SaveChanges();
+                _response.Result = _mapper.Map<ArtworkDTO>(artwork);
+            } catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
         }
 
-        public Task<ResponseDTO> GetAllCategory()
+        public async Task<ResponseDTO> GetAllArtwork()
         {
-            throw new NotImplementedException();
+            try
+            {
+                IEnumerable<FArtwork> artworkList = await _db.FArtworks.ToListAsync();
+                _response.Result = _mapper.Map<IEnumerable<FArtwork>>(artworkList);
+            } catch (Exception ex) {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
         }
 
-        public Task<ResponseDTO> GetArtWorkByCondition(string? name, string id, string status, string discount)
+        public async Task<ResponseDTO> GetArtWorkByCondition(string? name, string id, string status, decimal discount)
         {
-            throw new NotImplementedException();
+            try
+            {
+                IEnumerable<FArtwork> artworkList = await _db.FArtworks.ToListAsync();
+                IEnumerable<ArtworkDTO> artworkDTOList = new List<ArtworkDTO>();        
+
+                if (!string.IsNullOrEmpty(name))
+                {
+                    artworkList = artworkList.Where(u => u.ArtworkName == name);        
+                }
+                if (!string.IsNullOrEmpty(id))
+                {
+                    artworkList = artworkList.Where(u => u.Id== name);
+                }
+                if (discount != null)
+                {
+                    artworkList = artworkList.Where(u => u.Discount == discount);
+                }
+                if (!string.IsNullOrEmpty(status))
+                {
+                    SD.ArtworkStatus artworkStatus = SD.CheckArtworkStatus(status);
+                    if (artworkStatus != SD.ArtworkStatus.All)
+                    {
+                        artworkList = artworkList.Where(u => (u.Status ?? "").Equals(artworkStatus.ToString()));
+                    }
+                }
+                if (artworkList != null)
+                {
+                    artworkDTOList = _mapper.Map<IEnumerable<ArtworkDTO>>(artworkList);
+                }
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
         }
 
-        public Task<ResponseDTO> GetArtworkById(string id)
+        public async Task<ResponseDTO> GetArtworkById(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                FArtwork artwork = await _db.FArtworks.FirstAsync(x => x.Id == id);
+                _response.Result = _mapper.Map<FArtwork>(artwork);
+            }catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
         }
 
-        public Task<ResponseDTO> ReportArtworkByID(string id)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<ResponseDTO> UpdateArtwork(ArtworkDTO artworkDTO)
+        public async Task<ResponseDTO> UpdateArtwork(ArtworkDTO artworkDTO)
         {
-            throw new NotImplementedException();
+            try
+            {
+                FArtwork artwork = _mapper.Map<FArtwork>(artworkDTO);
+                FArtwork oldArtwork = _db.FArtworks.First(u => u.ArtworkId == artworkDTO.ArtworkId);
+
+                if (oldArtwork == null)
+                {
+                    _response.IsSuccess = false;
+                    _response.Message = "No supercategory found!";
+                }
+                else
+                {
+                    if (artworkDTO.Image != null)
+                    {
+                        var oldfilePathDirectory = Path.Combine(Directory.GetCurrentDirectory());
+                        FileInfo file = new FileInfo(oldfilePathDirectory);
+                        if (file.Exists)
+                        {
+                            file.Delete();
+                        }
+                        string fileName = artwork.ArtworkId + Path.GetExtension(Directory.GetCurrentDirectory());
+                        var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+                        using (var fileStream = new FileStream(filePathDirectory, FileMode.Create))
+                        {
+                            artworkDTO.Image.CopyTo(fileStream);
+                        }
+                        artwork.ImageUrl = fileName;
+                    }
+
+                    _db.FArtworks.Update(oldArtwork);
+                    await _db.SaveChangesAsync();
+                }
+            } catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
         }
     }
 }

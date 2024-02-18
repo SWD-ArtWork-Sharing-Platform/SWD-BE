@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Management.Models;
-using Management.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Management.Data;

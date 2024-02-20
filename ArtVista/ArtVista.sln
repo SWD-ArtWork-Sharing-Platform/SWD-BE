@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management", "..\Management\Management.csproj", "{65C308E6-B33D-48A3-B447-1C20AC8E83B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Management", "..\Management\Management.csproj", "{65C308E6-B33D-48A3-B447-1C20AC8E83B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth", "..\Auth\Auth.csproj", "{3A539A30-217E-4C5A-8C8A-A2CD62F073C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth", "..\Auth\Auth.csproj", "{3A539A30-217E-4C5A-8C8A-A2CD62F073C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Market", "Market\Market.csproj", "{93A78C99-47A6-4BD5-B1ED-FB56DD03E9BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{3A539A30-217E-4C5A-8C8A-A2CD62F073C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A539A30-217E-4C5A-8C8A-A2CD62F073C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A539A30-217E-4C5A-8C8A-A2CD62F073C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93A78C99-47A6-4BD5-B1ED-FB56DD03E9BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93A78C99-47A6-4BD5-B1ED-FB56DD03E9BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93A78C99-47A6-4BD5-B1ED-FB56DD03E9BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93A78C99-47A6-4BD5-B1ED-FB56DD03E9BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

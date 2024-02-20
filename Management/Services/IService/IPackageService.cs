@@ -4,11 +4,11 @@ namespace Management.Services.IService
 {
     public interface IPackageService
     {
-        Task<ResponseDTO> GetAllPackage();
-        Task<ResponseDTO> GetPackageByID(string id);
-        Task<ResponseDTO> CreatePackage(PackageDTO packageDTO);
-        Task<ResponseDTO> UpdatePackage(PackageDTO packageDTO);
-        Task<ResponseDTO> DeletePackage(string id, bool confirm);
-        Task<ResponseDTO> GetPackageByCondtion(string name, decimal price, decimal discount);
+        ResponseDTO GetAllPackage();
+        ResponseDTO GetPackageByID(string id);
+        ResponseDTO CreatePackage(PackageDTO packageDTO);
+        ResponseDTO UpdatePackage(PackageDTO packageDTO);
+        ResponseDTO DeletePackage(string id, bool confirm);
+        ResponseDTO GetPackageByCondtion(string name, decimal price, decimal discount);
     }
 }

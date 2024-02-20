@@ -49,11 +49,11 @@ namespace Management.Controllers
         }
 
         [HttpPost("CreateNewArtwork")]
-        public async Task<ResponseDTO> CreateNewArtwork(ArtworkDTO artworkDTO)
+        public  ResponseDTO CreateNewArtwork(ArtworkDTO artworkDTO)
         {
             try
             {
-                _response.Result = await _artworkService.CreateNewArtwork(artworkDTO);
+                _response.Result =  _artworkService.CreateNewArtwork(artworkDTO);
             }
             catch (Exception ex)
             {
@@ -93,11 +93,11 @@ namespace Management.Controllers
         }
 
         [HttpDelete("DeleteArtWorkByID")]
-        public async Task<ResponseDTO> DeleteArtWorkByID(string id, bool confirm)
+        public ResponseDTO DeleteArtWorkByID(string id, bool confirm)
         {
             try
             {
-                _response.Result = await _artworkService.DeleteArtWorkByID(id, confirm);
+                _response.Result =  _artworkService.DeleteArtWorkByID(id, confirm);
             }
             catch (Exception ex)
             {

@@ -1,12 +1,15 @@
 
 using AutoMapper;
 using Management.Data;
+using Management.Extension;
 using Management.Models;
 using Management.Services;
 using Management.Services.IService;
 using Management.Utils;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 namespace Management
 {
@@ -28,24 +31,53 @@ namespace Management
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddScoped<BackendApiAuthenthicationHttpClientHandler>();
             builder.Services.AddScoped<IArtworkService, ArtworkService>();
+            builder.Services.AddScoped<IConfigurationService, ConfigurationService>();
 
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen(option =>
+            {
+                option.AddSecurityDefinition(name: JwtBearerDefaults.AuthenticationScheme, securityScheme: new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Description = "Enter string as follow : Bearer Generated-JWT-Token",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+                option.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    { new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = JwtBearerDefaults.AuthenticationScheme
+                        }
+                    }, new string[]{}
+                    }
+                });
+            }
+           );
+            builder.AppAuthentication();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+                if (!app.Environment.IsDevelopment())
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Order API");
+                    c.RoutePrefix = string.Empty;
+                }
+            });
 
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

@@ -4,10 +4,10 @@ namespace Management.Services.IService
 {
     public interface IConfigurationService
     {
-        Task<ResponseDTO> GetAllConfiguration();
-        Task<ResponseDTO> GetConfigurationByID(string id); 
-        Task<ResponseDTO> DeleteConfigurationByID(string id, bool confirm);
-        Task<ResponseDTO> CreateNewConfiguration(ConfigurationDTO configurationDTO);
-        Task<ResponseDTO> UpdateConfiguration(ConfigurationDTO configurationDTO);   
+        ResponseDTO GetAllConfiguration();
+        ResponseDTO GetConfigurationByID(string id); 
+        ResponseDTO DeleteConfigurationByID(string id, bool confirm);
+        ResponseDTO CreateNewConfiguration(ConfigurationDTO configurationDTO);
+        ResponseDTO UpdateConfiguration(ConfigurationDTO configurationDTO);   
     }
 }

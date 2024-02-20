@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Management.Util;
+using Management.Repository.IRepository;
 
 namespace Management.Services
 {
@@ -14,17 +15,17 @@ namespace Management.Services
         private ResponseDTO _response;
         private IMapper _mapper;
         private readonly ArtworkSharingPlatformContext _db;
+        private readonly IArtworkRepository _artworkRepository;
         private readonly IConfiguration _configuration;
-        private readonly UserManager<ApplicationUser> _userManager;
-        public ArtworkService(ArtworkSharingPlatformContext db, IMapper mapper, IConfiguration configuration, UserManager<ApplicationUser> userManager)
+        public ArtworkService(ArtworkSharingPlatformContext db, IMapper mapper, IConfiguration configuration, IArtworkRepository artworkRepository)
         {
             _db = db;
             this._response = new ResponseDTO();
             _mapper = mapper;
             _configuration = configuration;
-            _userManager = userManager;
+            _artworkRepository = artworkRepository;
         }
-        public async Task<ResponseDTO> CreateNewArtwork(ArtworkDTO model)
+        public ResponseDTO CreateNewArtwork(ArtworkDTO model)
         {
             try
             {
@@ -39,10 +40,11 @@ namespace Management.Services
                         model.Image.CopyTo(fileStream);
                     }
                     artwork.ImageUrl = "/ProductImages/" + fileName;
-                    artwork.ImageLocalPath = localPathDirector; 
+                    artwork.ImageLocalPath = localPathDirector;
                 }
-               await  _db.FArtworks.AddAsync(artwork);
-               await _db.SaveChangesAsync();
+
+                _artworkRepository.Add(artwork);
+                _artworkRepository.Save();
                 _response.Result = _mapper.Map<ArtworkDTO>(artwork);
             }
             catch (Exception ex)
@@ -53,26 +55,30 @@ namespace Management.Services
             return _response;
         }
 
-        public async Task<ResponseDTO> DeleteArtWorkByID(string id, bool confirm)
+        public  ResponseDTO DeleteArtWorkByID(string id, bool confirm)
         {
             try
             {
-                FArtwork artwork = await _db.FArtworks.FirstAsync(u => u.Id == id);
-
-                if (!string.IsNullOrEmpty(artwork.ImageLocalPath))
+                if (confirm)
                 {
-                    var oldFilePathLocalDirectory = Path.Combine(Directory.GetCurrentDirectory(), artwork.ImageLocalPath);
-                    FileInfo file = new FileInfo(oldFilePathLocalDirectory);
-                    if (file.Exists)
+                    FArtwork artwork =  _db.FArtworks.First(u => u.Id == id);
+
+                    if (!string.IsNullOrEmpty(artwork.ImageLocalPath))
                     {
-                        file.Delete();
+                        var oldFilePathLocalDirectory = Path.Combine(Directory.GetCurrentDirectory(), artwork.ImageLocalPath);
+                        FileInfo file = new FileInfo(oldFilePathLocalDirectory);
+                        if (file.Exists)
+                        {
+                            file.Delete();
+                        }
                     }
+
+                    _artworkRepository.Remove(artwork);
+                    _artworkRepository.Save();
+                    _response.Result = _mapper.Map<ArtworkDTO>(artwork);
                 }
-
-                _db.Remove(artwork);
-                _db.SaveChanges();
-                _response.Result = _mapper.Map<ArtworkDTO>(artwork);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 _response.IsSuccess = false;
                 _response.Message = ex.Message;
@@ -80,33 +86,35 @@ namespace Management.Services
             return _response;
         }
 
-        public async Task<ResponseDTO> GetAllArtwork()
+        public  ResponseDTO GetAllArtwork()
         {
             try
             {
-                IEnumerable<FArtwork> artworkList = await _db.FArtworks.ToListAsync();
+                IEnumerable<FArtwork> artworkList = _artworkRepository.GetAll();
                 _response.Result = _mapper.Map<IEnumerable<FArtwork>>(artworkList);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 _response.IsSuccess = false;
                 _response.Message = ex.Message;
             }
             return _response;
         }
 
-        public async Task<ResponseDTO> GetArtWorkByCondition(string? name, string id, string status, decimal discount)
+        public ResponseDTO GetArtWorkByCondition(string? name, string id, string status, decimal discount)
         {
             try
             {
-                IEnumerable<FArtwork> artworkList = await _db.FArtworks.ToListAsync();
-                IEnumerable<ArtworkDTO> artworkDTOList = new List<ArtworkDTO>();        
+                IEnumerable<FArtwork> artworkList = _artworkRepository.GetAll();
+                IEnumerable<ArtworkDTO> artworkDTOList = new List<ArtworkDTO>();
 
                 if (!string.IsNullOrEmpty(name))
                 {
-                    artworkList = artworkList.Where(u => u.ArtworkName == name);        
+                    artworkList = artworkList.Where(u => u.ArtworkName == name);
                 }
                 if (!string.IsNullOrEmpty(id))
                 {
-                    artworkList = artworkList.Where(u => u.Id== name);
+                    artworkList = artworkList.Where(u => u.Id == name);
                 }
                 if (discount != null)
                 {
@@ -133,13 +141,14 @@ namespace Management.Services
             return _response;
         }
 
-        public async Task<ResponseDTO> GetArtworkById(string id)
+        public ResponseDTO GetArtworkById(string id)
         {
             try
             {
-                FArtwork artwork = await _db.FArtworks.FirstAsync(x => x.Id == id);
+                FArtwork artwork =  _artworkRepository.Get(u => u.ArtworkId == id);   
                 _response.Result = _mapper.Map<FArtwork>(artwork);
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 _response.IsSuccess = false;
                 _response.Message = ex.Message;
@@ -148,7 +157,7 @@ namespace Management.Services
         }
 
 
-        public async Task<ResponseDTO> UpdateArtwork(ArtworkDTO artworkDTO)
+        public ResponseDTO UpdateArtwork(ArtworkDTO artworkDTO)
         {
             try
             {
@@ -179,10 +188,12 @@ namespace Management.Services
                         artwork.ImageUrl = fileName;
                     }
 
-                    _db.FArtworks.Update(oldArtwork);
-                    await _db.SaveChangesAsync();
+                    _artworkRepository.Update(oldArtwork);
+                    _artworkRepository.Save();
+                    _response.Message = "Update successfully!";
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 _response.IsSuccess = false;
                 _response.Message = ex.Message;

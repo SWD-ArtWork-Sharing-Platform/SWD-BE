@@ -4,11 +4,11 @@ namespace Management.Services.IService
 {
     public interface IArtworkService
     {
-        Task<ResponseDTO> GetAllArtwork();
-        Task<ResponseDTO> GetArtworkById(string id);
-        Task<ResponseDTO> UpdateArtwork(ArtworkDTO artworkDTO);
-        Task<ResponseDTO> DeleteArtWorkByID(string id, bool confirm);
-        Task<ResponseDTO> CreateNewArtwork(ArtworkDTO artworkDTO);
-        Task<ResponseDTO> GetArtWorkByCondition(string? name, string id, string status, decimal discount);
+        ResponseDTO GetAllArtwork();
+        ResponseDTO GetArtworkById(string id);
+        ResponseDTO UpdateArtwork(ArtworkDTO artworkDTO);
+        ResponseDTO DeleteArtWorkByID(string id, bool confirm);
+        ResponseDTO CreateNewArtwork(ArtworkDTO artworkDTO);
+        ResponseDTO GetArtWorkByCondition(string? name, string id, string status, decimal discount);
     }
 }

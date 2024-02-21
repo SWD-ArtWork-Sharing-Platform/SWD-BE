@@ -20,11 +20,11 @@ namespace Management.Controllers
         }
 
         [HttpGet("GettAllArtwork")]
-        public async Task<ResponseDTO> GetAllArtwork()
+        public ResponseDTO GetAllArtwork()
         {
             try
             {
-                _response.Result = await _artworkService.GetAllArtwork();   
+                _response.Result =  _artworkService.GetAllArtwork();   
             } catch (Exception ex)
             {
                 _response.IsSuccess = false;
@@ -34,11 +34,11 @@ namespace Management.Controllers
         }
 
         [HttpGet("GetAartworkByID")]
-        public async Task<ResponseDTO> GetArtworkByID(string id)
+        public ResponseDTO GetArtworkByID(string id)
         {
             try
             {
-                _response.Result = await _artworkService.GetArtworkById(id);
+                _response.Result =  _artworkService.GetArtworkById(id);
             }
             catch (Exception ex)
             {
@@ -64,11 +64,11 @@ namespace Management.Controllers
         }
 
         [HttpPut("UpdateArtwork")]
-        public async Task<ResponseDTO> UpdateArtwork(ArtworkDTO artworkDTO)
+        public ResponseDTO UpdateArtwork(ArtworkDTO artworkDTO)
         {
             try
             {
-                _response.Result = await _artworkService.UpdateArtwork(artworkDTO);
+                _response.Result =  _artworkService.UpdateArtwork(artworkDTO);
             } catch (Exception ex)
             {
                 _response.IsSuccess = false;
@@ -78,11 +78,11 @@ namespace Management.Controllers
         }
 
         [HttpGet("GetArtWorkByCondition")]
-        public async Task<ResponseDTO> GetArtWorkByCondition(string? name, string id, string status, decimal discount)
+        public ResponseDTO GetArtWorkByCondition(string? name, string id, string status, decimal discount)
         {
             try
             {
-                _response.Result = await _artworkService.GetArtWorkByCondition(name, id, status, discount);
+                _response.Result =  _artworkService.GetArtWorkByCondition(name, id, status, discount);
             }
             catch (Exception ex)
             {

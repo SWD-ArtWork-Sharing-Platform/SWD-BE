@@ -59,7 +59,7 @@ namespace Management.Services
         {
             try
             {
-                if (confirm)
+                if (confirm == true)
                 {
                     FArtwork artwork =  _db.FArtworks.First(u => u.Id == id);
 
@@ -116,7 +116,7 @@ namespace Management.Services
                 {
                     artworkList = artworkList.Where(u => u.Id == name);
                 }
-                if (discount != null)
+                if (discount > 0)
                 {
                     artworkList = artworkList.Where(u => u.Discount == discount);
                 }

@@ -44,7 +44,7 @@ namespace Management.Services
         {
             try
             {
-                if (confirm)
+                if (confirm == true)
                 {
                     FConfiguration configuration = _db.FConfigurations.First(u => u.ConfigurationId == id);
                     _configurationRepository.Remove(configuration);

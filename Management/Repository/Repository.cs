@@ -42,9 +42,9 @@ namespace Management.Repository
             Dbset.RemoveRange(entity);
         }
 
-        public async void Save()
+        public void Save()
         {
-            await _db.SaveChangesAsync();
+             _db.SaveChanges();
         }
 
         public void Update(T entity)

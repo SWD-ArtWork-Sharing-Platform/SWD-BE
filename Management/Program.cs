@@ -3,6 +3,8 @@ using AutoMapper;
 using Management.Data;
 using Management.Extension;
 using Management.Models;
+using Management.Repository;
+using Management.Repository.IRepository;
 using Management.Services;
 using Management.Services.IService;
 using Management.Utils;
@@ -30,6 +32,16 @@ namespace Management
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddScoped<BackendApiAuthenthicationHttpClientHandler>();
+
+            builder.Services.AddScoped<IArtworkRepository, ArtworkRepository>();
+            builder.Services.AddScoped<IConfigurationRepository, ConfigurationRepository>();
+            builder.Services.AddScoped<IInteractionRepository, InteractionRepository>();
+            builder.Services.AddScoped<IPackageOfCreatorRepository, PackageOfCreatorRepository>();
+            builder.Services.AddScoped<IPackageRepository, PackageRepository>();
+            builder.Services.AddScoped<IPostRepository, PostRepository>();
+
+
+
             builder.Services.AddScoped<IArtworkService, ArtworkService>();
             builder.Services.AddScoped<IConfigurationService, ConfigurationService>();
 

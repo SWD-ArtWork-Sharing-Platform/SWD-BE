@@ -51,7 +51,7 @@ namespace Auth
 
 
             app.MapControllers();
-            // ApplyMigration();
+             ApplyMigration();
             app.Run();
 
 

@@ -18,7 +18,6 @@ namespace Auth.Controllers
         private readonly AppDbContext _db;
         private readonly IAuthService _authService;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
         protected ResponseDTO _response;
         private readonly IConfiguration _configuration;
         private readonly IJwtTokenGenerator _jwtTokenGenerator;

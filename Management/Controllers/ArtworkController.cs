@@ -24,7 +24,7 @@ namespace Management.Controllers
         {
             try
             {
-                _response.Result = await _artworkService.GetAllArtwork();   
+                _response.Result =  _artworkService.GetAllArtwork();   
             } catch (Exception ex)
             {
                 _response.IsSuccess = false;
@@ -38,7 +38,7 @@ namespace Management.Controllers
         {
             try
             {
-                _response.Result = await _artworkService.GetArtworkById(id);
+                _response.Result =  _artworkService.GetArtworkById(id);
             }
             catch (Exception ex)
             {
@@ -68,7 +68,7 @@ namespace Management.Controllers
         {
             try
             {
-                _response.Result = await _artworkService.UpdateArtwork(artworkDTO);
+                _response.Result =  _artworkService.UpdateArtwork(artworkDTO);
             } catch (Exception ex)
             {
                 _response.IsSuccess = false;
@@ -82,7 +82,7 @@ namespace Management.Controllers
         {
             try
             {
-                _response.Result = await _artworkService.GetArtWorkByCondition(name, id, status, discount);
+                _response.Result =  _artworkService.GetArtWorkByCondition(name, id, status, discount);
             }
             catch (Exception ex)
             {

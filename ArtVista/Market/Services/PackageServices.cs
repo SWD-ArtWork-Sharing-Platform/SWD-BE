@@ -67,24 +67,51 @@ namespace Market.Services
             }
         }
 
-        public async Task<IEnumerable<PackageDTO>> BuyPackage(string userID, PackageOFCreatorDTO obj)
+        public async Task<bool> BuyPackage(string userID, PackageOFCreatorDTO obj)
         {
-            throw new NotImplementedException();
+            DPackageOfCreator packageData = _mapper.Map<DPackageOfCreator>(obj);
+            if(packageData != null)
+            {
+                _db.DPackageOfCreators.Add(packageData);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
-        public async Task<IEnumerable<PackageDTO>> ReturnPackage(string userID, PackageOFCreatorDTO obj)
+
+        public async Task<bool> AdminUpdatePackage(PackageDTO obj)
         {
-            throw new NotImplementedException();
+            FPackage packageData = _mapper.Map<FPackage>(obj);
+            if (packageData != null)
+            {
+                _db.FPackages.Update(packageData);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public async Task<IEnumerable<PackageDTO>> AdminUpdatePackage(PackageDTO obj)
+        public async Task<bool> AdminDeletePackage(string packageID)
         {
-            throw new NotImplementedException();
-        }
+            FPackage? packageData = _db.FPackages.FirstOrDefault(u => u.PackageId == packageID);
+            if (packageData != null)
+            {
+                _db.FPackages.Remove(packageData);
 
-        public Task<IEnumerable<PackageDTO>> AdminDeletePackage(string packageID)
-        {
-            throw new NotImplementedException();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
  
 

@@ -22,6 +22,7 @@ public partial class ArtworkSharingPlatformContext : DbContext
 
     public virtual DbSet<DPackageOfCreator> DPackageOfCreators { get; set; }
 
+    public virtual DbSet<DWishlistDetail> DWishlistDetails { get; set; }
     public virtual DbSet<FArtwork> FArtworks { get; set; }
 
     public virtual DbSet<FOrder> FOrders { get; set; }
@@ -37,6 +38,23 @@ public partial class ArtworkSharingPlatformContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<DWishlistDetail>(entity =>
+        {
+            entity.HasKey(e => e.WishlistDetailId);
+
+            entity.ToTable("D_WishlistDetail");
+
+            entity.Property(e => e.WishlistDetailId)
+                .HasMaxLength(50)
+                .HasColumnName("WishlistDetail_ID");
+            entity.Property(e => e.ArtworkId)
+                .HasMaxLength(50)
+                .HasColumnName("Artwork_ID");
+            entity.Property(e => e.WishlistId)
+                .HasMaxLength(50)
+                .HasColumnName("Wishlist_ID");
+        });
+
         modelBuilder.Entity<FPost>(entity =>
         {
             entity.HasKey(e => e.PostId);

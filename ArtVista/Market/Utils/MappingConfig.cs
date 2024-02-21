@@ -48,6 +48,7 @@ namespace Market
                    .ForMember(dest => dest.OrderId, opt => opt.MapFrom(src => src.Order.OrderId));
 
                 config.CreateMap<FWishlist, WishListDTO>().ReverseMap();
+                config.CreateMap<DWishlistDetail, WishListDetailDTO>().ReverseMap();
 
             });
             return mappingConfig;

@@ -6,10 +6,9 @@ namespace Market.Services.IServices
     {
         Task<IEnumerable<PackageDTO>> GetAllAvailablePackage(string? name, int? max, decimal? price, decimal? discount);
         Task<IEnumerable<PackageOFCreatorDTO>> GetAllPurchasePackagebyUserID(string userID);
-        Task<IEnumerable<PackageDTO>> BuyPackage(string userID, PackageOFCreatorDTO obj);
-        Task<IEnumerable<PackageDTO>> ReturnPackage(string userID, PackageOFCreatorDTO obj);
-        Task<IEnumerable<PackageDTO>> AdminUpdatePackage(PackageDTO obj);
-        Task<IEnumerable<PackageDTO>> AdminDeletePackage(string packageID);
+        Task<bool> BuyPackage(string userID, PackageOFCreatorDTO obj);
+        Task<bool> AdminUpdatePackage(PackageDTO obj);
+        Task<bool> AdminDeletePackage(string packageID);
 
 
 

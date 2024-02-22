@@ -4,7 +4,7 @@ namespace Management.Services.IService
 {
     public interface IReportService
     {
-        Task<ResponseDTO> MonthlyInspection(DateTime SelectedMoth);
-        Task<ResponseDTO> ReportByUser(string id);
+        ResponseDTO MonthlyInspection(DateTime SelectedMoth);
+        ResponseDTO ReportByUser(string id);
     }
 }

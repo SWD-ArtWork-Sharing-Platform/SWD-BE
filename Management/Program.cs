@@ -39,11 +39,17 @@ namespace Management
             builder.Services.AddScoped<IPackageOfCreatorRepository, PackageOfCreatorRepository>();
             builder.Services.AddScoped<IPackageRepository, PackageRepository>();
             builder.Services.AddScoped<IPostRepository, PostRepository>();
+            builder.Services.AddScoped<IReportRepository, ReportRepository>();
 
 
 
             builder.Services.AddScoped<IArtworkService, ArtworkService>();
             builder.Services.AddScoped<IConfigurationService, ConfigurationService>();
+            builder.Services.AddScoped<IInteractionService, InteractionService>();
+            builder.Services.AddScoped<IPackageOfCreatorService, PackageOfCreatorService>();
+            builder.Services.AddScoped<IPackageService, PackageService>();
+            builder.Services.AddScoped<IPostService, PostService>();
+            builder.Services.AddScoped<IReportService, ReportService>();
 
 
             builder.Services.AddControllers();

@@ -1,18 +1,68 @@
-﻿using Management.Models.DTO;
+﻿using AutoMapper;
+using Management.Data;
+using Management.Models;
+using Management.Models.DTO;
+using Management.Repository.IRepository;
 using Management.Services.IService;
+using Management.Util;
+using Microsoft.AspNetCore.Identity;
 
 namespace Management.Services
 {
     public class ReportService : IReportService
     {
-        public Task<ResponseDTO> MonthlyInspection(DateTime SelectedMoth)
+        private ResponseDTO _response;
+        private IMapper _mapper;
+        private readonly ArtworkSharingPlatformContext _db;
+        private  IReportRepository _reportRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
+        public ReportService(ArtworkSharingPlatformContext db, IMapper mapper, IReportRepository reportRepository, UserManager<ApplicationUser> userManager)
         {
-            throw new NotImplementedException();
+            this._response = new ResponseDTO(); 
+            _mapper = mapper;
+            _db = db;
+            _reportRepository = reportRepository;   
+            _userManager = userManager; 
+        }
+        public ResponseDTO MonthlyInspection(DateTime SelectedMoth)
+        {
+            try
+            {
+                DateTime currentMonthStart = new DateTime(SelectedMoth.Year, SelectedMoth.Month, 1);
+                DateTime currentMonthEnd = currentMonthStart.AddMonths(1).AddDays(-1);
+
+                IEnumerable<FReport> reportList = _reportRepository.GetAll().Where(u => u.CreatedOn >= currentMonthStart && u.CreatedOn <= currentMonthEnd);
+                IEnumerable<ReportDTO> reportDTOList = _mapper.Map<IEnumerable<ReportDTO>>(reportList);
+
+                _response.Result = reportDTOList;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
         }
 
-        public Task<ResponseDTO> ReportByUser(string id)
+        public ResponseDTO ReportByUser(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                IEnumerable<FReport> objList = _reportRepository.GetAll().Where(u => u.Id == id).OrderBy(u => u.Id);
+                IEnumerable<ReportDTO> reportDTOs = new List<ReportDTO>();
+
+                if (objList != null)
+                {
+                    reportDTOs = _mapper.Map<IEnumerable<ReportDTO>>(objList);       
+                }
+                _response.Result = reportDTOs;  
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
         }
     }
 }

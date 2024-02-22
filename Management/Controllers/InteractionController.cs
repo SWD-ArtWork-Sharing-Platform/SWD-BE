@@ -1,6 +1,7 @@
 ﻿using Azure;
 using Management.Models.DTO;
 using Management.Services.IService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace Management.Controllers
 {
     [Route("api/interaction")]
     [ApiController]
+    
     public class InteractionController : ControllerBase
     {
         protected ResponseDTO _response;
@@ -48,6 +50,7 @@ namespace Management.Controllers
             return _response;
         }
 
+        [Authorize]
         [HttpGet("GetInteractionByUserID")]
         public ResponseDTO GetInteractionByUserID(string userID)
         {
@@ -78,6 +81,8 @@ namespace Management.Controllers
             return _response;
         }
 
+
+        [Authorize]
         [HttpPost("Createinteraction")]
         public ResponseDTO CreateInteraction(InteractionDTO interactionDTO)
         {
@@ -93,6 +98,8 @@ namespace Management.Controllers
             return _response;
         }
 
+
+        [Authorize]
         [HttpPut("UpdateInteraction")]
         public ResponseDTO UpdateInteraction(InteractionDTO interactionDTO) 
         {
@@ -108,6 +115,9 @@ namespace Management.Controllers
             return _response;
         }
 
+
+
+        [Authorize]
         [HttpDelete("DeleteInteraction")]
         public ResponseDTO DeleteInteraction(string id)
         {

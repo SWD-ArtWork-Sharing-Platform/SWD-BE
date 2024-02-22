@@ -7,6 +7,7 @@ using Management.Repository;
 using Management.Repository.IRepository;
 using Management.Services;
 using Management.Services.IService;
+using Management.Util;
 using Management.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -81,6 +82,27 @@ namespace Management
             }
            );
             builder.AppAuthentication();
+            builder.Services.AddAuthorization(options => {
+
+                options.AddPolicy("ARTWORKMANAGEMENT", policy =>
+                {
+                    policy.RequireRole(SD.ADMIN);
+                    policy.RequireRole(SD.MODERATOR);
+                    policy.RequireRole(SD.CREATOR);
+                });
+
+                options.AddPolicy("ORGANIZATION", policy =>
+                {
+                    policy.RequireRole(SD.ADMIN);
+                    policy.RequireRole(SD.MODERATOR);
+                });
+
+                options.AddPolicy("CUSTOMER_USER", policy =>
+                {
+                    policy.RequireRole(SD.CUSTOMER);
+                    policy.RequireRole(SD.CREATOR);
+                });
+            });
 
             var app = builder.Build();
 

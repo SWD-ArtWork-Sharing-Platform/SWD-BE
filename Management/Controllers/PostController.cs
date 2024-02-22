@@ -1,5 +1,6 @@
 ﻿using Management.Models.DTO;
 using Management.Services.IService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,7 @@ namespace Management.Controllers
             _postService = postService; 
         }
 
+        [Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpPost("CreateNewPost")]
         public ResponseDTO CreateNewPost(PostDTO postDTO)
         {
@@ -33,6 +35,7 @@ namespace Management.Controllers
             return _response;
         }
 
+        [Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpDelete("DeletePostByID")]
         public ResponseDTO DeletePostByID(string id)
         {
@@ -48,12 +51,13 @@ namespace Management.Controllers
             return _response;
         }
 
+
         [HttpGet("GetPostByCondition")]
         public ResponseDTO GetPostByCondition(string title, string artworkId)
         {
             try
             {
-                _response.Result = _postService.GetPostByCondition(title, artworkId);       
+               _response.Result = _postService.GetPostByCondition(title, artworkId);       
             }
             catch (Exception ex)
             {
@@ -93,6 +97,7 @@ namespace Management.Controllers
             return _response;
         }
 
+        [Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpPut("UpdatePost")]
         public ResponseDTO UpdatePost(PostDTO postDTO)
         {

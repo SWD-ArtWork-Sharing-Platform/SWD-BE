@@ -9,6 +9,7 @@ namespace Market.Services.IServices
         Task<bool> CreateArtWork(ArtWorkDTO artworkDTO);
         Task<bool> UpdateArtWork(ArtWorkDTO artworkDTO);
         Task<bool> DeleteArtWork(string id);
+        Task<ArtWorkDTO> GetArtWork(string artWorkID);
 
 
 

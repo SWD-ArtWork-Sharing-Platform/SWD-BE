@@ -1,5 +1,6 @@
 ﻿using Management.Models.DTO;
 using Management.Services.IService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.NetworkInformation;
@@ -33,7 +34,7 @@ namespace Management.Controllers
             return _response;
         }
 
-        [HttpGet("GetAartworkByID")]
+        [HttpGet("GetArtworkByID")]
         public ResponseDTO GetArtworkByID(string id)
         {
             try
@@ -48,6 +49,7 @@ namespace Management.Controllers
             return _response;
         }
 
+        [Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpPost("CreateNewArtwork")]
         public  ResponseDTO CreateNewArtwork(ArtworkDTO artworkDTO)
         {
@@ -63,6 +65,7 @@ namespace Management.Controllers
             return _response;
         }
 
+        [Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpPut("UpdateArtwork")]
         public ResponseDTO UpdateArtwork(ArtworkDTO artworkDTO)
         {
@@ -76,6 +79,7 @@ namespace Management.Controllers
             }
             return _response;
         }
+
 
         [HttpGet("GetArtWorkByCondition")]
         public ResponseDTO GetArtWorkByCondition(string? name, string id, string status, decimal discount)
@@ -92,6 +96,7 @@ namespace Management.Controllers
             return _response;
         }
 
+        [Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpDelete("DeleteArtWorkByID")]
         public ResponseDTO DeleteArtWorkByID(string id, bool confirm)
         {

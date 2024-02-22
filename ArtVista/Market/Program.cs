@@ -2,12 +2,15 @@
 using AutoMapper;
 using Market.Data;
 using Market.Models;
+using Market.Services.IServices;
+using Market.Services;
 using Market.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using MPVI_Warehouse.Extension;
+using Management.Util;
+using Market.Extension;
 
 namespace Market
 {
@@ -28,6 +31,8 @@ namespace Market
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddScoped<BackendApiAuthenthicationHttpClientHandler>();
+            builder.Services.AddScoped<IImageProcessingService, ImageProcessingService>();
+
 
 
             builder.Services.AddControllers();
@@ -57,16 +62,26 @@ namespace Market
                 });
             }
             );
-
             builder.AppAuthentication();
             builder.Services.AddAuthorization(options => {
-
-                options.AddPolicy("MPVI_Organization", policy =>
+                
+                options.AddPolicy("ARTWORKMANAGEMENT", policy =>
                 {
-                   /* policy.RequireRole(SD.MPVI_SUPER_ADMIN);
-                    policy.RequireRole(SD.MPVI_WAREHOUSE_MANAGER);
-                    policy.RequireRole(SD.MPVI_ECONOMIC_LEAD);
-                    policy.RequireRole(SD.MPVI_MEMBER);*/
+                    policy.RequireRole(SD.ADMIN);
+                    policy.RequireRole(SD.MODERATOR);
+                    policy.RequireRole(SD.CREATOR);
+                });
+
+                options.AddPolicy("ORGANIZATION", policy =>
+                {
+                    policy.RequireRole(SD.ADMIN);
+                    policy.RequireRole(SD.MODERATOR);
+                });
+
+                options.AddPolicy("CUSTOMER_USER", policy =>
+                {
+                    policy.RequireRole(SD.CUSTOMER);
+                    policy.RequireRole(SD.CREATOR);
                 });
             });
 

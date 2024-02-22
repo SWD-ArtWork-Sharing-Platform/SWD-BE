@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Runtime.CompilerServices;
 using System.Text;
-namespace MPVI_Warehouse.Extension
+namespace Market.Extension
 {
     public static class WebApplicationBuilderExtensions
     {

@@ -10,7 +10,7 @@ namespace Management.Controllers
     public class ConfigurationController : ControllerBase
     {
         protected ResponseDTO _response;
-        private readonly IConfigurationService _configurationService;   
+        private  IConfigurationService _configurationService;   
         public ConfigurationController(IConfigurationService configurationService)
         {
             this._response = new ResponseDTO();

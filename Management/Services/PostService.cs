@@ -105,7 +105,7 @@ namespace Management.Services
             return _response;
         }
 
-        public ResponseDTO GettAllPost()
+        public ResponseDTO GetAllPost()
         {
             try
             {
@@ -120,7 +120,7 @@ namespace Management.Services
             return _response;
         }
 
-        public ResponseDTO UpdatePostByID(PostDTO postDTO)
+        public ResponseDTO UpdatePost(PostDTO postDTO)
         {
             try
             {

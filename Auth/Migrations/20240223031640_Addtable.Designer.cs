@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Auth.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240218101028_init")]
-    partial class init
+    [Migration("20240223031640_Addtable")]
+    partial class Addtable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

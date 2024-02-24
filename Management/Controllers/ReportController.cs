@@ -19,6 +19,7 @@ namespace Management.Controllers
             _reportService = reportService;    
         }
 
+        [HttpGet("MonthlyInspection")]
         public ResponseDTO MonthlyInspection(DateTime SelectedMoth)
         {
             try
@@ -33,6 +34,7 @@ namespace Management.Controllers
             return _response;
         }
 
+        [HttpGet("ReportByUser")]
         public ResponseDTO ReportByUser(string id)
         {
             try

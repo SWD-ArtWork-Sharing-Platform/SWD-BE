@@ -1,5 +1,6 @@
 ﻿using Management.Models.DTO;
 using Management.Services;
+using Management.Services.IService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,9 +11,9 @@ namespace Management.Controllers
     public class PackageController : ControllerBase
     {
         private ResponseDTO _response;
-        private PackageService _packageService;
+        private IPackageService _packageService;
 
-        public PackageController(PackageService packageService)
+        public PackageController(IPackageService packageService)
         {
             this._response = new ResponseDTO();  
             _packageService = packageService;   

@@ -68,7 +68,7 @@ namespace Management.Controllers
         }
 
         [Authorize(Policy = "ARTWORKMANAGEMENT")]
-        [HttpPost("GetPackageOfCreatorByID")]
+        [HttpGet("GetPackageOfCreatorByID")]
         public ResponseDTO GetPackageOfCreatorByID(string id)
         {
             try

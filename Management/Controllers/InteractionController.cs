@@ -83,7 +83,7 @@ namespace Management.Controllers
 
 
         [Authorize]
-        [HttpPost("Createinteraction")]
+        [HttpPost("CreateInteraction")]
         public ResponseDTO CreateInteraction(InteractionDTO interactionDTO)
         {
             try

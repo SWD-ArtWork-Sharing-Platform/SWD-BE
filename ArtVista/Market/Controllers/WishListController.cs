@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Market.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/wishlist")]
     [ApiController]
     public class WishListController : ControllerBase
     {

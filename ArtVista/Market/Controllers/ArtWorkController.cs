@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Market.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/artworkMarket")]
     [ApiController]
     public class ArtWorkController : ControllerBase
     {

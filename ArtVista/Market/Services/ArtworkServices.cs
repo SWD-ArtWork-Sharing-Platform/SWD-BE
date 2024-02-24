@@ -12,17 +12,13 @@ namespace Market.Services
     {
         private IMapper _mapper;
         private readonly ArtworkSharingPlatformContext _db;
-        private readonly IConfiguration _configuration;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IHttpClientFactory _httpClientFactory;
-        public ArtworkServices(ArtworkSharingPlatformContext db, IHttpClientFactory httpClientFactory,
-             IMapper mapper, IConfiguration configuration, UserManager<ApplicationUser> userManager)
+        private readonly IImageProcessingService _imageServices;
+
+        public ArtworkServices(ArtworkSharingPlatformContext db,IMapper mapper, IImageProcessingService imageServices)
         {
             _db = db;
             _mapper = mapper;
-            _configuration = configuration;
-            _userManager = userManager;
-            _httpClientFactory = httpClientFactory;
+            _imageServices = imageServices;
         }
         public async Task<bool> CreateArtWork(ArtWorkDTO artworkDTO)
         {
@@ -42,7 +38,7 @@ namespace Market.Services
 
         public async Task<bool> DeleteArtWork(string id)
         {
-            FArtwork data = _db.FArtworks.FirstOrDefault(x => x.ArtworkId == id);
+            FArtwork? data = _db.FArtworks.FirstOrDefault(x => x.ArtworkId == id);
             if (data != null)
             {                
                 _db.FArtworks.Remove(data);
@@ -79,7 +75,7 @@ namespace Market.Services
             }
             if (!string.IsNullOrEmpty(cateID))
             {
-                Datalist = Datalist.Where(u => u.Category.CategoryId == cateID);
+                Datalist = Datalist.Where(u => u.CategoryID == cateID);
             }
 
 
@@ -103,5 +99,32 @@ namespace Market.Services
             else
             { return false; }
         }
+
+        public async Task<ArtWorkDTO> GetArtWork(string artWorkID)
+        {/*
+          IImageProcessingService imageProcessingService = new ImageProcessingService();
+
+        await imageProcessingService.CropImageAsync("F:\\CodeDebugged\\Img\\image.jpg", "F:\\CodeDebugged\\Img\\croppedimage.jpg", 0, 0, 400, 400);
+        await imageProcessingService.InsertTextIntoImageAsync("F:\\CodeDebugged\\Img\\image.jpg", "F:\\CodeDebugged\\Img\\imagewithtext.jpg", "Code Debugged", new PointF(405f, 430f), "Verdana", 25);
+    
+          */
+
+            FArtwork? data = _db.FArtworks.FirstOrDefault(u => u.ArtworkId == artWorkID);
+            if (data != null)
+            {
+                ArtWorkDTO? obj = _mapper.Map<ArtWorkDTO>(data);
+
+
+                return obj;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+        
+
     }
 }

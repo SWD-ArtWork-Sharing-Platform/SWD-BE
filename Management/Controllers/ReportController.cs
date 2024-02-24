@@ -1,6 +1,7 @@
 ﻿using Azure;
 using Management.Models.DTO;
 using Management.Services.IService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,7 @@ namespace Management.Controllers
             _reportService = reportService;    
         }
 
-        [HttpGet("MonthlyInspection")]
+        [Authorize(Policy = "ORGANIZATION")]
         public ResponseDTO MonthlyInspection(DateTime SelectedMoth)
         {
             try
@@ -34,7 +35,6 @@ namespace Management.Controllers
             return _response;
         }
 
-        [HttpGet("ReportByUser")]
         public ResponseDTO ReportByUser(string id)
         {
             try

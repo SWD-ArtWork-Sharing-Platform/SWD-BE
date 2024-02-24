@@ -1,5 +1,6 @@
 ﻿using Market.Models.DTO;
 using Market.Services.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -37,6 +38,7 @@ namespace Market.Controllers
             return _response;
         }
 
+        [Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpPost("CreateArtWork")]
         public async Task<ResponseDTO> CreateArtWork(ArtWorkDTO artworkDTO)
         {
@@ -52,7 +54,8 @@ namespace Market.Controllers
             return _response;
         }
 
-        [HttpPost("UpdateArtWork")]
+        [Authorize(Policy = "ARTWORKMANAGEMENT")]
+        [HttpPut("UpdateArtWork")]
         public async Task<ResponseDTO> UpdateArtWork(ArtWorkDTO artworkDTO)
         {
             try
@@ -67,7 +70,8 @@ namespace Market.Controllers
             return _response;
         }
 
-        [HttpPost("DeleteArtWork")]
+        [Authorize(Policy = "ARTWORKMANAGEMENT")]
+        [HttpDelete("DeleteArtWork")]
         public async Task<ResponseDTO> DeleteArtWork(string id)
         {
             try

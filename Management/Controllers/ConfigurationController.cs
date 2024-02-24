@@ -1,5 +1,7 @@
 ﻿using Management.Models.DTO;
 using Management.Services.IService;
+using Management.Util;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +18,7 @@ namespace Management.Controllers
             this._response = new ResponseDTO();
             _configurationService = configurationService;   
         }
+
 
         [HttpGet("GetAllConfiguration")]
         public ResponseDTO GetAllConfiguration()
@@ -46,6 +49,8 @@ namespace Management.Controllers
             return _response;
         }
 
+
+        [Authorize (Roles = SD.ADMIN)]
         [HttpPost("CreateNewConfiguration")]
         public ResponseDTO CreateNewConfiguration(ConfigurationDTO configurationDTO)
         {
@@ -61,6 +66,7 @@ namespace Management.Controllers
             return _response;
         }
 
+        [Authorize (Roles = SD.ADMIN)]
         [HttpPut("UpdateConfiguration")]
         public ResponseDTO UpdateConfiguration(ConfigurationDTO configurationDTO)
         {
@@ -76,6 +82,7 @@ namespace Management.Controllers
             return _response;
         }
 
+        [Authorize (Roles = SD.ADMIN)]
         [HttpDelete("DeleteConfigurationByID")]
         public ResponseDTO DeleteConfigurationByID(string id, bool confirm)
         {

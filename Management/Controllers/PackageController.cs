@@ -19,6 +19,7 @@ namespace Management.Controllers
             _packageService = packageService;   
         }
 
+        [Authorize(Policy = "ORGANIZATION")]
         [HttpPost("CreatePackage")]
         public ResponseDTO CreatePackage(PackageDTO packageDTO)
         {
@@ -34,6 +35,8 @@ namespace Management.Controllers
             return _response;
         }
 
+
+        [Authorize(Policy = "ORGANIZATION")]
         [HttpDelete("DeletePackage")]
         public ResponseDTO DeletePackage(string id, bool confirm)
         {
@@ -94,6 +97,7 @@ namespace Management.Controllers
             return _response;
         }
 
+        [Authorize(Policy = "ORGANIZATION")]
         [HttpPut("UpdatePackage")]
         public ResponseDTO UpdatePackage(PackageDTO packageDTO)
         {

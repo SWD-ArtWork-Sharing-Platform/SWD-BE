@@ -32,11 +32,15 @@ namespace Market
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddScoped<BackendApiAuthenthicationHttpClientHandler>();
             builder.Services.AddScoped<IImageProcessingService, ImageProcessingService>();
-
-
+            builder.Services.AddScoped<IArtworkServices, ArtworkServices>();
+            builder.Services.AddScoped<IOrderService, OrderServices>();
+            builder.Services.AddScoped<IPackageServices, PackageServices>();
+            builder.Services.AddScoped<IVnPayService, VnPayService>();
+            builder.Services.AddScoped<IWishListServices, WishListServices>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(option =>
             {
@@ -61,10 +65,10 @@ namespace Market
                     }
                 });
             }
-            );
+           );
             builder.AppAuthentication();
             builder.Services.AddAuthorization(options => {
-                
+
                 options.AddPolicy("ARTWORKMANAGEMENT", policy =>
                 {
                     policy.RequireRole(SD.ADMIN);
@@ -87,16 +91,20 @@ namespace Market
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+                if (!app.Environment.IsDevelopment())
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Order API");
+                    c.RoutePrefix = string.Empty;
+                }
+            });
 
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
+
 
             app.MapControllers();
 
@@ -104,3 +112,4 @@ namespace Market
         }
     }
 }
+

@@ -1,0 +1,736 @@
+{
+  "Routes": [
+    ///Artwork
+    {
+      "DownstreamPathTemplate": "/api/artwork/GettAllArtwork",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/artwork/GettAllArtwork",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/artwork/GetArtworkByID",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/artwork/GetArtworkByID",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/artwork/CreateNewArtwork",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/artwork/CreateNewArtwork",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/artwork/UpdateArtwork",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/artwork/UpdateArtwork",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/artwork/GetArtWorkByCondition",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/artwork/GetArtWorkByCondition",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/artwork/DeleteArtWorkByID",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/artwork/DeleteArtWorkByID",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    ////Configuration
+    {
+      "DownstreamPathTemplate": "/api/configuration/GetAllConfiguration",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/configuration/GetAllConfiguration",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/configuration/GetConfigurationByID",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/configuration/GetConfigurationByID",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/configuration/CreateNewConfiguration",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/configuration/CreateNewConfiguration",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/configuration/UpdateConfiguration",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/configuration/UpdateConfiguration",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/configuration/DeleteConfigurationByID",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/configuration/DeleteConfigurationByID",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    ///Interaction
+    {
+      "DownstreamPathTemplate": "/api/interaction/GetAllInteraction",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/interaction/GetAllInteraction",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/interaction/GetInteractionByID",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/interaction/GetInteractionByID",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/interaction/GetInteractionByUserID",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/interaction/GetInteractionByUserID",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/interaction/GetInteractionByPostID",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/interaction/GetInteractionByPostID",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/interaction/CreateInteraction",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/interaction/CreateInteraction",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/interaction/UpdateInteraction",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/interaction/UpdateInteraction",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/interaction/DeleteInteraction",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/interaction/DeleteInteraction",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    ///Package
+    {
+      "DownstreamPathTemplate": "/api/package/CreatePackage",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/package/CreatePackage",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/package/DeletePackage",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/package/DeletePackage",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/package/GetAllPackage",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/package/GetAllPackage",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/package/GetPackageByCondtion",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/package/GetPackageByCondtion",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/package/GetPackageByID",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/package/GetPackageByID",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/package/UpdatePackage",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/package/UpdatePackage",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/packageOfCreator/CreatePackageOfCreator",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/packageOfCreator/CreatePackageOfCreator",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/packageOfCreator/DeletePackageOfCreator",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/packageOfCreator/DeletePackageOfCreator",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/packageOfCreator/GetAllPackgeOfCreator",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/packageOfCreator/GetAllPackgeOfCreator",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/packageOfCreator/GetPackageOfCreatorByID",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/packageOfCreator/GetPackageOfCreatorByID",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/packageOfCreator/UpdatePackageOfCreator",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/packageOfCreator/UpdatePackageOfCreator",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    // Post
+    {
+      "DownstreamPathTemplate": "/api/post/CreateNewPost",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/post/CreateNewPost",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/post/DeletePostByID",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/post/DeletePostByID",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/post/GetPostByCondition",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/post/GetPostByCondition",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/post/GetPostByID",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/post/GetPostByID",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/post/GetAllPost",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/post/GetAllPost",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/post/UpdatePost",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/post/UpdatePost",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    //Report
+    {
+      "DownstreamPathTemplate": "/api/report/MonthlyInspection",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/report/MonthlyInspection",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/report/ReportByUser",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/report/ReportByUser",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    //Artwork Market
+    {
+      "DownstreamPathTemplate": "/api/artworkMarket/GetAllArtwork",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamarket.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/artworkMarket/GetAllArtwork",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/artworkMarket/CreateArtWork",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamarket.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/artworkMarket/CreateArtWork",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/artworkMarket/UpdateArtWork",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamarket.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/artworkMarket/UpdateArtWork",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/artworkMarket/DeleteArtWork",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamarket.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/artworkMarket/DeleteArtWork",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/order/GetOrder",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamarket.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/order/GetOrder",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/order/DownloadArtWorkCheck",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamarket.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/order/DownloadArtWorkCheck",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/order/CreateOrder",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamarket.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/order/CreateOrder",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/order/GetHistoryOrder",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamarket.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/order/GetHistoryOrder",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/packagePurchase/GetAllAvailablePackage",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamarket.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/packagePurchase/GetAllAvailablePackage",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/packagePurchase/GetAllPurchasePackagebyUserID",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamarket.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/packagePurchase/GetAllPurchasePackagebyUserID",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/packagePurchase/BuyPackage",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamarket.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/packagePurchase/BuyPackage",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/packagePurchase/AdminUpdatePackage",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamarket.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/packagePurchase/AdminUpdatePackage",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/packagePurchase/AdminDeletePackage",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamarket.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/packagePurchase/AdminDeletePackage",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/wishlist/GetWishList",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamarket.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/wishlist/GetWishList",
+      "UpstreamHttpMethod": [ "Get" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/wishlist/RemoveArtWorkFromWishList",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamarket.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/wishlist/RemoveArtWorkFromWishList",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/wishlist/RemoveArtWorkFromWishList",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamarket.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/wishlist/RemoveArtWorkFromWishList",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/wishlist/AddArtWorkToWishList",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamarket.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/wishlist/AddArtWorkToWishList",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/wishlist/UpdateWishList",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamarket.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/wishlist/UpdateWishList",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenthicationProvider": "Bearer"
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "artvistagateway.azurewebsites.net",
+    "AuthUrl": "artvistaauthapi.azurewebsites.net",
+    "MarketUrl": "artvistamarket.azurewebsites.net",
+    "ManagementUrl": "artvistamanagementapi.azurewebsites.net"
+  }
+}

@@ -91,12 +91,15 @@ namespace Market
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+                if (!app.Environment.IsDevelopment())
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "MARKET API");
+                    c.RoutePrefix = string.Empty;
+                }
+            });
 
             app.UseHttpsRedirection();
             app.UseAuthentication();

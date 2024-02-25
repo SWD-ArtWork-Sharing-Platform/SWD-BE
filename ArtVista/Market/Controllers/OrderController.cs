@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Market.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/order")]
     [ApiController]
     public class OrderController : ControllerBase
     {

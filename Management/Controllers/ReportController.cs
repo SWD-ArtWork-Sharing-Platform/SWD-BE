@@ -21,6 +21,7 @@ namespace Management.Controllers
         }
 
         [Authorize(Policy = "ORGANIZATION")]
+        [HttpGet("MonthlyInspection")]
         public ResponseDTO MonthlyInspection(DateTime SelectedMoth)
         {
             try
@@ -35,9 +36,7 @@ namespace Management.Controllers
             return _response;
         }
 
-
-
-        [Authorize(Policy = "ARTWORKMANAGEMENT")]
+        [HttpGet("ReportByUser")]
         public ResponseDTO ReportByUser(string id)
         {
             try

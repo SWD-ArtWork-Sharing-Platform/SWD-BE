@@ -16,5 +16,6 @@
 
         public string CategoryID { get; set; }
         public IFormFile? Image { get; set; }
+        public CategoryDTO Category { get; set; }
     }
 }

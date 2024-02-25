@@ -111,7 +111,7 @@ namespace Management
             {
                 if (!app.Environment.IsDevelopment())
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Order API");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "MANAGEMENT API");
                     c.RoutePrefix = string.Empty;
                 }
             });

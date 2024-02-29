@@ -26,7 +26,7 @@ namespace Management
                 option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ArtworkSharingPlatformContext>()
-.AddDefaultTokenProviders();
+    .AddDefaultTokenProviders();
             // Add services to the container.
             IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
             builder.Services.AddSingleton(mapper);

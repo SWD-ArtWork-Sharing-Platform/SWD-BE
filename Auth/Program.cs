@@ -1,5 +1,4 @@
 
-using Auth.Data;
 using Auth.Models;
 using Auth.Repository.IRepository;
 using Auth.Services.IService;
@@ -9,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using Auth.Service;
 using Auth.Repository;
+using Auth.Data;
 
 
 namespace Auth

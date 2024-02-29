@@ -124,7 +124,8 @@ namespace Management.Services
         {
             try
             {
-                FPost post = _postRepository.Get(u => u.PostId == postDTO.PostId);
+                FPost post = _mapper.Map<FPost>(postDTO);
+                FPost oldPost = _postRepository.Get(u => u.PostId == postDTO.PostId);
                 if (post == null)
                 {
                     _response.IsSuccess = false;
@@ -132,6 +133,7 @@ namespace Management.Services
                 }
                 else
                 {
+                    oldPost = post;
                     _postRepository.Update(post);
                     _postRepository.Save();
                     _response.Result = _mapper.Map<PostDTO>(post);

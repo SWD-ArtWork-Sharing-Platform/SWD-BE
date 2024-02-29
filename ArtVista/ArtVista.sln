@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth", "..\Auth\Auth.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Market", "Market\Market.csproj", "{93A78C99-47A6-4BD5-B1ED-FB56DD03E9BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway", "Gateway\Gateway.csproj", "{217E802D-55BD-4F2C-8D42-798888601111}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway", "Gateway\Gateway.csproj", "{1F75AAF7-F4E5-4B05-8920-DFF2CFFE156E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{93A78C99-47A6-4BD5-B1ED-FB56DD03E9BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93A78C99-47A6-4BD5-B1ED-FB56DD03E9BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93A78C99-47A6-4BD5-B1ED-FB56DD03E9BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{217E802D-55BD-4F2C-8D42-798888601111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{217E802D-55BD-4F2C-8D42-798888601111}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{217E802D-55BD-4F2C-8D42-798888601111}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{217E802D-55BD-4F2C-8D42-798888601111}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F75AAF7-F4E5-4B05-8920-DFF2CFFE156E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F75AAF7-F4E5-4B05-8920-DFF2CFFE156E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F75AAF7-F4E5-4B05-8920-DFF2CFFE156E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F75AAF7-F4E5-4B05-8920-DFF2CFFE156E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -104,6 +104,7 @@ namespace Management.Services
                 }
                 else
                 {
+                    oldConfiguration = configuration;
                     _configurationRepository.Update(oldConfiguration);
                     _configurationRepository.Save();
                     _response.Message = "Update successfully!";

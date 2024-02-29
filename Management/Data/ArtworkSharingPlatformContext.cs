@@ -29,10 +29,9 @@ public partial class ArtworkSharingPlatformContext : DbContext
     public virtual DbSet<FPost> FPosts { get; set; }
 
     public virtual DbSet<FReport> FReports { get; set; }
+    public virtual DbSet<DCategory> DCategory { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("server=(local);database=ArtworkSharingPlatform;uid=sa;pwd=123456;TrustServerCertificate=True;");
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -201,6 +200,28 @@ public partial class ArtworkSharingPlatformContext : DbContext
             entity.HasOne(d => d.Artwork).WithMany(p => p.FReports)
                 .HasForeignKey(d => d.ArtworkId)
                 .HasConstraintName("FK_F_Report_F_Artwork");
+        });
+
+        modelBuilder.Entity<DCategory>(entity =>
+        {
+            entity.HasKey(e => e.CategoryId);
+
+            entity.ToTable("D_Category");
+
+            entity.Property(e => e.CategoryId)
+                .HasMaxLength(50)
+                .HasColumnName("Category_ID");
+            entity.Property(e => e.CategoryName)
+                .HasMaxLength(50)
+                .HasColumnName("Category_Name");
+            entity.Property(e => e.Note).HasMaxLength(255);
+            entity.Property(e => e.Type).HasMaxLength(255);
+            entity.Property(e => e.UpdatedBy)
+                .HasMaxLength(50)
+                .HasColumnName("Updated_by");
+            entity.Property(e => e.UpdatedDate)
+                .HasColumnType("datetime")
+                .HasColumnName("Updated_date");
         });
 
         OnModelCreatingPartial(modelBuilder);

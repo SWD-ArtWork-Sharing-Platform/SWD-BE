@@ -91,7 +91,7 @@ namespace Management.Services
             try
             {
                 IEnumerable<FArtwork> artworkList = _artworkRepository.GetAll();
-                _response.Result = _mapper.Map<IEnumerable<FArtwork>>(artworkList);
+                _response.Result = _mapper.Map<IEnumerable<ArtworkDTO>>(artworkList);
             }
             catch (Exception ex)
             {
@@ -167,7 +167,7 @@ namespace Management.Services
                 if (oldArtwork == null)
                 {
                     _response.IsSuccess = false;
-                    _response.Message = "No supercategory found!";
+                    _response.Message = "No artwork found!";
                 }
                 else
                 {
@@ -187,6 +187,8 @@ namespace Management.Services
                         }
                         artwork.ImageUrl = fileName;
                     }
+
+                    oldArtwork = artwork;
 
                     _artworkRepository.Update(oldArtwork);
                     _artworkRepository.Save();

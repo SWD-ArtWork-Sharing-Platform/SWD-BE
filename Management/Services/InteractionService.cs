@@ -111,6 +111,7 @@ namespace Management.Services
                 }
                 else
                 {
+                    oldInteraction = interaction;
                     _interactionRepository.Update(oldInteraction);
                     _interactionRepository.Save();
                     _response.Message = "Update successfully!";

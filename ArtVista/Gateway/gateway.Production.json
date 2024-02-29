@@ -479,6 +479,64 @@
       "UpstreamPathTemplate": "/api/report/ReportByUser",
       "UpstreamHttpMethod": [ "Get" ]
     },
+    //Category
+
+    {
+      "DownstreamPathTemplate": "/api/category/GetAllCategory",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/category/GetAllCategory",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/category/DeleteCategory",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/category/DeleteCategory",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/category/CreateCategory",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/category/CreateCategory",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/category/GetCategoryByCondition",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/category/GetCategoryByCondition",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/category/UpdateCategory",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "artvistamanagementapi.azurewebsites.net"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/category/UpdateCategory",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+
     //Artwork Market
     {
       "DownstreamPathTemplate": "/api/artworkMarket/GetAllArtwork",

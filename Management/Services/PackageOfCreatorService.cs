@@ -103,6 +103,7 @@ namespace Management.Services
                 }
                 else
                 {
+                    oldPackageOfCreator = packageOfCreator;
                     _packageOfCreatorRepository.Update(oldPackageOfCreator);
                     _packageOfCreatorRepository.Save();
                     _response.Message = "Update successfully!";

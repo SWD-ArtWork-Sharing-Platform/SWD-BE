@@ -41,6 +41,7 @@ namespace Management
             builder.Services.AddScoped<IPackageRepository, PackageRepository>();
             builder.Services.AddScoped<IPostRepository, PostRepository>();
             builder.Services.AddScoped<IReportRepository, ReportRepository>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
 
@@ -51,6 +52,8 @@ namespace Management
             builder.Services.AddScoped<IPackageService, PackageService>();
             builder.Services.AddScoped<IPostService, PostService>();
             builder.Services.AddScoped<IReportService, ReportService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+
 
 
             builder.Services.AddControllers();

@@ -141,6 +141,7 @@ namespace Management.Services
                 }
                 else
                 {
+                    oldPackage = package;
                     _packageRepository.Update(oldPackage);
                     _packageRepository.Save();
                     _response.Message = "Package updated successfully!";

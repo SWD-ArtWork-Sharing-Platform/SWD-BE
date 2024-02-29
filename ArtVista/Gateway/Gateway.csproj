@@ -7,8 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.16" />
-    <PackageReference Include="Ocelot" Version="23.0.0" />
+    <Content Remove="gateway.Production.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="gateway.Production.json" />
+  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.16" />
+		<PackageReference Include="Ocelot" Version="23.0.0" />
+	</ItemGroup>
 </Project>

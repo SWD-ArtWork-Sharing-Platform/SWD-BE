@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.Runtime.CompilerServices;
 using System.Text;
-namespace gate.Extension
+
+namespace Gateway.Extension
 {
     public static class WebApplicationBuilderExtensions
     {

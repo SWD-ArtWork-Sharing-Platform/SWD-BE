@@ -1,4 +1,4 @@
-using gate.Extension;
+using Gateway.Extension;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -12,11 +12,11 @@ namespace Gateway
             builder.AppAuthentication();
             if (builder.Environment.EnvironmentName.ToString().ToLower().Equals("production"))
             {
-                builder.Configuration.AddJsonFile("ocelot.Production.json", optional: false, reloadOnChange: true);
+                builder.Configuration.AddJsonFile("gateway.Production.json", optional: false, reloadOnChange: true);
             }
             else
             {
-                builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
+                builder.Configuration.AddJsonFile("gateway.json", optional: false, reloadOnChange: true);
             }
             builder.Services.AddOcelot(builder.Configuration);
 

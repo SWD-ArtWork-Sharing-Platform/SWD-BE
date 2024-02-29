@@ -17,6 +17,8 @@ namespace Management
                 config.CreateMap<FPackage, PackageDTO>().ReverseMap();
                 config.CreateMap<FPost, PostDTO>().ReverseMap();
                 config.CreateMap<FReport, ReportDTO>().ReverseMap();
+                config.CreateMap<DCategory, CategoryDTO>().ReverseMap();
+
             });
             return mappingConfig;
         }

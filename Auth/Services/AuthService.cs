@@ -80,7 +80,8 @@ namespace Auth.Service
                     Email = user.Email ?? "",
                     Id = user.Id,
                     Name = user.Name,
-                    PhoneNumber = user.PhoneNumber ?? ""
+                    PhoneNumber = user.PhoneNumber ?? "",
+                    Role = roles
                 };
                 LoginResponseDTO loginResponseDTO = new LoginResponseDTO()
                 {

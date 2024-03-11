@@ -32,10 +32,12 @@ namespace Market
 
                 // DOrderDetail
                 config.CreateMap<FArtwork, ArtWorkDTO>()
-                    .ForPath(dest => dest.CategoryID, opt => opt.MapFrom(src => src.CategoryId));
+                    .ForPath(dest => dest.CategoryID, opt => opt.MapFrom(src => src.CategoryId))
+                    .ForPath(dest => dest.Creator.Id, opt => opt.MapFrom(src => src.Id));
 
                 config.CreateMap<ArtWorkDTO, FArtwork>()
-                   .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryID));
+                   .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryID))
+                   .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Creator.Id));
 
                 config.CreateMap<FOrder, OrderDTO>().ReverseMap();
                 config.CreateMap<FPackage, PackageDTO>().ReverseMap();

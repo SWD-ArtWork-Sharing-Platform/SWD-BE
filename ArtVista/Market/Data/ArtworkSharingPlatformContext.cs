@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Market.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Market.Data;
 
-public partial class ArtworkSharingPlatformContext : DbContext
+public partial class ArtworkSharingPlatformContext : IdentityDbContext<ApplicationUser>
 {
     public ArtworkSharingPlatformContext()
     {
@@ -35,6 +37,18 @@ public partial class ArtworkSharingPlatformContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Ignore<IdentityUserLogin<string>>();
+        modelBuilder.Ignore<IdentityUserRole<string>>();
+        modelBuilder.Ignore<IdentityUserClaim<string>>();
+        modelBuilder.Ignore<IdentityUserToken<string>>();
+        modelBuilder.Ignore<IdentityUser<string>>();
+        modelBuilder.Ignore<ApplicationUser>();
+
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<ApplicationUser>();
         modelBuilder.Entity<DWishlistDetail>(entity =>
         {
             entity.HasKey(e => e.WishlistDetailId);

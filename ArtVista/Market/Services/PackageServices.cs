@@ -84,35 +84,35 @@ namespace Market.Services
         }
 
 
-        public async Task<bool> AdminUpdatePackage(PackageDTO obj)
-        {
-            FPackage packageData = _mapper.Map<FPackage>(obj);
-            if (packageData != null)
+            public async Task<bool> AdminUpdatePackage(PackageDTO obj)
             {
-                _db.FPackages.Update(packageData);
+                FPackage packageData = _mapper.Map<FPackage>(obj);
+                if (packageData != null)
+                {
+                    _db.FPackages.Update(packageData);
 
-                return true;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
-            {
-                return false;
-            }
-        }
 
-        public async Task<bool> AdminDeletePackage(string packageID)
-        {
-            FPackage? packageData = _db.FPackages.FirstOrDefault(u => u.PackageId == packageID);
-            if (packageData != null)
+            public async Task<bool> AdminDeletePackage(string packageID)
             {
-                _db.FPackages.Remove(packageData);
+                FPackage? packageData = _db.FPackages.FirstOrDefault(u => u.PackageId == packageID);
+                if (packageData != null)
+                {
+                    _db.FPackages.Remove(packageData);
 
-                return true;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
-            {
-                return false;
-            }
-        }
  
 
 

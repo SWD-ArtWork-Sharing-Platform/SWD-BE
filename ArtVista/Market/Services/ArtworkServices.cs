@@ -14,11 +14,15 @@ namespace Market.Services
         private readonly ArtworkSharingPlatformContext _db;
         private readonly IImageProcessingService _imageServices;
 
-        public ArtworkServices(ArtworkSharingPlatformContext db,IMapper mapper, IImageProcessingService imageServices)
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public ArtworkServices(ArtworkSharingPlatformContext db,IMapper mapper,
+            IImageProcessingService imageServices, UserManager<ApplicationUser> userManager)
         {
             _db = db;
             _mapper = mapper;
             _imageServices = imageServices;
+            _userManager = userManager;
         }
         public async Task<bool> CreateArtWork(ArtWorkDTO artworkDTO)
         {
@@ -78,7 +82,13 @@ namespace Market.Services
                 Datalist = Datalist.Where(u => u.CategoryID == cateID);
             }
 
-
+            foreach (var item in Datalist)
+            {
+                if(item.Creator.Id != null)
+                {
+                    item.Creator = await _userManager.FindByIdAsync(item.Creator.Id) ?? new ApplicationUser();
+                }
+            }
 
 
             return Datalist;

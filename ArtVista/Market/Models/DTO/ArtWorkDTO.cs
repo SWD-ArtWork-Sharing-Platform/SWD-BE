@@ -12,7 +12,7 @@
 
         public string? Status { get; set; }
 
-        public string Id { get; set; } = null!;
+        public ApplicationUser Creator { get; set; } = null!;
 
         public string CategoryID { get; set; }
         public IFormFile? Image { get; set; }

@@ -33,6 +33,10 @@ namespace Management.Services
                 if (model.Image != null)
                 {
                     string fileName = artwork.Id + Path.GetExtension(model.Image.FileName);
+
+                    string[] fileNameParts = fileName.Split('/');
+                    fileName = fileNameParts[fileNameParts.Length - 1];
+
                     string localPathDirector = @"wwwroot\ProductImages\" + fileName;
                     var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), localPathDirector);
                     using (var fileStream = new FileStream(filePathDirectory, FileMode.Create))

@@ -20,7 +20,7 @@ namespace Management.Controllers
             _artworkService = artworkService;       
         }
 
-        [HttpGet("GettAllArtwork")]
+        [HttpGet("GetAllArtwork")]
         public ResponseDTO GetAllArtwork()
         {
             try

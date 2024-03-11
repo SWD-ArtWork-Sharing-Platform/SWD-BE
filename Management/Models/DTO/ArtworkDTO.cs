@@ -4,7 +4,7 @@ namespace Management.Models.DTO
 {
     public class ArtworkDTO
     {
-        public string ArtworkId { get; set; } = null!;
+        public string? ArtworkId { get; set; } 
 
         public string? ArtworkName { get; set; }
 
@@ -14,7 +14,7 @@ namespace Management.Models.DTO
 
         public string? Status { get; set; }
 
-        public string Id { get; set; } = null!;
+        public string? Id { get; set; } 
 
         public string? CategoryId { get; set; }
         public string? ImageUrl { get; set; }

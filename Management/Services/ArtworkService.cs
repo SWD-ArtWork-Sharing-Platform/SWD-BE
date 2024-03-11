@@ -37,13 +37,13 @@ namespace Management.Services
                     string[] fileNameParts = fileName.Split('/');
                     fileName = fileNameParts[fileNameParts.Length - 1];
 
-                    string localPathDirector = @"wwwroot\ProductImages\" + fileName;
+                    string localPathDirector = @"wwwroot\ArtworkImages\" + fileName;
                     var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), localPathDirector);
                     using (var fileStream = new FileStream(filePathDirectory, FileMode.Create))
                     {
                         model.Image.CopyTo(fileStream);
                     }
-                    artwork.ImageUrl = "/ProductImages/" + fileName;
+                    artwork.ImageUrl = "/ArtworkImages/" + fileName;
                     artwork.ImageLocalPath = localPathDirector;
                 }
 

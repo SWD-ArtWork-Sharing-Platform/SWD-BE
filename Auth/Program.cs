@@ -36,6 +36,14 @@ namespace Auth
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+               builder.Services.AddCors(options => {
+                options.AddPolicy("MyAllowSpecificOrigins", policy =>
+                {
+                    policy.WithOrigins("http://localhost:3000", "http://localhost:3001",
+                                          "http://localhost:3002", "http://localhost:3003");
+                });
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -52,7 +60,7 @@ namespace Auth
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
+            app.UseCors();  
 
             app.MapControllers();
              //ApplyMigration();

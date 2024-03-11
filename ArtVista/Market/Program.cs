@@ -67,6 +67,13 @@ namespace Market
             }
            );
             builder.AppAuthentication();
+            builder.Services.AddCors(options => {
+                options.AddPolicy("MyAllowSpecificOrigins", policy =>
+                {
+                    policy.WithOrigins("http://localhost:3000", "http://localhost:3001",
+                                          "http://localhost:3002", "http://localhost:3003");
+                });
+            });
             builder.Services.AddAuthorization(options => {
 
                 options.AddPolicy("ARTWORKMANAGEMENT", policy =>
@@ -101,6 +108,7 @@ namespace Market
                 }
             });
 
+            app.UseCors();  
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();

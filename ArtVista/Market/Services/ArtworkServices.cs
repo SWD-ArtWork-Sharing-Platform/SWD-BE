@@ -82,6 +82,7 @@ namespace Market.Services
                 Datalist = Datalist.Where(u => u.CategoryID == cateID);
             }
 
+            ApplicationUser? users = await _userManager.FindByEmailAsync("123");
             foreach (var item in Datalist)
             {
                 if(item.Creator.Id != null)

@@ -19,6 +19,9 @@ public partial class FArtwork
 
     public string? CategoryId { get; set; }
 
+    public string? ImageUrl { get; set; }
+    public string? ImageLocalPath { get; set; }
+
     public virtual DCategory? Category { get; set; }
 
     public virtual ICollection<DOrderDetail> DOrderDetails { get; set; } = new List<DOrderDetail>();

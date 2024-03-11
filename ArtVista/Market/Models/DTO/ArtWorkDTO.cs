@@ -15,7 +15,10 @@
         public ApplicationUser Creator { get; set; } = null!;
 
         public string CategoryID { get; set; }
-        public IFormFile? Image { get; set; }
+
+
+        public string? ImageUrl { get; set; }
+        public string? ImageLocalPath { get; set; }
         public CategoryDTO Category { get; set; }
     }
 }

@@ -32,6 +32,9 @@ namespace Auth
             builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             builder.Services.AddScoped<IAccountRepository, AccountRepository>();
             builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddHttpClient("PhoneCheck", u => u.BaseAddress = new Uri(builder.Configuration["ValideUser:PhoneAPI"]));
+            builder.Services.AddHttpClient("MailCheck", u => u.BaseAddress = new Uri(builder.Configuration["ValideUser:EmailAPI"]));
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

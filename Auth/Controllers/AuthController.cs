@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Auth.Helper;
 using Microsoft.AspNetCore.Authorization;
 using Auth.Util;
+using Newtonsoft.Json;
 
 namespace Auth.Controllers
 {
@@ -22,11 +23,14 @@ namespace Auth.Controllers
         private readonly IConfiguration _configuration;
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
+        private readonly IHttpClientFactory _httpClientFactory;
+
         public AuthController(IAuthService authService,
             IConfiguration configuration,
             UserManager<ApplicationUser> userManager,
             AppDbContext db,
-            IJwtTokenGenerator jwtTokenGenerator)
+            IJwtTokenGenerator jwtTokenGenerator,
+            IHttpClientFactory httpClientFactory)
         {
             _db = db;
             _authService = authService;
@@ -34,11 +38,43 @@ namespace Auth.Controllers
             _configuration = configuration;
             _userManager = userManager;
             _jwtTokenGenerator = jwtTokenGenerator;
+            _httpClientFactory = httpClientFactory;
         }
 
         [HttpPost("register")]
         public async Task<ResponseDTO> Register([FromBody] RegisterationRequestDTO model)
         {
+            //PhoneCheck
+            
+            string url = "https://phonevalidation.abstractapi.com/v1/?api_key=0b4a7b91b44e40648af2b59fb2e8190c&phone=" +model.PhoneNumber;
+            var client = _httpClientFactory.CreateClient("PhoneCheck");
+            var response = await client.GetAsync(url);
+            var apiContent = await response.Content.ReadAsStringAsync();
+            var resp = JsonConvert.DeserializeObject<PhoneCheckDTO>(apiContent);
+            if (!resp.valid)
+            {
+                return new ResponseDTO
+                {
+                    IsSuccess = false,
+                    Message = "Not valid phone number"
+                };
+            }
+
+            string Eurl = "https://emailvalidation.abstractapi.com/v1/?api_key=6d23c9a3595f4aecbce5bffbeb1cd8e4&email=" + model.Email;
+            var Eclient = _httpClientFactory.CreateClient("MailCheck");
+            var Eresponse = await Eclient.GetAsync(Eurl);
+            var EapiContent = await Eresponse.Content.ReadAsStringAsync();
+            var Eresp = JsonConvert.DeserializeObject<MailCheckDTO>(EapiContent);
+            if (!Eresp.is_smtp_valid.value)
+            {
+                return new ResponseDTO
+                {
+                    IsSuccess = false,
+                    Message = "Not valid phone number"
+                };
+            }
+
+
             ApplicationUser user = new()
             {
                 UserName = model.Email,

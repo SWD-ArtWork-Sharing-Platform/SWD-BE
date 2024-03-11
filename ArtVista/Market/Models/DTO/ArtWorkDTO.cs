@@ -19,6 +19,5 @@
 
         public string? ImageUrl { get; set; }
         public string? ImageLocalPath { get; set; }
-        public CategoryDTO Category { get; set; }
     }
 }

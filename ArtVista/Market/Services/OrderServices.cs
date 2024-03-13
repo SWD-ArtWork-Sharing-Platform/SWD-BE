@@ -2,6 +2,7 @@
 using Market.Data;
 using Market.Models;
 using Market.Models.DTO;
+using Market.Repository.IRepository;
 using Market.Services.IServices;
 using Market.Utils;
 
@@ -11,10 +12,14 @@ namespace Market.Services
     {
         private IMapper _mapper;
         private readonly ArtworkSharingPlatformContext _db;
-        public OrderServices(ArtworkSharingPlatformContext db, IMapper mapper)
+        private IOrderRepository _orderRepository;
+        private IOrderDetailsRepository _orderDetailsRepository;    
+        public OrderServices(ArtworkSharingPlatformContext db, IMapper mapper, IOrderRepository orderRepository, IOrderDetailsRepository orderDetailsRepository)
         {
             _db = db;
             _mapper = mapper;
+            _orderRepository = orderRepository;
+            _orderDetailsRepository = orderDetailsRepository;   
         }
 
         public async Task<OrderResponseDTO> GetOrder(string OrderID,
@@ -60,10 +65,10 @@ namespace Market.Services
             List<DOrderDetail>? details = _mapper.Map<List<DOrderDetail>>(obj.OrderDetails);
             if (headerData != null && details != null)
             {
-                _db.FOrders.Add(headerData);
+                _orderRepository.Add(headerData);       
                 foreach(DOrderDetail detail in details)
                 {
-                    _db.DOrderDetails.Add(detail);
+                    _orderDetailsRepository.Add(detail);
                 }
                 await _db.SaveChangesAsync();
                 return true;

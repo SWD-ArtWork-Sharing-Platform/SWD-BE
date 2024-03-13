@@ -98,7 +98,7 @@ namespace Auth.Controllers
                         PhoneNumber = userToReturn.PhoneNumber ?? ""
                     };
                     string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.Action(nameof(ConfirmEmail), "AuthAPI", new { token, email = userDto.Email }, HttpContext.Request.Scheme);
+                    var callbackUrl = Url.Action(nameof(ConfirmEmail), "Auth", new { token, email = userDto.Email }, HttpContext.Request.Scheme);
                     string sendMail = SendMail.SendEmail(user.Email, "Confirm your account",
                         "Please confirm your account by clicking <a href=\"" +
                         callbackUrl + "\">here</a>", "");

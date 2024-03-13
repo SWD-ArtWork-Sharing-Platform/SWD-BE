@@ -176,7 +176,7 @@ namespace Auth.Controllers
                 if (user != null && user.Email != null)
                 {
                     var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                    var forgetLink = Url.Action(nameof(ForgotPassword), "AuthAPI", new { token, email = user.Email }, HttpContext.Request.Scheme);
+                    var forgetLink = Url.Action(nameof(ForgotPassword), "Auth", new { token, email = user.Email }, HttpContext.Request.Scheme);
                     string sendMail = SendMail.SendEmail(user.Email, "Reset password", "Please reset your password by clicking <a href=\"" + forgetLink + "\">here</a>", "");
                     if (sendMail != "")
                     {
@@ -203,7 +203,7 @@ namespace Auth.Controllers
                 if (user != null && user.Email != null)
                 {
                     var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                    var resetLink = Url.Action(nameof(ForgotPassword), "AuthAPI", new { token, email = user.Email }, HttpContext.Request.Scheme);
+                    var resetLink = Url.Action(nameof(ForgotPassword), "Auth", new { token, email = user.Email }, HttpContext.Request.Scheme);
                     string sendMail = SendMail.SendEmail(user.Email, "Reset password", "Please reset your password by clicking <a href=\"" + resetLink + "\">here</a>", "");
                     if (sendMail != "")
                     {

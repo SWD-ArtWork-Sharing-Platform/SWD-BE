@@ -9,5 +9,6 @@ namespace Auth.Services.IService
         Task<bool> AssignRole(string email, string roleName);
         Task<ChangePasswordDTO> ChangePassword(ChangePasswordDTO changePasswordDTO);
         Task<ApplicationUser> UpdateAccount(ApplicationUser updateUser);
+        Task<ResponseDTO> ChangePass(string email, string currentPassword, string newPassword);
     }
 }

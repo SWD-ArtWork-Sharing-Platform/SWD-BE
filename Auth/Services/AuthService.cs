@@ -42,6 +42,38 @@ namespace Auth.Service
             return false;
         }
 
+        public async Task<ResponseDTO> ChangePass(string email, string currentPassword, string newPassword)
+        {
+            ApplicationUser? user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
+
+            if (user == null)
+            {
+                return new ResponseDTO()
+                {
+                    IsSuccess = false,
+                    Message = "User not found!"
+                };
+            }
+
+            var changePasswordResult = await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+
+            if (!changePasswordResult.Succeeded)
+            {
+                return new ResponseDTO()
+                {
+                    IsSuccess = false,
+                    Message = "Change not success, please try again!"
+                };
+            }
+
+           
+
+            return new ResponseDTO()
+            {
+                Message = "Change password successfully!"
+            };
+        }
+
         public async Task<ChangePasswordDTO> ChangePassword(ChangePasswordDTO changePasswordDTO)
         {
             var user = _db.ApplicationUsers.FirstOrDefault(u => (u.Email ?? "").ToLower() == changePasswordDTO.Email.ToLower());
@@ -104,7 +136,6 @@ namespace Auth.Service
             return updateUser;
         }
 
-
-
+      
     }
 }

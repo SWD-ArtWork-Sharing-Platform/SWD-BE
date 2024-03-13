@@ -167,8 +167,8 @@ namespace Auth.Controllers
             return Ok(_response);
         }
 
-        [HttpPost("ForgotPassword")]
-        public async Task<ResponseDTO> ForgotPassword(string email)
+        [HttpPost("SendEmailForgotPassword")]
+        public async Task<ResponseDTO> SendEmailForgotPassword(string email, string emailcontent)
         {
             try
             {
@@ -176,14 +176,18 @@ namespace Auth.Controllers
                 if (user != null && user.Email != null)
                 {
                     var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                    var forgetLink = Url.Action(nameof(ForgotPassword), "AuthAPI", new { token, email = user.Email }, HttpContext.Request.Scheme);
-                    string sendMail = SendMail.SendEmail(user.Email, "Reset password", "Please reset your password by clicking <a href=\"" + forgetLink + "\">here</a>", "");
+                    string sendMail = SendMail.SendEmail(user.Email, "Reset password", emailcontent, "");
                     if (sendMail != "")
                     {
                         _response.IsSuccess = false;
                         _response.Message = sendMail;
                     }
-                    _response.Result = Ok(_response);
+                   // _response.Result = Ok(_response);
+                }
+                else
+                {
+                    _response.IsSuccess = false;
+                    _response.Message = "User not found!";
                 }
             }
             catch (Exception ex)
@@ -194,34 +198,7 @@ namespace Auth.Controllers
             return _response;
         }
 
-        [HttpPost("ResetPassword")]
-        public async Task<ResponseDTO> ResetPassword(string email)
-        {
-            try
-            {
-                var user = await _userManager.FindByEmailAsync(email);
-                if (user != null && user.Email != null)
-                {
-                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                    var resetLink = Url.Action(nameof(ForgotPassword), "AuthAPI", new { token, email = user.Email }, HttpContext.Request.Scheme);
-                    string sendMail = SendMail.SendEmail(user.Email, "Reset password", "Please reset your password by clicking <a href=\"" + resetLink + "\">here</a>", "");
-                    if (sendMail != "")
-                    {
-                        _response.IsSuccess = false;
-                        _response.Message = sendMail;
-                    }
-                    _response.Result = Ok(_response);
-                }
-            }
-            catch (Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.Message = ex.Message;
-            }
-            return _response;
-        }
-
-
+      
         [HttpPost("ChangePassword")]
         public async Task<IActionResult> ChangePassword(ChangePasswordDTO model)
         {

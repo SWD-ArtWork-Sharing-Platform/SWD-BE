@@ -14,10 +14,12 @@ namespace Market.Controllers
     {
         protected ResponseDTO _response;
         private IOrderService _order_services;
-        public OrderController(IOrderService wishlist_servoces)
+        private IVnPayService _vnPayService;
+        public OrderController(IOrderService wishlist_servoces, IVnPayService vnPayService)
         {
             this._response = new ResponseDTO();
             _order_services = wishlist_servoces;
+            _vnPayService = vnPayService;   
         }
 
         [Authorize]
@@ -59,7 +61,7 @@ namespace Market.Controllers
         {
             try
             {
-                _response.IsSuccess = await _order_services.CreateOrder( obj);
+                _response.IsSuccess = await _order_services.CreateOrder(obj);
             }
             catch (Exception ex)
             {
@@ -75,7 +77,38 @@ namespace Market.Controllers
         {
             try
             {
-                _response.Result = await _order_services.GetHistoryOrder( userID);
+                _response.Result = await _order_services.GetHistoryOrder(userID);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
+        }
+
+        [HttpPost("CreatePaymentUrl")]
+        public IActionResult CreatePaymentUrl(OrderDTO orderDTO)
+        {
+            var url = _vnPayService.CreatePaymentUrl(orderDTO, HttpContext);
+
+            if (!string.IsNullOrEmpty(url))
+            {
+                return Ok(new { Url = url });
+            }
+            else
+            {
+                return BadRequest("Failed to create payment URL");
+            }
+        }
+
+        [HttpPost("PaymentCallback")]
+        public ResponseDTO PaymentCallback()
+        {
+            try
+            {
+                var vnPayResponse = _vnPayService.PaymentExecute(Request.Query);
+                _response.Result = vnPayResponse;
             }
             catch (Exception ex)
             {

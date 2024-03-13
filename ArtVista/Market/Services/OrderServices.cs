@@ -90,5 +90,35 @@ namespace Market.Services
                 return null;
             }
         }
+
+
+         [HttpPost("CreatePaymentUrl")]
+        public IActionResult CreatePaymentUrl(OrderDTO orderDTO)
+        {
+            var url = _vnPayService.CreatePaymentUrl(orderDTO, HttpContext);
+
+            if (!string.IsNullOrEmpty(url))
+            {
+                return Ok(new { Url = url });
+            }
+            else
+            {
+                return BadRequest("Failed to create payment URL");
+            }
+        }
+
+        [HttpPost("PaymentCallback")]
+        public ResponseDTO PaymentCallback()
+        {
+            try
+            {
+                var vnPayResponse = _vnPayService.PaymentExecute(Request.Query);
+                _response.Result = vnPayResponse;
+            } catch (Exception ex) {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
+        }
     }
 }

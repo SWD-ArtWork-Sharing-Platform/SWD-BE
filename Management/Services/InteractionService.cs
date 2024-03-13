@@ -55,8 +55,8 @@ namespace Management.Services
         {
             try
             {
-                DInteraction interaction = _interactionRepository.Get(u => u.Id == id);
-                _response.Result = _mapper.Map<InteractionDTO>(interaction);
+                IEnumerable<DInteraction> interaction = _interactionRepository.GetList(u => u.Id == id);
+                _response.Result = _mapper.Map<IEnumerable<InteractionDTO>>(interaction);
             }
             catch (Exception ex)
             {
@@ -70,8 +70,8 @@ namespace Management.Services
         {
             try
             {
-                DInteraction interaction = _interactionRepository.Get(u => u.PostId == postId);
-                _response.Result = _mapper.Map<InteractionDTO>(interaction);
+                IEnumerable<DInteraction> interaction = _interactionRepository.GetList(u => u.PostId == postId);
+                _response.Result = _mapper.Map<IEnumerable<InteractionDTO>>(interaction);
             }
             catch (Exception ex)
             {

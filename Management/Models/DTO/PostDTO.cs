@@ -14,6 +14,5 @@
 
         public string? Status { get; set; }
         public ArtworkDTO? ArtworkDTO { get; set; }  
-        public IEnumerable<InteractionDTO>? InteractionDTOs { get; set; }    
     }
 }

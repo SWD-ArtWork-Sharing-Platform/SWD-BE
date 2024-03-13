@@ -19,5 +19,4 @@ public partial class FPost
 
     public virtual FArtwork? Artwork { get; set; }
 
-    public virtual ICollection<DInteraction> DInteractions { get; set; } = new List<DInteraction>();
 }

@@ -54,10 +54,6 @@ public partial class ArtworkSharingPlatformContext : DbContext
             entity.Property(e => e.PostId)
                 .HasMaxLength(50)
                 .HasColumnName("Post_ID");
-
-            entity.HasOne(d => d.Post).WithMany(p => p.DInteractions)
-                .HasForeignKey(d => d.PostId)
-                .HasConstraintName("FK_D_Interaction_F_Post");
         });
 
         modelBuilder.Entity<DPackageOfCreator>(entity =>

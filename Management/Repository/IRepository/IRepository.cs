@@ -6,6 +6,7 @@ namespace Management.Repository.IRepository
     {
         IEnumerable<T> GetAll();
         T Get(Expression<Func<T, bool>> filter);
+        IEnumerable<T> GetList(Expression<Func<T, bool>> filter);
         void Add(T entity);
         void Update(T entity);
         void Remove(T entity);

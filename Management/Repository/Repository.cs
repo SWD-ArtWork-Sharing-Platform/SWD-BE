@@ -32,6 +32,13 @@ namespace Management.Repository
             return query.ToList();
         }
 
+        public IEnumerable<T> GetList(Expression<Func<T, bool>> filter)
+        {
+            IQueryable<T> query = Dbset;
+            query = query.Where(filter);
+            return query.ToList();
+        }
+
         public void Remove(T entity)
         {
             Dbset.Remove(entity);

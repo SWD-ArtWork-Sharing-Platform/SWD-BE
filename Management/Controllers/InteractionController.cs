@@ -50,7 +50,6 @@ namespace Management.Controllers
             return _response;
         }
 
-        [Authorize]
         [HttpGet("GetInteractionByUserID")]
         public ResponseDTO GetInteractionByUserID(string userID)
         {
@@ -82,7 +81,6 @@ namespace Management.Controllers
         }
 
 
-        [Authorize]
         [HttpPost("CreateInteraction")]
         public ResponseDTO CreateInteraction(InteractionDTO interactionDTO)
         {
@@ -99,7 +97,6 @@ namespace Management.Controllers
         }
 
 
-        [Authorize]
         [HttpPut("UpdateInteraction")]
         public ResponseDTO UpdateInteraction(InteractionDTO interactionDTO) 
         {
@@ -117,7 +114,6 @@ namespace Management.Controllers
 
 
 
-        [Authorize]
         [HttpDelete("DeleteInteraction")]
         public ResponseDTO DeleteInteraction(string id)
         {

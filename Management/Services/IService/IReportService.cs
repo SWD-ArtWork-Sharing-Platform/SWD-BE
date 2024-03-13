@@ -6,5 +6,10 @@ namespace Management.Services.IService
     {
         ResponseDTO MonthlyInspection(DateTime SelectedMoth);
         ResponseDTO ReportByUser(string id);
+        ResponseDTO CreateReport(ReportDTO obj);
+        ResponseDTO UpdateReport(ReportDTO obj);
+        ResponseDTO RemoveREport(string id);
+
+
     }
 }

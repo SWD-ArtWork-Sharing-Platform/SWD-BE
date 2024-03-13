@@ -64,5 +64,55 @@ namespace Management.Services
             }
             return _response;
         }
+
+        public ResponseDTO CreateReport(ReportDTO obj)
+        {
+            FReport updateObj = _mapper.Map<FReport>(obj);
+            if (updateObj == null)
+            {
+                return new ResponseDTO()
+                {
+                    IsSuccess = false,
+                    Message = "Object not exist!"
+                };
+            }
+            _reportRepository.Add(updateObj);
+            _reportRepository.Save();
+            return _response;
+        }
+
+        public ResponseDTO UpdateReport(ReportDTO obj)
+        {
+            FReport data = _reportRepository.Get(u => u.ReportId == obj.ReportId);
+            FReport updateObj =_mapper.Map<FReport>(obj);
+            if (data == null && obj== null)
+            {
+                return new ResponseDTO()
+                {
+                    IsSuccess = false,
+                    Message = "Object not exist!"
+                };
+            }
+            data = updateObj;
+            _reportRepository.Update(data);
+            _reportRepository.Save();
+            return _response;
+        }
+
+        public ResponseDTO RemoveREport(string id)
+        {
+            FReport data = _reportRepository.Get(u => u.ReportId == id);
+            if (data == null)
+            {
+                return new ResponseDTO()
+                {
+                    IsSuccess = false,
+                    Message ="Object not exist!"
+                };
+            }
+            _reportRepository.Remove(data);
+            _reportRepository.Save();
+            return _response;
+        }
     }
 }

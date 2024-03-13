@@ -50,5 +50,47 @@ namespace Management.Controllers
             }
             return _response;
         }
+        [HttpGet("RemoveREport")]
+        public ResponseDTO RemoveREport(string id)
+        {
+            try
+            {
+                _response.Result = _reportService.RemoveREport(id);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
+        }
+        [HttpGet("UpdateReport")]
+        public ResponseDTO UpdateReport(ReportDTO obj)
+        {
+            try
+            {
+                _response.Result = _reportService.UpdateReport(obj);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
+        }
+        [HttpGet("CreateReport")]
+        public ResponseDTO CreateReport(ReportDTO obj)
+        {
+            try
+            {
+                _response.Result = _reportService.CreateReport(obj);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
+        }
     }
 }

@@ -70,7 +70,7 @@ namespace Auth.Controllers
                 return new ResponseDTO
                 {
                     IsSuccess = false,
-                    Message = "Not valid phone number"
+                    Message = "Not valid gmail!"
                 };
             }
 

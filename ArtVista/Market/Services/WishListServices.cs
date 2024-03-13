@@ -57,22 +57,49 @@ namespace Market.Services
 
         public async Task<bool> AddArtWorkToWishList(string userID, string artwork, int quantity)
         {
-            FWishlist? HeaderData = _db.FWishlists.FirstOrDefault(u => u.Id == userID);
-            if (HeaderData != null)
+            try
             {
-                DWishlistDetail add = new DWishlistDetail()
+                FWishlist? HeaderData = _db.FWishlists.FirstOrDefault(u => u.Id == userID);
+                if (HeaderData != null)
                 {
-                    ArtworkId =artwork,
-                    WishlistId = HeaderData.WishlistId
-                };
-                HeaderData.Total += 1;
-                _db.DWishlistDetails.Add(add);
-                _db.FWishlists.Update(HeaderData);
-                await _db.SaveChangesAsync();
-                return true;
+                    DWishlistDetail add = new DWishlistDetail()
+                    {
+                        WishlistDetailId = userID + DateTime.Now,
+                        ArtworkId = artwork,
+                        WishlistId = HeaderData.WishlistId
+                    };
+                    HeaderData.Total += 1;
+                    _db.DWishlistDetails.Add(add);
+                    _db.FWishlists.Update(HeaderData);
+                    await _db.SaveChangesAsync();
+                    return true;
+                }
+                else
+                {
+                    FWishlist header = new FWishlist()
+                    {
+                        WishlistId = DateTime.Now.ToString(),
+                        Id = userID,
+                        Total = 1,
+                        Note = ""
+                    };
+                    _db.FWishlists.Add(header);
+                    await _db.SaveChangesAsync();
+
+                    DWishlistDetail add = new DWishlistDetail()
+                    {
+                        WishlistDetailId = DateTime.Now.ToString(),
+                        ArtworkId = artwork,
+                        WishlistId = header.WishlistId
+                    };
+                    _db.DWishlistDetails.Add(add);
+                    await _db.SaveChangesAsync();
+                    return true;
+                }
             }
-            else
+            catch (Exception e)
             {
+                string alo = e.Message;
                 return false;
             }
         }

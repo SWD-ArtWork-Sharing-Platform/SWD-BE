@@ -34,6 +34,18 @@ namespace Auth
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddHttpClient("PhoneCheck", u => u.BaseAddress = new Uri(builder.Configuration["ValideUser:PhoneAPI"]));
             builder.Services.AddHttpClient("MailCheck", u => u.BaseAddress = new Uri(builder.Configuration["ValideUser:EmailAPI"]));
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
+                    });
+            });
+
+
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -59,7 +71,7 @@ namespace Auth
                     c.RoutePrefix = string.Empty;
                 }
             });
-
+            app.UseCors("AllowAll");
             app.UseHttpsRedirection();
 
             app.UseAuthorization();

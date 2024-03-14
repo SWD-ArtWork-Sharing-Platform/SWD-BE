@@ -18,7 +18,7 @@ namespace Market.Controllers
             _wishlist_services = wishlist_servoces;
         }
 
-        [Authorize]
+       // [Authorize]
         [HttpGet("GetWishList")]
         public async Task<ResponseDTO> GetWishList(string userID)
         {

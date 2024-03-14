@@ -107,75 +107,221 @@
     </style>
 </head>
 
-<body style=""""background-color: #f4f4f4; margin: 0 !important; padding: 0 !important;"""">
+<body style=""background-color: #f4f4f4; margin: 0 !important; padding: 0 !important;"">
     <!-- HIDDEN PREHEADER TEXT -->
        <table border=""0"" cellpadding=""0"" cellspacing=""0"" width=""100%"">
-        <!-- LOGO -->
-        <tr>
-            <td bgcolor=""#000"" align=""center"">
-                <table border=""0"" cellpadding=""0"" cellspacing=""0"" width=""100%"" style=""""max-width: 600px;"""">
+  <tbody>
+    <tr>
+      <td bgcolor=""#E8D6FF"" align=""center"">
+        <table
+          border=""0""
+          cellpadding=""0""
+          cellspacing=""0""
+          width=""100%""
+          style=""max-width: 600px""
+        >
+          <tbody>
+            <tr>
+              <td align=""center"" valign=""top"" style=""padding: 40px 10px""></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor=""#E8D6FF"" align=""center"" style=""padding: 0px 10px"">
+        <table
+          border=""0""
+          cellpadding=""0""
+          cellspacing=""0""
+          width=""100%""
+          style=""max-width: 1000px; height: auto""
+        >
+          <tbody>
+            <tr>
+              <td
+                bgcolor=""#ffffff""
+                align=""center""
+                valign=""top""
+                style=""
+                  padding: 40px 20px 20px;
+                  border-radius: 4px 4px 0px 0px;
+                  color: rgb(201, 160, 255);
+                  font-family: Lato, Helvetica, Arial, sans-serif;
+                  font-size: 48px;
+                  font-weight: 400;
+                  letter-spacing: 4px; /* line-height: 48;""
+              >
+                <h1 style=""font-weight: bolder; font-size: 60px"">Artvista</h1>
+                <h1 style=""font-size: 48px; font-weight: 400; margin: 2px"">
+                  Thank you for your registration
+                </h1>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor=""#E8D6FF"" align=""center"" style=""padding: 0px 10px"">
+        <table
+          border=""0""
+          cellpadding=""0""
+          cellspacing=""0""
+          width=""100%""
+          style=""max-width: 1000px; height: auto""
+        >
+          <tbody>
+            <tr>
+              <td
+                bgcolor=""#fff""
+                align=""center""
+                style=""
+                  padding: 0px 10px;
+                  border-radius: 4px;
+                  padding-bottom: 25px;
+                ""
+              >
+                <table
+                  border=""0""
+                  cellpadding=""0""
+                  cellspacing=""0""
+                  width=""100%""
+                  style=""max-width: 600px""
+                >
+                  <tbody>
                     <tr>
-                        <td align=""center"" valign=""top"" style=""""padding: 40px 10px 40px 10px;""""> </td>
+                      <td
+                        bgcolor=""#ffffff""
+                        align=""left""
+                        style=""
+                          /* padding: 20px 30px 20px; */
+                          color: rgb(102, 102, 102);
+                          font-family: Lato, Helvetica, Arial, sans-serif;
+                          font-size: 23px;
+                          font-weight: 400; /* line-height: 25; */
+                        ""
+                      >
+                        <p style=""margin: 0px"">
+                          We're excited to have you get started. First, you need
+                          to confirm your email account.
+                        </p>
+                      </td>
                     </tr>
+                    <tr>
+                      <td bgcolor=""#ffffff"" align=""left"">
+                        <table
+                          width=""100%""
+                          border=""0""
+                          cellspacing=""0""
+                          cellpadding=""0""
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                bgcolor=""#ffffff""
+                                align=""center""
+                                style=""padding: 20px 30px 20px""
+                              >
+                                <table
+                                  border=""0""
+                                  cellspacing=""0""
+                                  cellpadding=""0""
+                                >
+                                  <tbody>
+                                    <tr>
+                                      <td
+                                        align=""center""
+                                        bgcolor=""E8D6FF""
+                                        style=""border-radius: 3px""
+                                      >
+                                        <a
+                                          target=""_blank""
+                                          style=""
+                                            font-size: 20px;
+                                            font-family: Helvetica, Arial,
+                                              sans-serif;
+                                            padding: 15px 25px;
+                                            border-radius: 2px;
+                                            border: 1px solid #e8d6ff;
+                                            display: inline-block;
+                                            text-decoration: underline;
+                                            cursor: pointer;
+                                          "" href=""" + callbackUrl + @"""
+                                          >Click here to confirm your email</a
+                                        >
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        bgcolor=""#ffffff""
+                        align=""left""
+                        style=""
+                          padding: 0px 0px 20px 0px;
+                          color: rgb(102, 102, 102);
+                          font-family: Lato, Helvetica, Arial, sans-serif;
+                          font-size: 23px;
+                          font-weight: 400; /* line-height: 25; */
+                        ""
+                      >
+                        <p style=""margin: 0px"">
+                          If you have any questions, just reply to this email,
+                          we're always happy to help out.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        bgcolor=""#ffffff""
+                        align=""left""
+                        style=""
+                          padding: 0px 0px 20px 0px;
+                          border-radius: 0px 0px 4px 4px;
+                          color: rgb(102, 102, 102);
+                          font-family: Lato, Helvetica, Arial, sans-serif;
+                          font-size: 23px;
+                          font-weight: 400; /* line-height: 25; */
+                        ""
+                      >
+                        <p style=""margin: 0px"">Cheers,<br />Artvista Team</p>
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor=""#E8D6FF"" align=""center"">
+        <table
+          border=""0""
+          cellpadding=""0""
+          cellspacing=""0""
+          width=""100%""
+          style=""max-width: 600px""
+        >
+          <tbody>
+            <tr>
+              <td align=""center"" valign=""top"" style=""padding: 40px 10px""></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-                
-            </td>
-        </tr>
-        <tr>
-            <td bgcolor=""#000"" align=""center"" style=""""padding: 0px 10px 0px 10px;"""">
-                <table border=""0"" cellpadding=""0"" cellspacing=""0"" width=""100%"" style=""""max-width: 600px;"""">
-                    <tr>
-                        <td bgcolor=""#ffffff"" align=""center"" valign=""top"" style=""""padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #C9A0FF; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;"""">
-                            <h1 style=""""font-weight: ""bolder""; color: ""#A259FF""; font-size: ""60px"">
-                            <h1 style=""""font-size: 48px; font-weight: 400; margin: 2;"""">Thank you for your registration</h1> 
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td bgcolor=""#f4f4f4"" align=""center"" style=""""padding: 0px 10px 0px 10px;"""">
-                <table border=""0"" cellpadding=""0"" cellspacing=""0"" width=""100%"" style=""""max-width: 600px;"""">
-                    <tr>
-                        <td bgcolor=""#ffffff"" align=""left"" style=""""padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 23px; font-weight: 400; line-height: 25px;"""">
-                            <p style=""""margin: 0;"""">We're excited to have you get started. First, you need to confirm your email account.</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td bgcolor=""#ffffff"" align=""left"">
-                            <table width=""100%"" border=""0"" cellspacing=""0"" cellpadding=""0"">
-                                <tr>
-                                    <td bgcolor=""#ffffff"" align=""center"" style=""""padding: 20px 30px 60px 30px;"""">
-                                        <table border=""0"" cellspacing=""0"" cellpadding=""0"">
-                                            <tr>
-
-                                                <td align=""center"" style=""""border-radius: 3px;"" bgcolor=""#C9A0FF""><a href="" + callbackUrl + @""target=""_blank"" style=""""font-size: 20px; font-family: Helvetica, Arial, sans-serif; padding: 15px 25px; border-radius: 2px; border: 1px solid #C9A0FF; display: inline-block; text-decoration: ""underline""""
-    href=""" + callbackUrl + @""">Click here to confirm your email</a></td>
-
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr> 
-                  
-                    
-                    <tr>
-                        <td bgcolor=""#ffffff"" align=""left"" style=""""padding: 0px 30px 20px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 23px; font-weight: 400; line-height: 25px;"""">
-                            <p style=""""margin: 0;"""">If you have any questions, just reply to this email &mdash; we're always happy to help out.</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td bgcolor=""#ffffff"" align=""left"" style=""""padding: 0px 30px 40px 30px; border-radius: 0px 0px 4px 4px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 23px; font-weight: 400; line-height: 25px;"""">
-                            <p style=""""margin: 0;"""">Cheers,<br>Artvista Team</p>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
 </body>
 
 </html>";
@@ -287,75 +433,221 @@
     </style>
 </head>
 
-<body style=""""background-color: #f4f4f4; margin: 0 !important; padding: 0 !important;"""">
+<body style=""background-color: #f4f4f4; margin: 0 !important; padding: 0 !important;"">
     <!-- HIDDEN PREHEADER TEXT -->
        <table border=""0"" cellpadding=""0"" cellspacing=""0"" width=""100%"">
-        <!-- LOGO -->
-        <tr>
-            <td bgcolor=""#000"" align=""center"">
-                <table border=""0"" cellpadding=""0"" cellspacing=""0"" width=""100%"" style=""""max-width: 600px;"""">
+  <tbody>
+    <tr>
+      <td bgcolor=""#E8D6FF"" align=""center"">
+        <table
+          border=""0""
+          cellpadding=""0""
+          cellspacing=""0""
+          width=""100%""
+          style=""max-width: 600px""
+        >
+          <tbody>
+            <tr>
+              <td align=""center"" valign=""top"" style=""padding: 40px 10px""></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor=""#E8D6FF"" align=""center"" style=""padding: 0px 10px"">
+        <table
+          border=""0""
+          cellpadding=""0""
+          cellspacing=""0""
+          width=""100%""
+          style=""max-width: 1000px; height: auto""
+        >
+          <tbody>
+            <tr>
+              <td
+                bgcolor=""#ffffff""
+                align=""center""
+                valign=""top""
+                style=""
+                  padding: 40px 20px 20px;
+                  border-radius: 4px 4px 0px 0px;
+                  color: rgb(201, 160, 255);
+                  font-family: Lato, Helvetica, Arial, sans-serif;
+                  font-size: 48px;
+                  font-weight: 400;
+                  letter-spacing: 4px; /* line-height: 48;""
+              >
+                <h1 style=""font-weight: bolder; font-size: 60px"">Artvista</h1>
+                <h1 style=""font-size: 48px; font-weight: 400; margin: 2px"">
+                  Reset Password
+                </h1>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor=""#E8D6FF"" align=""center"" style=""padding: 0px 10px"">
+        <table
+          border=""0""
+          cellpadding=""0""
+          cellspacing=""0""
+          width=""100%""
+          style=""max-width: 1000px; height: auto""
+        >
+          <tbody>
+            <tr>
+              <td
+                bgcolor=""#fff""
+                align=""center""
+                style=""
+                  padding: 0px 10px;
+                  border-radius: 4px;
+                  padding-bottom: 25px;
+                ""
+              >
+                <table
+                  border=""0""
+                  cellpadding=""0""
+                  cellspacing=""0""
+                  width=""100%""
+                  style=""max-width: 600px""
+                >
+                  <tbody>
                     <tr>
-                        <td align=""center"" valign=""top"" style=""""padding: 40px 10px 40px 10px;""""> </td>
+                      <td
+                        bgcolor=""#ffffff""
+                        align=""left""
+                        style=""
+                          /* padding: 20px 30px 20px; */
+                          color: rgb(102, 102, 102);
+                          font-family: Lato, Helvetica, Arial, sans-serif;
+                          font-size: 23px;
+                          font-weight: 400; /* line-height: 25; */
+                        ""
+                      >
+                        <p style=""margin: 0px"">
+                          We have received a request to reset your password recently. You can click
+the link below to reset password now.
+                        </p>
+                      </td>
                     </tr>
+                    <tr>
+                      <td bgcolor=""#ffffff"" align=""left"">
+                        <table
+                          width=""100%""
+                          border=""0""
+                          cellspacing=""0""
+                          cellpadding=""0""
+                        >
+                          <tbody>
+                            <tr>
+                              <td
+                                bgcolor=""#ffffff""
+                                align=""center""
+                                style=""padding: 20px 30px 20px""
+                              >
+                                <table
+                                  border=""0""
+                                  cellspacing=""0""
+                                  cellpadding=""0""
+                                >
+                                  <tbody>
+                                    <tr>
+                                      <td
+                                        align=""center""
+                                        bgcolor=""E8D6FF""
+                                        style=""border-radius: 3px""
+                                      >
+                                        <a
+                                          target=""_blank""
+                                          style=""
+                                            font-size: 20px;
+                                            font-family: Helvetica, Arial,
+                                              sans-serif;
+                                            padding: 15px 25px;
+                                            border-radius: 2px;
+                                            border: 1px solid #e8d6ff;
+                                            display: inline-block;
+                                            text-decoration: underline;
+                                            cursor: pointer;
+                                          "" href=""" + callbackUrl + @"""
+                                          >Click here to reset your password</a
+                                        >
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        bgcolor=""#ffffff""
+                        align=""left""
+                        style=""
+                          padding: 0px 0px 20px 0px;
+                          color: rgb(102, 102, 102);
+                          font-family: Lato, Helvetica, Arial, sans-serif;
+                          font-size: 23px;
+                          font-weight: 400; /* line-height: 25; */
+                        ""
+                      >
+                        <p style=""margin: 0px"">
+                          If you have any questions, just reply to this email,
+                          we're always happy to help out.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        bgcolor=""#ffffff""
+                        align=""left""
+                        style=""
+                          padding: 0px 0px 20px 0px;
+                          border-radius: 0px 0px 4px 4px;
+                          color: rgb(102, 102, 102);
+                          font-family: Lato, Helvetica, Arial, sans-serif;
+                          font-size: 23px;
+                          font-weight: 400; /* line-height: 25; */
+                        ""
+                      >
+                        <p style=""margin: 0px"">Cheers,<br />Artvista Team</p>
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor=""#E8D6FF"" align=""center"">
+        <table
+          border=""0""
+          cellpadding=""0""
+          cellspacing=""0""
+          width=""100%""
+          style=""max-width: 600px""
+        >
+          <tbody>
+            <tr>
+              <td align=""center"" valign=""top"" style=""padding: 40px 10px""></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-                
-            </td>
-        </tr>
-        <tr>
-            <td bgcolor=""#000"" align=""center"" style=""""padding: 0px 10px 0px 10px;"""">
-                <table border=""0"" cellpadding=""0"" cellspacing=""0"" width=""100%"" style=""""max-width: 600px;"""">
-                    <tr>
-                        <td bgcolor=""#ffffff"" align=""center"" valign=""top"" style=""""padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #C9A0FF; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;"""">
-                            <h1 style=""""font-weight: ""bolder""; color: ""#A259FF""; font-size: ""60px"">
-                            <h1 style=""""font-size: 48px; font-weight: 400; margin: 2;"""">Reset your password</h1> 
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td bgcolor=""#f4f4f4"" align=""center"" style=""""padding: 0px 10px 0px 10px;"""">
-                <table border=""0"" cellpadding=""0"" cellspacing=""0"" width=""100%"" style=""""max-width: 600px;"""">
-                    <tr>
-                        <td bgcolor=""#ffffff"" align=""left"" style=""""padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 23px; font-weight: 400; line-height: 25px;"""">
-                            <p style=""""margin: 0;"""">We have received a request to reset your password recently. You need to click the link below to change your password now.</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td bgcolor=""#ffffff"" align=""left"">
-                            <table width=""100%"" border=""0"" cellspacing=""0"" cellpadding=""0"">
-                                <tr>
-                                    <td bgcolor=""#ffffff"" align=""center"" style=""""padding: 20px 30px 60px 30px;"""">
-                                        <table border=""0"" cellspacing=""0"" cellpadding=""0"">
-                                            <tr>
-
-                                                <td align=""center"" style=""""border-radius: 3px;"" bgcolor=""#C9A0FF""><a href="" + callbackUrl + @""target=""_blank"" style=""""font-size: 20px; font-family: Helvetica, Arial, sans-serif; padding: 15px 25px; border-radius: 2px; border: 1px solid #C9A0FF; display: inline-block; text-decoration: ""underline""""
-    href=""" + callbackUrl + @""">Click here to reset your password</a></td>
-
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr> 
-                  
-                    
-                    <tr>
-                        <td bgcolor=""#ffffff"" align=""left"" style=""""padding: 0px 30px 20px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 23px; font-weight: 400; line-height: 25px;"""">
-                            <p style=""""margin: 0;"""">If you have any questions, just reply to this email &mdash; we're always happy to help out.</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td bgcolor=""#ffffff"" align=""left"" style=""""padding: 0px 30px 40px 30px; border-radius: 0px 0px 4px 4px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 23px; font-weight: 400; line-height: 25px;"""">
-                            <p style=""""margin: 0;"""">Cheers,<br>Artvista Team</p>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
 </body>
 
 </html>";

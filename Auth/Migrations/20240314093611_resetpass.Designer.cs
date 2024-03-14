@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Auth.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240223031640_Addtable")]
-    partial class Addtable
+    [Migration("20240314093611_resetpass")]
+    partial class resetpass
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,8 +71,7 @@ namespace Auth.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
@@ -102,6 +101,23 @@ namespace Auth.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Auth.Models.ID_F_ResetPass", b =>
+                {
+                    b.Property<string>("Gmail")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("exprired_time")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Gmail");
+
+                    b.ToTable("ResetPasses");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

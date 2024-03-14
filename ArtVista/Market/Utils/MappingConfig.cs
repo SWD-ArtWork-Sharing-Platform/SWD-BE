@@ -51,6 +51,8 @@ namespace Market
 
                 config.CreateMap<FWishlist, WishListDTO>().ReverseMap();
                 config.CreateMap<DWishlistDetail, WishListDetailDTO>().ReverseMap();
+                config.CreateMap<DBankAccount, BankAccountDTO>().ReverseMap();
+
 
             });
             return mappingConfig;

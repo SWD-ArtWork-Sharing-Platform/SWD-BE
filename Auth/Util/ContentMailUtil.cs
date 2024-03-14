@@ -328,7 +328,7 @@
             return content;
         }
 
-        public static string GetContentForgetPassword(string callbackUrl)
+      public static string GetContentForgetPassword(string callbackUrl)
         {
             string content = @"<!DOCTYPE html>
 <html>

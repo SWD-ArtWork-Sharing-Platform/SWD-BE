@@ -37,6 +37,7 @@ namespace Market
             builder.Services.AddScoped<IPackageServices, PackageServices>();
             builder.Services.AddScoped<IVnPayService, VnPayService>();
             builder.Services.AddScoped<IWishListServices, WishListServices>();
+            builder.Services.AddScoped<IBankAccountService, BankAccountService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

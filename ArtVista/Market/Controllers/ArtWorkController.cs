@@ -19,7 +19,7 @@ namespace Market.Controllers
             _artwork_service = u;
         }
 
-        //[Authorize(Policy = "MPVI_WH_Management")]
+        [Authorize(Policy = "MPVI_WH_Management")]
         // Book an Report Ticket
         [HttpGet("GetAllArtwork")]
         public async Task<ResponseDTO> GetAllArtwork(string? searchkey, decimal? minPrice,

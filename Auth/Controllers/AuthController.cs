@@ -232,8 +232,8 @@ namespace Auth.Controllers
         }
 
       
-        [HttpPost("ChangePassword")]
-        public async Task<IActionResult> ChangePassword(ChangePasswordDTO model)
+        [HttpPost("ChangePasswordWithOldPass")]
+        public async Task<IActionResult> ChangePasswordWithOldPass(ChangePasswordDTO model)
         {
             var changePasswordRequest = await _authService.ChangePassword(model);
             if (changePasswordRequest == null)
@@ -243,6 +243,64 @@ namespace Auth.Controllers
             }
             _response.Result = changePasswordRequest;
             return Ok(_response);
+        }
+        [HttpPost("ChangePasswordWithoutOldPass")]
+        public async Task<ResponseDTO> ChangePasswordWithoutOldPass(string email, string newpass, string code)
+        {
+            try
+            {
+                ID_F_ResetPass? confirm = _db.ResetPasses.FirstOrDefault( u=> u.Gmail == email);
+                if (confirm == null|| confirm.exprired_time >DateTime.Now || confirm.Code != code)
+                {
+                    return new ResponseDTO() { 
+                    IsSuccess = false,
+                    Message = "Token is not valid! "
+                    };
+                }
+                else
+                {
+                    
+
+                    _db.ResetPasses.Remove(confirm);
+                    _db.SaveChanges();
+                }
+
+                var user = await _userManager.FindByEmailAsync(email);
+                if (user == null)
+                {
+                    // Trả về lỗi nếu không tìm thấy người dùng
+                    return new ResponseDTO()
+                    {
+                        IsSuccess = false,
+                        Message = "User not found!"
+                    }; 
+                }
+
+                // Thực hiện thay đổi mật khẩu
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var changePasswordResult = await _userManager.ResetPasswordAsync(user, token, newpass);
+
+                // Kiểm tra kết quả và trả về phản hồi phù hợp
+                if (changePasswordResult.Succeeded)
+                {
+                    _response.Message = "Change successfully!";
+                    return _response ;
+                }
+                else {
+                    return new ResponseDTO()
+                    {
+                        IsSuccess = false,
+                        Message = "Change unsuccessfully!"
+                    };
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                _response.Message = ex.Message;
+                return _response;
+            }
+        
         }
 
         [HttpPut("UpdateAccount")]

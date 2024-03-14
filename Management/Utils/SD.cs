@@ -8,6 +8,10 @@
         public const string MODERATOR = "778ac5b81fa251b450f827846378739caee510c31b01cfa9d31822b88bed8441";
         public const string ANYNOMOUS = "6baf58a5ce7a1fcb2a9f146292751122d9ab707d4c54db39c301b7b266709283";
 
+        public const string active = "Active";
+        public const string inactive = "Inactive";
+
+
         public static string CheckRole(string input)
         {
             switch (input)

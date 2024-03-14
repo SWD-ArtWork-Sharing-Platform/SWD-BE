@@ -113,7 +113,8 @@ namespace Auth.Service
                     Id = user.Id,
                     Name = user.Name,
                     PhoneNumber = user.PhoneNumber ?? "",
-                    Role = roles
+                    Role = roles,
+                    Status = user.Status
                 };
                 LoginResponseDTO loginResponseDTO = new LoginResponseDTO()
                 {

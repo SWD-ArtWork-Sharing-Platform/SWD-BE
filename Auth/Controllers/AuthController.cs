@@ -81,7 +81,8 @@ namespace Auth.Controllers
                 Email = model.Email,
                 NormalizedEmail = model.Email.ToUpper(),
                 Name = model.Name,
-                PhoneNumber = model.PhoneNumber
+                PhoneNumber = model.PhoneNumber,
+                Status =  SD.INACTIVE
             };
             try
             {
@@ -95,13 +96,13 @@ namespace Auth.Controllers
                         Email = userToReturn.Email ?? "",
                         Id = userToReturn.Id,
                         Name = userToReturn.Name,
-                        PhoneNumber = userToReturn.PhoneNumber ?? ""
+                        PhoneNumber = userToReturn.PhoneNumber ?? "",
+                        
                     };
                     string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.Action(nameof(ConfirmEmail), "Auth", new { token, email = userDto.Email }, HttpContext.Request.Scheme);
-                    string sendMail = SendMail.SendEmail(user.Email, "Confirm your account",
-                        "Please confirm your account by clicking <a href=\"" +
-                        callbackUrl + "\">here</a>", "");
+                    string content = ContentMailUtil.GetContentRegisterAccount(callbackUrl);
+                    string sendMail = SendMail.SendEmail(user.Email, "Confirm your account",content, "");
                     if (sendMail != "")
                     {
                         _response.IsSuccess = false;
@@ -148,7 +149,13 @@ namespace Auth.Controllers
                 _response.IsSuccess = false;
                 _response.Message = "Username or password is incorrect";
                 return BadRequest(_response);
+            }else if(loginResponse.User.Status == SD.INACTIVE)
+            {
+                _response.IsSuccess = false;
+                _response.Message = "Account is inactive!";
+                return BadRequest(_response);
             }
+            
             _response.Result = loginResponse;
             return Ok(_response);
         }
@@ -168,15 +175,37 @@ namespace Auth.Controllers
         }
 
         [HttpPost("SendEmailForgotPassword")]
-        public async Task<ResponseDTO> SendEmailForgotPassword(string email, string emailcontent)
+        public async Task<ResponseDTO> SendEmailForgotPassword(string email)
         {
             try
             {
                 var user = await _userManager.FindByEmailAsync(email);
                 if (user != null && user.Email != null)
                 {
+                    
+                     Random rand = new Random();
+                    int randomNumber = rand.Next(10000, 99999);
+                    string callbackurl ="http://localhost:3000/ResetPassword/" + email + "/" + randomNumber;
+
+                    ID_F_ResetPass? reset = _db.ResetPasses.Find(email);
+                    if (reset != null)
+                    {
+                        _db.ResetPasses.Remove(reset);
+                        _db.SaveChanges();
+                    }
+                    ID_F_ResetPass newObj = new ID_F_ResetPass()
+                    {
+                        Gmail = email,
+                        Code = randomNumber.ToString()
+                    };
+                    _db.ResetPasses.Add(newObj);
+                    _db.SaveChanges();
+
+                    string content = ContentMailUtil.GetContentForgetPassword(callbackurl);
+
+
                     var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                    string sendMail = SendMail.SendEmail(user.Email, "Reset password", emailcontent, "");
+                    string sendMail = SendMail.SendEmail(user.Email, "Reset password", content, "");
                     if (sendMail != "")
                     {
                         _response.IsSuccess = false;
@@ -229,6 +258,10 @@ namespace Auth.Controllers
             }
             return _response;
         }
+
+       
+
+
     }
 }
 

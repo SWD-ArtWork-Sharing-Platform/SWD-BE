@@ -1,8 +1,8 @@
 ﻿namespace Auth.Util
 {
-    public class ContentMailUtil
+    public static class ContentMailUtil
     {
-        public string GetContentRegisterAccount(string callbackUrl)
+        public static string GetContentRegisterAccount(string callbackUrl)
         {
             string content = @"<!DOCTYPE html>
 <html>
@@ -182,7 +182,7 @@
             return content;
         }
 
-        public string GetContentForgetPassword(string callbackUrl)
+        public static string  GetContentForgetPassword(string callbackUrl)
         {
             string content = @"<!DOCTYPE html>
 <html>

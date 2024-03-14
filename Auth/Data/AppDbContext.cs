@@ -11,6 +11,7 @@ namespace Auth.Data
         }
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<ID_F_ResetPass> ResetPasses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

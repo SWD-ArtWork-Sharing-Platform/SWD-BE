@@ -1,4 +1,5 @@
 ﻿using Auth.Models;
+using Auth.Models.DTO;
 using Auth.Services.IService;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -29,6 +30,32 @@ namespace Auth.Services
             };
             claimList.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Audience = _jwtOptions.Audience,
+                Issuer = _jwtOptions.Issuer,
+                Subject = new ClaimsIdentity(claimList),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
+
+
+        public string GenerateTokenForResetPass(ChangePasswordDTO obj)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var key = Encoding.ASCII.GetBytes(_jwtOptions.Secret);
+
+            var claimList = new List<Claim>
+            {
+                new Claim("Gmail", "your_gmail_value_here"),
+                new Claim("Code", "your_code_value_here"),
+                new Claim("exprired_time", DateTime.Now.AddMinutes(15).ToString("yyyy-MM-ddTHH:mm:ssZ"))
+            };
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Audience = _jwtOptions.Audience,

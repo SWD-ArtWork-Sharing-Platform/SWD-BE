@@ -92,6 +92,5 @@ namespace Market.Services
         }
 
 
-       
     }
 }

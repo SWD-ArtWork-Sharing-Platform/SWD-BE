@@ -100,8 +100,10 @@ namespace Auth.Controllers
                         
                     };
                     string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.Action(nameof(ConfirmEmail), "Auth", new { token, email = userDto.Email }, HttpContext.Request.Scheme);
-                    string content = ContentMailUtil.GetContentRegisterAccount(callbackUrl);
+                    //var callbackUrl = Url.Action(nameof(ConfirmEmail), "Auth", new { token, email = userDto.Email }, HttpContext.Request.Scheme);
+                    string returnUrl = "http://localhost:3000/ConfirmEmail/"+userDto.Email +"/" + token;
+
+                    string content = ContentMailUtil.GetContentRegisterAccount(returnUrl);
                     string sendMail = SendMail.SendEmail(user.Email, "Confirm your account",content, "");
                     if (sendMail != "")
                     {

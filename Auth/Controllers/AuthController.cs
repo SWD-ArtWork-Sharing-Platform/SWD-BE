@@ -100,8 +100,7 @@ namespace Auth.Controllers
                     string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.Action(nameof(ConfirmEmail), "Auth", new { token, email = userDto.Email }, HttpContext.Request.Scheme);
                     string sendMail = SendMail.SendEmail(user.Email, "Confirm your account",
-                        "Please confirm your account by clicking <a href=\"" +
-                        callbackUrl + "\">here</a>", "");
+                        ContentMailUtil.GetContentRegisterAccount(callbackUrl), "");
                     if (sendMail != "")
                     {
                         _response.IsSuccess = false;

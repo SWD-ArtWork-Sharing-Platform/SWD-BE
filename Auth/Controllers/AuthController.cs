@@ -128,6 +128,8 @@ namespace Auth.Controllers
                 if (user != null)
                 {
                     var result = await _userManager.ConfirmEmailAsync(user, token);
+                    user.Status = SD.ACTIVE;
+                    _db.SaveChanges();
                     _response.Result = result;
                 }
             }

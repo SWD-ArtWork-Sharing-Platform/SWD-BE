@@ -34,7 +34,8 @@ public partial class ArtworkSharingPlatformContext : IdentityDbContext<Applicati
     public virtual DbSet<FPayment> FPayments { get; set; }
     public virtual DbSet<FWishlist> FWishlists { get; set; }
     public virtual DbSet<FPost> FPosts { get; set; }
-
+    public virtual DbSet<DBankAccount> DBankAccounts { get; set; }
+    public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 
@@ -271,7 +272,18 @@ public partial class ArtworkSharingPlatformContext : IdentityDbContext<Applicati
                 .HasForeignKey(d => d.OrderId)
                 .HasConstraintName("FK_F_Payment_F_Order");
         });
+        modelBuilder.Entity<DBankAccount>(entity =>
+        {
+            entity.HasKey(e => e.AccountId).HasName("PK__BankAcco__349DA5A6AA3EADB5");
 
+            entity.ToTable("D_BankAccount");
+
+            entity.HasIndex(e => e.UserId, "UQ__BankAcco__1788CC4DE7AD3D4A").IsUnique();
+
+            entity.Property(e => e.AccountNumber).HasMaxLength(50);
+            entity.Property(e => e.AccountType).HasMaxLength(50);
+            entity.Property(e => e.Balance).HasColumnType("decimal(18, 2)");
+        });
         OnModelCreatingPartial(modelBuilder);
     }
 

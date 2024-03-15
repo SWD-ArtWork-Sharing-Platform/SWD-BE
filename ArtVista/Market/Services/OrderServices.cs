@@ -91,7 +91,5 @@ namespace Market.Services
                 return null;
             }
         }
-
-
     }
 }

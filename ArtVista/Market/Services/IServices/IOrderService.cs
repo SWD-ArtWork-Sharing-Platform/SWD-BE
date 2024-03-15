@@ -9,10 +9,5 @@ namespace Market.Services.IServices
         Task<bool> DownloadArtWorkCheck(string userID,string OrderID, string artID);
         Task<bool> CreateOrder(OrderResponseDTO obj);
         Task<IEnumerable<OrderDTO>> GetHistoryOrder(string userID);
-
-
-
-
-
     }
 }

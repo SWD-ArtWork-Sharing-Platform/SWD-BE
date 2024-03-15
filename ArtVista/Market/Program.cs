@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Management.Util;
 using Market.Extension;
+using Market.Repository.IRepository;
+using Market.Repository;
 
 namespace Market
 {
@@ -31,6 +33,14 @@ namespace Market
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddScoped<BackendApiAuthenthicationHttpClientHandler>();
+
+            builder.Services.AddScoped<IBankAccountRepository, BankAccountRepository>();
+            builder.Services.AddScoped<IOrderDetailsRepository, OrderDetailsRepository>();
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
+
+
+
             builder.Services.AddScoped<IImageProcessingService, ImageProcessingService>();
             builder.Services.AddScoped<IArtworkServices, ArtworkServices>();
             builder.Services.AddScoped<IOrderService, OrderServices>();

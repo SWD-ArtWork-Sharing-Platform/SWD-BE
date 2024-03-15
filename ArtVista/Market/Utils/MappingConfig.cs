@@ -43,11 +43,7 @@ namespace Market
                 config.CreateMap<FPackage, PackageDTO>().ReverseMap();
 
                 // DOrderDetail
-                config.CreateMap<FPayment, PaymentDTO>()
-                    .ForPath(dest => dest.Order.OrderId, opt => opt.MapFrom(src => src.OrderId));
-
-                config.CreateMap<PaymentDTO, FPayment>()
-                   .ForMember(dest => dest.OrderId, opt => opt.MapFrom(src => src.Order.OrderId));
+          
 
                 config.CreateMap<FWishlist, WishListDTO>().ReverseMap();
                 config.CreateMap<DWishlistDetail, WishListDetailDTO>().ReverseMap();

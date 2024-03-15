@@ -83,7 +83,6 @@ namespace Market.Services
             if (packageData != null)
             {
                 _db.DPackageOfCreators.Add(packageData);
-
                 return true;
             }
             else

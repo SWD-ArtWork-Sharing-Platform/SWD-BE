@@ -55,7 +55,6 @@ namespace Market.Utils
         public static FPayment FPayment(FPayment obj)
         {
             obj.PaymentId = null;
-            obj.Order = null;
 
             return obj;
         }

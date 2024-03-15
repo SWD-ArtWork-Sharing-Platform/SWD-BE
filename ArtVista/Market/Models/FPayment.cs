@@ -14,8 +14,4 @@ public partial class FPayment
     public string? PaymentStatus { get; set; }
 
     public string? Note { get; set; }
-
-    public string? OrderId { get; set; }
-
-    public virtual FOrder? Order { get; set; }
 }

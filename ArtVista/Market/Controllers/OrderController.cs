@@ -1,5 +1,10 @@
 ﻿using Azure;
+using Management.Util;
+using Market.Data;
 using Market.Models.DTO;
+using Market.Models.Payment.PaymentResponse;
+using Market.Repository;
+using Market.Repository.IRepository;
 using Market.Services;
 using Market.Services.IServices;
 using Microsoft.AspNetCore.Authorization;
@@ -15,11 +20,17 @@ namespace Market.Controllers
         protected ResponseDTO _response;
         private IOrderService _order_services;
         private IVnPayService _vnPayService;
-        public OrderController(IOrderService wishlist_servoces, IVnPayService vnPayService)
+        private readonly IConfiguration _configuration;
+        private ArtworkSharingPlatformContext _db;
+        private IBankAccountRepository _bankAccountRepository;  
+        public OrderController(IOrderService wishlist_servoces, IVnPayService vnPayService, IConfiguration configuration, ArtworkSharingPlatformContext db, IBankAccountRepository bankAccountRepository)
         {
             this._response = new ResponseDTO();
             _order_services = wishlist_servoces;
-            _vnPayService = vnPayService;   
+            _vnPayService = vnPayService;
+            _configuration = configuration;
+            _db = db;
+            _bankAccountRepository = bankAccountRepository;
         }
 
         [Authorize]
@@ -102,13 +113,73 @@ namespace Market.Controllers
             }
         }
 
-        [HttpPost("PaymentCallback")]
+        [HttpGet("PaymentCallback")]
         public ResponseDTO PaymentCallback()
         {
             try
             {
+                var urlCallBack = _configuration["PaymentRedirect:ReturnUrl"];
+
+                var response = new PaymentResponse
+                {
+                    OrderDescription = Request.Query["vnp_OrderInfo"],
+                    Order_Id = Request.Query["vnp_TxnRef"],
+                    PaymentId = Request.Query["vnp_TransactionNo"],
+                    TransactionId = Request.Query["vnp_TransactionNo"],
+                    Token = Request.Query["vnp_SecureHash"],
+                    VnPayResponseCode = Request.Query["vnp_ResponseCode"],
+                    Success = true,
+                };
+
+                if (string.IsNullOrEmpty(response.PaymentMethod) ||
+                 string.IsNullOrEmpty(response.OrderDescription) ||
+                 string.IsNullOrEmpty(response.Order_Id) ||
+                 string.IsNullOrEmpty(response.PaymentId) ||
+                 string.IsNullOrEmpty(response.TransactionId) ||
+                 string.IsNullOrEmpty(response.Token) ||
+                 string.IsNullOrEmpty(response.VnPayResponseCode))
+                    {
+                    return _response;    
+                }
+
+                var paymentReult = new PaymentResponse
+                {
+                    OrderDescription = response.OrderDescription,
+                    Order_Id = response.Order_Id,
+                    PaymentId = response.PaymentId,
+                    TransactionId = response.TransactionId,
+                    Token = response.Token,
+                    VnPayResponseCode = response.VnPayResponseCode,
+                };
+
+                string[] orderParts = paymentReult.OrderDescription.Split(' ');
+
+                string userId = Convert.ToString(orderParts[0]);
+                double amount = Convert.ToDouble(orderParts[1]);
+                string orderId  = Convert.ToString(orderParts[2]);
+                int numberOfDowload = Convert.ToInt32(orderParts[3]);
+
+                var order = _db.FOrders.FirstOrDefault(u => u.Id == userId && u.OrderId == orderId);
+                if (order != null)
+                {
+                    _response.Message = "There is no valid order's payment of customer with id: " + userId + "for order's id: " + orderId;
+                }
+
+                if (order != null)
+                {
+                    if (paymentReult.VnPayResponseCode == "00")
+                    {
+                        order.OrderStatus = SD.OrderStatus.SUCCESS_PAY_VNPAY;
+                        var userBank = _bankAccountRepository.Get(u => u.UserId == userId);
+                        if (userBank != null)
+                        {
+                            userBank.Balance += order.Total;
+                        }
+                    }
+                }
                 var vnPayResponse = _vnPayService.PaymentExecute(Request.Query);
                 _response.Result = vnPayResponse;
+                _db.SaveChanges();  
             }
             catch (Exception ex)
             {

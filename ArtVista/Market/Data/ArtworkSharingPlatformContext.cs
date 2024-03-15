@@ -253,10 +253,7 @@ public partial class ArtworkSharingPlatformContext : IdentityDbContext<Applicati
                 .HasNoKey()
                 .ToTable("F_Payment");
 
-            entity.Property(e => e.Note).HasMaxLength(255);
-            entity.Property(e => e.OrderId)
-                .HasMaxLength(50)
-                .HasColumnName("Order_ID");
+   
             entity.Property(e => e.PaymentId)
                 .HasMaxLength(50)
                 .HasColumnName("Payment_ID");
@@ -268,9 +265,7 @@ public partial class ArtworkSharingPlatformContext : IdentityDbContext<Applicati
                 .HasColumnName("Payment_Status");
             entity.Property(e => e.Total).HasColumnType("decimal(18, 0)");
 
-            entity.HasOne(d => d.Order).WithMany()
-                .HasForeignKey(d => d.OrderId)
-                .HasConstraintName("FK_F_Payment_F_Order");
+      
         });
         modelBuilder.Entity<DBankAccount>(entity =>
         {

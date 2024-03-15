@@ -50,7 +50,7 @@ namespace Management.Controllers
             }
             return _response;
         }
-        [HttpGet("RemoveREport")]
+        [HttpGet("RemoveReport")]
         public ResponseDTO RemoveREport(string id)
         {
             try

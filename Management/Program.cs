@@ -53,6 +53,7 @@ namespace Management
             builder.Services.AddScoped<IPostService, PostService>();
             builder.Services.AddScoped<IReportService, ReportService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<IUserServices, UserServices>();
 
 
 

@@ -57,13 +57,14 @@ namespace Market.Services
 
         public async Task<bool> AddArtWorkToWishList(string userID, string artwork, int quantity)
         {
-            
+            try {
+
                 FWishlist? HeaderData = _db.FWishlists.FirstOrDefault(u => u.Id == userID);
                 if (HeaderData != null)
                 {
                     DWishlistDetail add = new DWishlistDetail()
                     {
-                        WishlistDetailId = userID + DateTime.Now,
+                        WishlistDetailId = DateTime.Now.ToString(),
                         ArtworkId = artwork,
                         WishlistId = HeaderData.WishlistId
                     };
@@ -95,7 +96,12 @@ namespace Market.Services
                     await _db.SaveChangesAsync();
                     return true;
                 }
+            }catch (Exception e)
+            {
+
+                return false;
             }
+        }
         
 
         public async Task<bool> UpdateWishList(string userID, WishList obj)

@@ -5,6 +5,7 @@ using Market.Models.DTO;
 using Market.Services.IServices;
 using Market.Utils;
 using Microsoft.AspNetCore.Identity;
+using System.Linq;
 
 namespace Market.Services
 {
@@ -24,18 +25,36 @@ namespace Market.Services
             _imageServices = imageServices;
             _userManager = userManager;
         }
-        public async Task<bool> CreateArtWork(ArtWorkDTO artworkDTO)
+        public async Task<ResponseDTO> CreateArtWork(string creatorID, ArtWorkDTO artworkDTO)
         {
+            DPackageOfCreator?  currentPackage = _db.DPackageOfCreators.Where(u => u.Id == creatorID).OrderByDescending(item => item.ExpiredDate).FirstOrDefault();
+            if (currentPackage == null || currentPackage.Remain< 1)
+            {
+                return new ResponseDTO()
+                {
+                    IsSuccess = false,
+                    Message = "Creator must buy package to create artwork!"
+                };
+            }
+
+
             FArtwork data = _mapper.Map<FArtwork>(artworkDTO);
            
             if (data != null)
             {
+                
                 data = Refresh.FArtwork(data);
                 _db.FArtworks.Add(data);
+                currentPackage.Remain = currentPackage.Remain - 1;
+                _db.DPackageOfCreators.Update(currentPackage);
                 await _db.SaveChangesAsync();
-                return true;
+                return new ResponseDTO();
             } else
-            { return false; }
+            { return  new ResponseDTO()
+            {
+                IsSuccess = false,
+                Message = "Create artwork fail!"
+            }; ; }
 
 
         }
@@ -134,8 +153,6 @@ namespace Market.Services
             }
         }
 
-
-        
-
+       
     }
 }

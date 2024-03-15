@@ -6,7 +6,7 @@ namespace Market.Services.IServices
     {
         Task<IEnumerable<ArtWorkDTO>> GetAllArtwork( string? searchkey, decimal? minPrice,
             decimal? MaxPrice, decimal? discount, string? status, string? cateID);
-        Task<bool> CreateArtWork(ArtWorkDTO artworkDTO);
+        Task<ResponseDTO> CreateArtWork(string creatorID, ArtWorkDTO artworkDTO);
         Task<bool> UpdateArtWork(ArtWorkDTO artworkDTO);
         Task<bool> DeleteArtWork(string id);
         Task<ArtWorkDTO> GetArtWork(string artWorkID);

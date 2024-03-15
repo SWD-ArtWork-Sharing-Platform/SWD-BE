@@ -30,6 +30,7 @@ namespace Market.Services
             pay.AddRequestData("vnp_Locale", _configuration["Vnpay:Locale"]);
             pay.AddRequestData("vnp_OrderInfo", $"{model.Id} {model.Total} {model.OrderId} {model.NumberOfDowload}");
             pay.AddRequestData("vnp_OrderType", model.OrderStatus);
+
             pay.AddRequestData("vnp_ReturnUrl", urlCallBack);
             pay.AddRequestData("vnp_TxnRef", tick);
 

@@ -118,7 +118,7 @@ namespace Market.Controllers
         {
             try
             {
-                var urlCallBack = _configuration["PaymentRedirect:ReturnUrl"];
+                var urlCallBack = _configuration["PaymentCallBack:ReturnUrl"];
 
                 var response = new PaymentResponse
                 {

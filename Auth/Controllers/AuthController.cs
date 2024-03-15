@@ -164,6 +164,28 @@ namespace Auth.Controllers
             return Ok(_response);
         }
 
+        [HttpPost("LoginGoogle")]
+        public async Task<IActionResult> LoginGoogle([FromBody] string email)
+        {
+            var loginResponse = await _authService.LoginGoogle(email);
+            if (loginResponse.User == null)
+            {
+                _response.IsSuccess = false;
+                _response.Message = "Username or password is incorrect";
+                return BadRequest(_response);
+            }
+            else if (loginResponse.User.Status == SD.INACTIVE)
+            {
+                _response.IsSuccess = false;
+                _response.Message = "Account is inactive!";
+                return BadRequest(_response);
+            }
+
+            _response.Result = loginResponse;
+            return Ok(_response);
+        }
+
+
 
         [HttpPost("AssignRole")]
         public async Task<IActionResult> AssignRole([FromBody] RegisterationRequestDTO model)

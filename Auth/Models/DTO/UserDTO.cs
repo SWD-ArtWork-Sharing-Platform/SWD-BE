@@ -11,6 +11,7 @@ namespace Auth.Models.DTO
         [Required]
         public string Email { get; set; } = "";
         public string PhoneNumber { get; set; } = "";
+        public string Status { get; set; } = "";
         public IEnumerable<string> Role { get; set; } = new List<string>();
     }
 }

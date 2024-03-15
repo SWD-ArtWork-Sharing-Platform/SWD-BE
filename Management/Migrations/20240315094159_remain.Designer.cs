@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Management.Migrations
 {
     [DbContext(typeof(ArtworkSharingPlatformContext))]
-    [Migration("20240218111905_addtable")]
-    partial class addtable
+    [Migration("20240315094159_remain")]
+    partial class remain
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,43 @@ namespace Management.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Management.Models.DCategory", b =>
+                {
+                    b.Property<string>("CategoryId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Category_ID");
+
+                    b.Property<string>("CategoryName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Category_Name");
+
+                    b.Property<string>("Note")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int?>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("Updated_by");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime")
+                        .HasColumnName("Updated_date");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("D_Category", (string)null);
+                });
 
             modelBuilder.Entity("Management.Models.DInteraction", b =>
                 {
@@ -81,6 +118,9 @@ namespace Management.Migrations
 
                     b.Property<decimal?>("Price")
                         .HasColumnType("decimal(18, 0)");
+
+                    b.Property<int>("Remain")
+                        .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .HasMaxLength(50)
@@ -274,9 +314,8 @@ namespace Management.Migrations
             modelBuilder.Entity("Management.Models.DInteraction", b =>
                 {
                     b.HasOne("Management.Models.FPost", "Post")
-                        .WithMany("DInteractions")
-                        .HasForeignKey("PostId")
-                        .HasConstraintName("FK_D_Interaction_F_Post");
+                        .WithMany()
+                        .HasForeignKey("PostId");
 
                     b.Navigation("Post");
                 });
@@ -322,11 +361,6 @@ namespace Management.Migrations
             modelBuilder.Entity("Management.Models.FPackage", b =>
                 {
                     b.Navigation("DPackageOfCreators");
-                });
-
-            modelBuilder.Entity("Management.Models.FPost", b =>
-                {
-                    b.Navigation("DInteractions");
                 });
 #pragma warning restore 612, 618
         }

@@ -10,6 +10,7 @@ namespace Auth.Helper
             try
             {
                 MailMessage msg = new MailMessage(ConstantHelper.emailSender, to, subject, body);
+                msg.IsBodyHtml = true;
              
                 using(var client = new SmtpClient(ConstantHelper.hostEmail, ConstantHelper.portEmail))
                 {

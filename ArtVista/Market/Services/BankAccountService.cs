@@ -3,6 +3,7 @@ using Market.Data;
 using Market.Helper;
 using Market.Models;
 using Market.Models.DTO;
+using Market.Repository;
 using Market.Repository.IRepository;
 using Market.Services.IServices;
 using Microsoft.AspNetCore.Identity;
@@ -15,11 +16,11 @@ namespace Market.Services
         private ArtworkSharingPlatformContext _db;
         private IBankAccountRepository _bankAccountRepository;
         private UserManager<ApplicationUser> _userManager;  
-        public BankAccountService(IMapper mapper, ArtworkSharingPlatformContext db, IBankAccountRepository bankAccountRepository, UserManager<ApplicationUser> userManager)
+        public BankAccountService(IMapper mapper, ArtworkSharingPlatformContext db, UserManager<ApplicationUser> userManager)
         {
-            _bankAccountRepository = bankAccountRepository;
-            _mapper = mapper;   
             _db = db;   
+            _bankAccountRepository = new BankAccountRepository(_db);
+            _mapper = mapper;   
         }
         public async Task<bool> AddBankAccount(string userId, BankAccountDTO model, string code)
         {

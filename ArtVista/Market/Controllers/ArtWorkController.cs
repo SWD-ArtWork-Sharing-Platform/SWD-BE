@@ -19,7 +19,6 @@ namespace Market.Controllers
             _artwork_service = u;
         }
 
-        [Authorize(Policy = "MPVI_WH_Management")]
         // Book an Report Ticket
         [HttpGet("GetAllArtwork")]
         public async Task<ResponseDTO> GetAllArtwork(string? searchkey, decimal? minPrice,
@@ -40,11 +39,11 @@ namespace Market.Controllers
 
         [Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpPost("CreateArtWork")]
-        public async Task<ResponseDTO> CreateArtWork(ArtWorkDTO artworkDTO)
+        public async Task<ResponseDTO> CreateArtWork(string creatorID,ArtWorkDTO artworkDTO)
         {
             try
             {
-                _response.IsSuccess = await _artwork_service.CreateArtWork(artworkDTO);
+                _response = await _artwork_service.CreateArtWork(creatorID,artworkDTO);
             }
             catch (Exception ex)
             {

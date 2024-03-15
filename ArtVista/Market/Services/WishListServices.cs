@@ -57,8 +57,7 @@ namespace Market.Services
 
         public async Task<bool> AddArtWorkToWishList(string userID, string artwork, int quantity)
         {
-            try
-            {
+            
                 FWishlist? HeaderData = _db.FWishlists.FirstOrDefault(u => u.Id == userID);
                 if (HeaderData != null)
                 {
@@ -97,12 +96,7 @@ namespace Market.Services
                     return true;
                 }
             }
-            catch (Exception e)
-            {
-                string alo = e.Message;
-                return false;
-            }
-        }
+        
 
         public async Task<bool> UpdateWishList(string userID, WishList obj)
         {

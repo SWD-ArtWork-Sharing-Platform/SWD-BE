@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Management.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Management.Data;
@@ -35,6 +36,18 @@ public partial class ArtworkSharingPlatformContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Ignore<IdentityUserLogin<string>>();
+        modelBuilder.Ignore<IdentityUserRole<string>>();
+        modelBuilder.Ignore<IdentityUserClaim<string>>();
+        modelBuilder.Ignore<IdentityUserToken<string>>();
+        modelBuilder.Ignore<IdentityUser<string>>();
+        modelBuilder.Ignore<ApplicationUser>();
+
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<ApplicationUser>();
+
         modelBuilder.Entity<DInteraction>(entity =>
         {
             entity.HasKey(e => e.InteractionId);

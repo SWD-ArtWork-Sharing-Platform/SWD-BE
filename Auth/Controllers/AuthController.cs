@@ -9,6 +9,7 @@ using Auth.Helper;
 using Microsoft.AspNetCore.Authorization;
 using Auth.Util;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
 
 namespace Auth.Controllers
 {
@@ -324,15 +325,28 @@ namespace Auth.Controllers
             }
         
         }
-
+        
         [HttpPut("UpdateAccount")]
-        [Authorize]
         public async Task<ResponseDTO> UpdateAccount(ApplicationUser applicationUser)
         {
+
             try
             {
-                var updateRequest = await _authService.UpdateAccount(applicationUser);
-                _response.Result = updateRequest;
+                ApplicationUser? user = _db.ApplicationUsers.AsNoTracking().FirstOrDefault(
+                    u=>u.Id == applicationUser.Id);
+                if (user == null)
+                {
+                    return new ResponseDTO()
+                    {
+                        IsSuccess=false,
+                        Message = "User ID not found!"
+                    };
+                }
+                user.Name = applicationUser.Name;
+                user.Address = applicationUser.Address;
+                user.Status = applicationUser.Status;
+                _db.ApplicationUsers.Update(user);
+                await _db.SaveChangesAsync();
                 _response.Message = "Updated successfully";
             }
             catch (Exception ex)

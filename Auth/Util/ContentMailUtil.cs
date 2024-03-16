@@ -152,8 +152,8 @@
                   font-weight: 400;
                   letter-spacing: 4px; /* line-height: 48;""
               >
-                <h1 style=""font-weight: bolder; font-size: 60px"">Artvista</h1>
-                <h1 style=""font-size: 48px; font-weight: 400; margin: 2px"">
+                <h1 style=""font-weight: bolder; font-size: 60px; margin-bottom: 0px; color: #A259FF;"">Artvista</h1>
+                <h1 style=""font-size: 48px; font-weight: 400; margin: 2px; color: #A259FF;"">
                   Thank you for your registration
                 </h1>
               </td>
@@ -245,7 +245,8 @@
                                             border-radius: 2px;
                                             border: 1px solid #e8d6ff;
                                             display: inline-block;
-                                            text-decoration: underline;
+                                            text-decoration:underline;
+                                            font-weight: bolder;
                                             cursor: pointer;
                                           "" href=""" + callbackUrl + @"""
                                           >Click here to confirm your email</a
@@ -478,8 +479,8 @@
                   font-weight: 400;
                   letter-spacing: 4px; /* line-height: 48;""
               >
-                <h1 style=""font-weight: bolder; font-size: 60px"">Artvista</h1>
-                <h1 style=""font-size: 48px; font-weight: 400; margin: 2px"">
+                <h1 style=""font-weight: bolder; font-size: 60px; margin-bottom: 0px; color: #A259FF;"">Artvista</h1>
+                <h1 style=""font-size: 48px; font-weight: 400; margin: 2px; color: #A259FF;"">
                   Reset Password
                 </h1>
               </td>
@@ -572,6 +573,7 @@ the link below to reset password now.
                                             border: 1px solid #e8d6ff;
                                             display: inline-block;
                                             text-decoration: underline;
+                                            font-weight: bolder;
                                             cursor: pointer;
                                           "" href=""" + callbackUrl + @"""
                                           >Click here to reset your password</a

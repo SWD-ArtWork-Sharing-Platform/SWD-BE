@@ -41,5 +41,12 @@ namespace Management.Services
             _response.Result = returnObj;
             return _response;
         }
+
+        public ResponseDTO UpdateAccount(ApplicationUser user)
+        {
+              _userManager.UpdateAsync(user);
+            _response.Result = user;
+            return _response;
+        }
     }
 }

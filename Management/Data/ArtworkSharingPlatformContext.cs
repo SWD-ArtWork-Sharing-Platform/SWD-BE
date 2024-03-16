@@ -139,8 +139,10 @@ public partial class ArtworkSharingPlatformContext : DbContext
             entity.Property(e => e.PackageName)
                 .HasMaxLength(50)
                 .HasColumnName("Package_Name");
+            entity.Property(e => e.PackageTime).HasMaxLength(30);
             entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
         });
+
 
         modelBuilder.Entity<FPost>(entity =>
         {

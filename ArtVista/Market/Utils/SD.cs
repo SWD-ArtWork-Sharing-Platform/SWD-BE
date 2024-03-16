@@ -18,6 +18,13 @@
             public static string PENDING_PAY_VNPAY = "Pending";
 
         }
+        public class PackageStatus
+        {
+            public static string ACTIVE = "Active";
+            public static string INACTIVE = "Inactive";
+            public static string ARCHIVED = "Archive";
+
+        }
         public const string CUSTOMER = "8df6bc3f93a218ee4cb31427312f62d4498cabd22742e5dea3561e16b3e5b260";
         public const string CREATOR = "fdd5f6745e3ae0acae613e1e69c3042a0bee192e81d812448dec52022cff2aa1";
         public const string ADMIN = "835d6dc88b708bc646d6db82c853ef4182fabbd4a8de59c213f2b5ab3ae7d9be";

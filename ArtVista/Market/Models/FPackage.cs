@@ -15,5 +15,7 @@ public partial class FPackage
 
     public decimal? Discount { get; set; }
 
+    public string? PackageTime { get; set; }    
+
     public virtual ICollection<DPackageOfCreator> DPackageOfCreators { get; set; } = new List<DPackageOfCreator>();
 }

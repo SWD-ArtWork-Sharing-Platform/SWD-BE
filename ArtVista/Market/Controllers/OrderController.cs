@@ -22,7 +22,7 @@ namespace Market.Controllers
         private IVnPayService _vnPayService;
         private readonly IConfiguration _configuration;
         private ArtworkSharingPlatformContext _db;
-        private IBankAccountRepository _bankAccountRepository;  
+        private IBankAccountRepository _bankAccountRepository;
         public OrderController(IOrderService wishlist_servoces, IVnPayService vnPayService, IConfiguration configuration, ArtworkSharingPlatformContext db, IBankAccountRepository bankAccountRepository)
         {
             this._response = new ResponseDTO();
@@ -98,6 +98,7 @@ namespace Market.Controllers
             return _response;
         }
 
+        [Authorize]
         [HttpPost("CreatePaymentUrl")]
         public IActionResult CreatePaymentUrl(OrderDTO orderDTO)
         {
@@ -113,80 +114,76 @@ namespace Market.Controllers
             }
         }
 
+
         [HttpGet("PaymentCallback")]
-        public ResponseDTO PaymentCallback()
+        public async Task<IActionResult> PaymentCallback()
         {
-            try
+
+
+            var urlCallBack = _configuration["PaymentCallBack:ReturnUrl"];
+
+            var response = new PaymentResponse
             {
-                var urlCallBack = _configuration["PaymentCallBack:ReturnUrl"];
+                OrderDescription = Request.Query["vnp_OrderInfo"],
+                Order_Id = Request.Query["vnp_TxnRef"],
+                PaymentId = Request.Query["vnp_TransactionNo"],
+                TransactionId = Request.Query["vnp_TransactionNo"],
+                Token = Request.Query["vnp_SecureHash"],
+                VnPayResponseCode = Request.Query["vnp_ResponseCode"],
+                Success = true,
+            };
 
-                var response = new PaymentResponse
+            if (string.IsNullOrEmpty(response.PaymentMethod) ||
+             string.IsNullOrEmpty(response.OrderDescription) ||
+             string.IsNullOrEmpty(response.Order_Id) ||
+             string.IsNullOrEmpty(response.PaymentId) ||
+             string.IsNullOrEmpty(response.TransactionId) ||
+             string.IsNullOrEmpty(response.Token) ||
+             string.IsNullOrEmpty(response.VnPayResponseCode))
+            {
+                return BadRequest("Invalid payment data received");
+            }
+
+            var paymentResult = new PaymentResponse
+            {
+                OrderDescription = response.OrderDescription,
+                Order_Id = response.Order_Id,
+                PaymentId = response.PaymentId,
+                TransactionId = response.TransactionId,
+                Token = response.Token,
+                VnPayResponseCode = response.VnPayResponseCode,
+            };
+
+            string[] orderParts = paymentResult.OrderDescription.Split(' ');
+
+            string userId = Convert.ToString(orderParts[0]);
+            double amount = Convert.ToDouble(orderParts[1]);
+            string orderId = Convert.ToString(orderParts[2]);
+            int numberOfDowload = Convert.ToInt32(orderParts[3]);
+
+            var order = _db.FOrders.FirstOrDefault(u => u.Id == userId && u.OrderId == orderId);
+            if (order == null)
+            {
+                _response.Message = "There is no valid order's payment of customer with id: " + userId + "for order's id: " + orderId;
+            }
+
+            if (order != null)
+            {
+                if (paymentResult.VnPayResponseCode == "00")
                 {
-                    OrderDescription = Request.Query["vnp_OrderInfo"],
-                    Order_Id = Request.Query["vnp_TxnRef"],
-                    PaymentId = Request.Query["vnp_TransactionNo"],
-                    TransactionId = Request.Query["vnp_TransactionNo"],
-                    Token = Request.Query["vnp_SecureHash"],
-                    VnPayResponseCode = Request.Query["vnp_ResponseCode"],
-                    Success = true,
-                };
-
-                if (string.IsNullOrEmpty(response.PaymentMethod) ||
-                 string.IsNullOrEmpty(response.OrderDescription) ||
-                 string.IsNullOrEmpty(response.Order_Id) ||
-                 string.IsNullOrEmpty(response.PaymentId) ||
-                 string.IsNullOrEmpty(response.TransactionId) ||
-                 string.IsNullOrEmpty(response.Token) ||
-                 string.IsNullOrEmpty(response.VnPayResponseCode))
+                    order.OrderStatus = SD.OrderStatus.SUCCESS_PAY_VNPAY;
+                    var userBank = _bankAccountRepository.Get(u => u.UserId == userId);
+                    if (userBank != null)
                     {
-                    return _response;    
-                }
-
-                var paymentReult = new PaymentResponse
-                {
-                    OrderDescription = response.OrderDescription,
-                    Order_Id = response.Order_Id,
-                    PaymentId = response.PaymentId,
-                    TransactionId = response.TransactionId,
-                    Token = response.Token,
-                    VnPayResponseCode = response.VnPayResponseCode,
-                };
-
-                string[] orderParts = paymentReult.OrderDescription.Split(' ');
-
-                string userId = Convert.ToString(orderParts[0]);
-                double amount = Convert.ToDouble(orderParts[1]);
-                string orderId  = Convert.ToString(orderParts[2]);
-                int numberOfDowload = Convert.ToInt32(orderParts[3]);
-
-                var order = _db.FOrders.FirstOrDefault(u => u.Id == userId && u.OrderId == orderId);
-                if (order != null)
-                {
-                    _response.Message = "There is no valid order's payment of customer with id: " + userId + "for order's id: " + orderId;
-                }
-
-                if (order != null)
-                {
-                    if (paymentReult.VnPayResponseCode == "00")
-                    {
-                        order.OrderStatus = SD.OrderStatus.SUCCESS_PAY_VNPAY;
-                        var userBank = _bankAccountRepository.Get(u => u.UserId == userId);
-                        if (userBank != null)
-                        {
-                            userBank.Balance += order.Total;
-                        }
+                        userBank.Balance += order.Total;
                     }
                 }
-                var vnPayResponse = _vnPayService.PaymentExecute(Request.Query);
-                _response.Result = vnPayResponse;
-                _db.SaveChanges();  
             }
-            catch (Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.Message = ex.Message;
-            }
-            return _response;
+            var vnPayResponse = _vnPayService.PaymentExecute(Request.Query);
+            _response.Result = vnPayResponse;
+            _db.SaveChanges();
+
+            return Redirect(urlCallBack);
         }
 
     }

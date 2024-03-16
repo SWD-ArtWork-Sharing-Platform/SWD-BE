@@ -26,22 +26,22 @@ namespace Market.Services
             {
                 packageList = packageList.Where(u => u.PackageName.Contains(name));
             }
-            if (max>0)
+            if (max > 0)
             {
-                packageList = packageList.Where( u=> u.Price <= max);
+                packageList = packageList.Where(u => u.Price <= max);
             }
             if (minprice > 0)
             {
                 packageList = packageList.Where(u => u.Price >= minprice);
             }
-            if(discount > 0)
+            if (discount > 0)
             {
                 packageList = packageList.Where(u => u.Discount >= discount);
             }
 
-            if(packageList!= null)
+            if (packageList != null)
             {
-                IEnumerable<PackageDTO>? ObjList = _mapper.Map<IEnumerable<PackageDTO>>(packageList);   
+                IEnumerable<PackageDTO>? ObjList = _mapper.Map<IEnumerable<PackageDTO>>(packageList);
                 return ObjList;
 
             }
@@ -54,11 +54,11 @@ namespace Market.Services
 
         public async Task<IEnumerable<PackageOFCreatorDTO>> GetAllPurchasePackagebyUserID(string userID)
         {
-            IEnumerable<DPackageOfCreator>? Datalist = _db.DPackageOfCreators.Where( u =>u.Id ==userID)
-                    .OrderBy( u => u.GraceDate);  
-            if(Datalist != null)
+            IEnumerable<DPackageOfCreator>? Datalist = _db.DPackageOfCreators.Where(u => u.Id == userID)
+                    .OrderBy(u => u.GraceDate);
+            if (Datalist != null)
             {
-                IEnumerable<PackageOFCreatorDTO> returnObj= _mapper.Map<IEnumerable<PackageOFCreatorDTO>>(Datalist);
+                IEnumerable<PackageOFCreatorDTO> returnObj = _mapper.Map<IEnumerable<PackageOFCreatorDTO>>(Datalist);
                 return returnObj;
             }
             else
@@ -71,7 +71,7 @@ namespace Market.Services
         {
             DPackageOfCreator packageData = _mapper.Map<DPackageOfCreator>(obj);
             FPackage? package = _db.FPackages.FirstOrDefault(u => u.PackageId == obj.PackageId);
-            if(package == null)
+            if (package == null)
             {
                 //here
                 packageData.Remain = package.MaximumArtworks ?? 0;
@@ -83,6 +83,7 @@ namespace Market.Services
             if (packageData != null)
             {
                 _db.DPackageOfCreators.Add(packageData);
+
                 return true;
             }
             else
@@ -93,36 +94,36 @@ namespace Market.Services
         }
 
 
-            public async Task<bool> AdminUpdatePackage(PackageDTO obj)
+        public async Task<bool> AdminUpdatePackage(PackageDTO obj)
+        {
+            FPackage packageData = _mapper.Map<FPackage>(obj);
+            if (packageData != null)
             {
-                FPackage packageData = _mapper.Map<FPackage>(obj);
-                if (packageData != null)
-                {
-                    _db.FPackages.Update(packageData);
+                _db.FPackages.Update(packageData);
 
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return true;
             }
-
-            public async Task<bool> AdminDeletePackage(string packageID)
+            else
             {
-                FPackage? packageData = _db.FPackages.FirstOrDefault(u => u.PackageId == packageID);
-                if (packageData != null)
-                {
-                    _db.FPackages.Remove(packageData);
-
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return false;
             }
- 
+        }
+
+        public async Task<bool> AdminDeletePackage(string packageID)
+        {
+            FPackage? packageData = _db.FPackages.FirstOrDefault(u => u.PackageId == packageID);
+            if (packageData != null)
+            {
+                _db.FPackages.Remove(packageData);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 
 
     }

@@ -151,30 +151,25 @@ public partial class ArtworkSharingPlatformContext : IdentityDbContext<Applicati
                 .HasConstraintName("FK_D_OrderDetail_F_Order");
         });
 
-        modelBuilder.Entity<DPackageOfCreator>(entity =>
+        modelBuilder.Entity<FPackage>(entity =>
         {
-            entity.HasKey(e => new { e.PackageId, e.Id });
+            entity.HasKey(e => e.PackageId);
 
-            entity.ToTable("D_PackageOfCreator");
+            entity.ToTable("F_Package");
 
             entity.Property(e => e.PackageId)
                 .HasMaxLength(50)
                 .HasColumnName("Package_ID");
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.ExpiredDate)
-                .HasColumnType("datetime")
-                .HasColumnName("Expired_date");
-            entity.Property(e => e.GraceDate)
-                .HasColumnType("datetime")
-                .HasColumnName("Grace_date");
+            entity.Property(e => e.Discount).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.MaximumArtworks).HasColumnName("Maximum_Artworks");
+            entity.Property(e => e.PackageName)
+                .HasMaxLength(50)
+                .HasColumnName("Package_Name");
+            entity.Property(e => e.PackageTime).HasMaxLength(30);
             entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
-            entity.Property(e => e.Status).HasMaxLength(50);
-
-            entity.HasOne(d => d.Package).WithMany(p => p.DPackageOfCreators)
-                .HasForeignKey(d => d.PackageId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_D_PackageOfCreator_F_Package");
         });
+
+        OnModelCreatingPartial(modelBuilder);
 
         modelBuilder.Entity<FArtwork>(entity =>
         {

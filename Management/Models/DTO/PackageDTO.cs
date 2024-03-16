@@ -11,6 +11,9 @@
         public decimal? Price { get; set; }
 
         public decimal? Discount { get; set; }
+
+        public string? PackageTime { get; set; }    
+
         public IEnumerable<PackageOfCreatorDTO>? PackageOfCreatorDTOs { get; set; }      
     }
 }

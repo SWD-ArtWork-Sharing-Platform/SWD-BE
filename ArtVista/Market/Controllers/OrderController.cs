@@ -1,6 +1,7 @@
 ﻿using Azure;
 using Management.Util;
 using Market.Data;
+using Market.Models;
 using Market.Models.DTO;
 using Market.Models.Payment.PaymentResponse;
 using Market.Repository;
@@ -154,6 +155,7 @@ namespace Market.Controllers
                 VnPayResponseCode = response.VnPayResponseCode,
             };
 
+
             string[] orderParts = paymentResult.OrderDescription.Split(' ');
 
             string userId = Convert.ToString(orderParts[0]);
@@ -171,6 +173,26 @@ namespace Market.Controllers
             {
                 if (paymentResult.VnPayResponseCode == "00")
                 {
+
+
+
+                    DPaymentResponse paymentResponse = new DPaymentResponse
+                    {
+                        OrderDescription = paymentResult.OrderDescription,
+                        OrderId = paymentResult.Order_Id,
+                        PaymentId = paymentResult.PaymentId,
+                        TransactionId = paymentResult.TransactionId,
+                        Amount = amount,
+                        PayDate = DateTime.Now,
+                        Token = paymentResult.Token,
+                        Success = true,
+                        VnPayResponseCode = paymentResult.VnPayResponseCode,
+                        PaymentMethod = paymentResult.PaymentMethod,
+                    };
+
+                    await _db.DPaymentResponses.AddAsync(paymentResponse);
+                    await _db.SaveChangesAsync();
+
                     order.OrderStatus = SD.OrderStatus.SUCCESS_PAY_VNPAY;
                     var userBank = _bankAccountRepository.Get(u => u.UserId == userId);
                     if (userBank != null)

@@ -36,6 +36,7 @@ public partial class ArtworkSharingPlatformContext : IdentityDbContext<Applicati
     public virtual DbSet<FPost> FPosts { get; set; }
     public virtual DbSet<DBankAccount> DBankAccounts { get; set; }
     public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+    public virtual DbSet<DPaymentResponse> DPaymentResponses { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 
@@ -274,6 +275,37 @@ public partial class ArtworkSharingPlatformContext : IdentityDbContext<Applicati
             entity.Property(e => e.AccountType).HasMaxLength(50);
             entity.Property(e => e.Balance).HasColumnType("decimal(18, 2)");
         });
+
+        modelBuilder.Entity<DPaymentResponse>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("D_PaymentResponse");
+
+            entity.Property(e => e.OrderDescription)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.OrderId)
+                .HasMaxLength(50)
+                .HasColumnName("Order_Id");
+            entity.Property(e => e.PayDate).HasColumnType("date");
+            entity.Property(e => e.PaymentId)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.PaymentMethod)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Token)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.TransactionId)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.VnPayResponseCode)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+        });
+
         OnModelCreatingPartial(modelBuilder);
     }
 

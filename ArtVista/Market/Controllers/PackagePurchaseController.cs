@@ -1,5 +1,6 @@
 ﻿using Management.Util;
 using Market.Data;
+using Market.Models;
 using Market.Models.DTO;
 using Market.Models.Payment.PaymentResponse;
 using Market.Repository.IRepository;
@@ -176,6 +177,24 @@ namespace Market.Controllers
             {
                 if (paymentResult.VnPayResponseCode == "00")
                 {
+
+                    DPaymentResponse paymentResponse = new DPaymentResponse
+                    {
+                        OrderDescription = paymentResult.OrderDescription,
+                        OrderId = paymentResult.Order_Id,
+                        PayDate = DateTime.Now,
+                        PaymentMethod = paymentResult.PaymentMethod,
+                        Success = true,
+                        Token = paymentResult.Token,
+                        TransactionId = paymentResult.TransactionId,
+                        VnPayResponseCode = paymentResult.VnPayResponseCode,
+                        PaymentId = paymentResult.PaymentId,
+                        Amount = amount,
+                    };
+
+                    await _db.DPaymentResponses.AddAsync(paymentResponse);      
+                    await _db.SaveChangesAsync();   
+
                     packageOfCreator.Status = SD.PackageStatus.ACTIVE; 
                     packageOfCreator.GraceDate = DateTime.Now;  
                 }

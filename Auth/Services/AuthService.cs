@@ -114,7 +114,8 @@ namespace Auth.Service
                     Name = user.Name,
                     PhoneNumber = user.PhoneNumber ?? "",
                     Role = roles,
-                    Status = user.Status
+                    Status = user.Status,
+                    Address = user.Address
                 };
                 LoginResponseDTO loginResponseDTO = new LoginResponseDTO()
                 {

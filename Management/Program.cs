@@ -86,16 +86,16 @@ namespace Management
             }
            );
             builder.AppAuthentication();
-            builder.Services.AddCors(options =>
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+            builder.Services.AddCors(p => p.AddPolicy(MyAllowSpecificOrigins, builder =>
             {
-                options.AddPolicy("AllowAll",
-                    builder =>
-                    {
-                        builder.AllowAnyOrigin()
-                               .AllowAnyHeader()
-                               .AllowAnyMethod();
-                    });
-            });
+                builder.WithOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "https://artvistamanagementapi.azurewebsites.net/", "https://artvista-website.vercel.app/").AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .AllowCredentials(); // Add this line to allow credentials
+
+                // Other configurations...
+            }));
 
             builder.Services.AddAuthorization(options => {
 
@@ -130,8 +130,8 @@ namespace Management
                     c.RoutePrefix = string.Empty;
                 }
             });
-            app.UseCors();  
             app.UseHttpsRedirection();
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthentication();
             app.UseAuthorization();
 

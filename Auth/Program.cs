@@ -48,15 +48,17 @@ namespace Auth
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-               builder.Services.AddCors(options => {
-                options.AddPolicy("MyAllowSpecificOrigins", policy =>
-                {
-                    policy.WithOrigins("http://localhost:3000", "http://localhost:3001",
-                                          "http://localhost:3002", "http://localhost:3003");
-                });
-            });
+            builder.Services.AddCors(p => p.AddPolicy(MyAllowSpecificOrigins, builder =>
+            {
+                builder.WithOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "https://artvistaauthapi.azurewebsites.net/", "https://artvista-website.vercel.app/")
+                       .AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .AllowCredentials(); // Add this line to allow credentials
+
+                // Other configurations...
+            }));
 
             var app = builder.Build();
 
@@ -70,11 +72,10 @@ namespace Auth
                     c.RoutePrefix = string.Empty;
                 }
             });
-            app.UseCors("AllowAll");
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-            app.UseCors();  
 
             app.MapControllers();
              //ApplyMigration();

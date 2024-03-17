@@ -29,6 +29,15 @@ namespace Management.Services
         {
             try
             {
+                DPackageOfCreator? currentPackage = _db.DPackageOfCreators.Where(u => u.Id == creatorID).OrderByDescending(item => item.ExpiredDate).FirstOrDefault();
+                if (currentPackage == null || currentPackage.Remain < 1)
+                {
+                    return new ResponseDTO()
+                    {
+                        IsSuccess = false,
+                        Message = "Creator must buy package to create artwork!"
+                    };
+                }
                 FArtwork artwork = _mapper.Map<FArtwork>(model);
                 if (model.Image != null)
                 {

@@ -29,7 +29,7 @@ namespace Management.Services
         {
             try
             {
-                DPackageOfCreator? currentPackage = _db.DPackageOfCreators.Where(u => u.Id == creatorID).OrderByDescending(item => item.ExpiredDate).FirstOrDefault();
+                DPackageOfCreator? currentPackage = _db.DPackageOfCreators.Where(u => u.Id == model.Id).OrderByDescending(item => item.ExpiredDate).FirstOrDefault();
                 if (currentPackage == null || currentPackage.Remain < 1)
                 {
                     return new ResponseDTO()

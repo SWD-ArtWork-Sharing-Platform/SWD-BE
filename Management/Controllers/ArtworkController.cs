@@ -50,6 +50,22 @@ namespace Management.Controllers
         }
 
         //[Authorize(Policy = "ARTWORKMANAGEMENT")]
+        [HttpPost]
+        public ResponseDTO CreateArtwork([FromForm] ArtworkDTO artworkDTO)
+        {
+            try
+            {
+                _response.Result = _artworkService.CreateNewArtwork(artworkDTO);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
+        }
+
+        //[Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpPost("CreateNewArtwork")]
         public  ResponseDTO CreateNewArtwork(ArtworkDTO artworkDTO)
         {

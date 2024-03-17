@@ -1,4 +1,4 @@
-﻿using Management.Models;
+﻿//using Management.Models;
 using Management.Models.DTO;
 using Management.Services;
 using Management.Services.IService;
@@ -21,7 +21,7 @@ namespace Management.Controllers
             _userServices = artworkService;
         }
 
-        [Authorize(Policy = "ARTWORKMANAGEMENT")]
+        //[Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpPost("UserReportManagement")]
         public ResponseDTO UserReportManagement(string UserID)
         {

@@ -83,7 +83,7 @@ namespace Market
 
             builder.Services.AddCors(p => p.AddPolicy(MyAllowSpecificOrigins, builder =>
             {
-                builder.WithOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "https://artvistamarketapi.azurewebsites.net/", "https://artvista-website.vercel.app/")
+                builder.WithOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:3002", "http://localhost:3003", "https://artvistamarketapi.azurewebsites.net/", "https://artvista-website.vercel.app/")
                        .AllowAnyMethod()
                        .AllowAnyHeader()
                        .AllowCredentials(); // Add this line to allow credentials
@@ -91,28 +91,28 @@ namespace Market
                 // Other configurations...
             }));
 
-            builder.Services.AddAuthorization(options =>
-            {
+            //builder.Services.AddAuthorization(options =>
+            //{
 
-                options.AddPolicy("ARTWORKMANAGEMENT", policy =>
-                {
-                    policy.RequireRole(SD.ADMIN);
-                    policy.RequireRole(SD.MODERATOR);
-                    policy.RequireRole(SD.CREATOR);
-                });
+            //    options.AddPolicy("ARTWORKMANAGEMENT", policy =>
+            //    {
+            //        policy.RequireRole(SD.ADMIN);
+            //        policy.RequireRole(SD.MODERATOR);
+            //        policy.RequireRole(SD.CREATOR);
+            //    });
 
-                options.AddPolicy("ORGANIZATION", policy =>
-                {
-                    policy.RequireRole(SD.ADMIN);
-                    policy.RequireRole(SD.MODERATOR);
-                });
+            //    options.AddPolicy("ORGANIZATION", policy =>
+            //    {
+            //        policy.RequireRole(SD.ADMIN);
+            //        policy.RequireRole(SD.MODERATOR);
+            //    });
 
-                options.AddPolicy("CUSTOMER_USER", policy =>
-                {
-                    policy.RequireRole(SD.CUSTOMER);
-                    policy.RequireRole(SD.CREATOR);
-                });
-            });
+            //    options.AddPolicy("CUSTOMER_USER", policy =>
+            //    {
+            //        policy.RequireRole(SD.CUSTOMER);
+            //        policy.RequireRole(SD.CREATOR);
+            //    });
+            //});
 
             var app = builder.Build();
 

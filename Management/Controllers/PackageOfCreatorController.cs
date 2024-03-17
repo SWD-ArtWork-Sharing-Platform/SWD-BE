@@ -18,7 +18,7 @@ namespace Management.Controllers
             _response = new ResponseDTO();  
             _packageOfCreatorService = packageOfCreatorService;     
         }
-        [Authorize(Policy = "CUSTOMER_USER")]
+        //[Authorize(Policy = "CUSTOMER_USER")]
         [HttpPost("CreatePackageOfCreator")]
         public ResponseDTO CreatePackageOfCreator(PackageOfCreatorDTO packageOfCreatorDTO)
         {
@@ -35,7 +35,7 @@ namespace Management.Controllers
         }
 
 
-        [Authorize]
+        //[Authorize]
         [HttpDelete("DeletePackageOfCreator")]
         public ResponseDTO DeletePackageOfCreator(string id, bool confirm)
         {
@@ -51,7 +51,7 @@ namespace Management.Controllers
             return _response;
         }
 
-        [Authorize(Policy = "ARTWORKMANAGEMENT")]
+        //[Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpGet("GetAllPackgeOfCreator")]
         public ResponseDTO GetAllPackgeOfCreator()
         {
@@ -67,7 +67,7 @@ namespace Management.Controllers
             return _response;
         }
 
-        [Authorize(Policy = "ARTWORKMANAGEMENT")]
+        //[Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpGet("GetPackageOfCreatorByID")]
         public ResponseDTO GetPackageOfCreatorByID(string id)
         {
@@ -83,7 +83,7 @@ namespace Management.Controllers
             return _response;
         }
 
-        [Authorize(Policy = "ARTWORKMANAGEMENT")]
+        //[Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpPut("UpdatePackageOfCreator")]
         public ResponseDTO UpdatePackageOfCreator(PackageOfCreatorDTO packageOfCreatorDTO)
         {

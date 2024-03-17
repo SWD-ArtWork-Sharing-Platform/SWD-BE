@@ -49,7 +49,7 @@ namespace Management.Controllers
             return _response;
         }
 
-        [Authorize(Policy = "ARTWORKMANAGEMENT")]
+        //[Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpPost("CreateNewArtwork")]
         public  ResponseDTO CreateNewArtwork(ArtworkDTO artworkDTO)
         {
@@ -65,7 +65,7 @@ namespace Management.Controllers
             return _response;
         }
 
-        [Authorize(Policy = "ARTWORKMANAGEMENT")]
+        //[Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpPut("UpdateArtwork")]
         public ResponseDTO UpdateArtwork(ArtworkDTO artworkDTO)
         {
@@ -96,7 +96,7 @@ namespace Management.Controllers
             return _response;
         }
 
-        [Authorize(Policy = "ARTWORKMANAGEMENT")]
+        //[Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpDelete("DeleteArtWorkByID")]
         public ResponseDTO DeleteArtWorkByID(string id, bool confirm)
         {

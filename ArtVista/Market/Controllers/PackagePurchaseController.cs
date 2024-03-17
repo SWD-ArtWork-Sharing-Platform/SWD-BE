@@ -48,7 +48,7 @@ namespace Market.Controllers
             return _response;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("GetAllPurchasePackagebyUserID")]
         public async Task<ResponseDTO> GetAllPurchasePackagebyUserID(string userID)
         {
@@ -64,7 +64,7 @@ namespace Market.Controllers
             return _response;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("BuyPackage")]
         public async Task<ResponseDTO> BuyPackage(string userID, PackageOFCreatorDTO obj)
         {
@@ -80,7 +80,7 @@ namespace Market.Controllers
             return _response;
         }
 
-        [Authorize(Policy = "ORGANIZATION")]
+        //[Authorize(Policy = "ORGANIZATION")]
         [HttpPost("AdminUpdatePackage")]
         public async Task<ResponseDTO> AdminUpdatePackage(PackageDTO obj)
         {
@@ -96,7 +96,7 @@ namespace Market.Controllers
             return _response;
         }
 
-        [Authorize(Policy = "ORGANIZATION")]
+        //[Authorize(Policy = "ORGANIZATION")]
         [HttpDelete("AdminDeletePackage")]
         public async Task<ResponseDTO> AdminDeletePackage(string packageID)
         {
@@ -112,7 +112,7 @@ namespace Market.Controllers
             return _response;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("CreatePaymentPackage")]
         public IActionResult CreatePaymentUrl(PackageOFCreatorDTO model)
         {

@@ -19,7 +19,7 @@ namespace Management.Controllers
             _postService = postService; 
         }
 
-        [Authorize(Policy = "ARTWORKMANAGEMENT")]
+        //[Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpPost("CreateNewPost")]
         public ResponseDTO CreateNewPost(PostDTO postDTO)
         {
@@ -35,7 +35,7 @@ namespace Management.Controllers
             return _response;
         }
 
-        [Authorize(Policy = "ARTWORKMANAGEMENT")]
+        //[Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpDelete("DeletePostByID")]
         public ResponseDTO DeletePostByID(string id)
         {
@@ -97,7 +97,7 @@ namespace Management.Controllers
             return _response;
         }
 
-        [Authorize(Policy = "ARTWORKMANAGEMENT")]
+        //[Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpPut("UpdatePost")]
         public ResponseDTO UpdatePost(PostDTO postDTO)
         {

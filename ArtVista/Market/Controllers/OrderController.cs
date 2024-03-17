@@ -34,7 +34,7 @@ namespace Market.Controllers
             _bankAccountRepository = bankAccountRepository;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("GetOrder")]
         public async Task<ResponseDTO> GetOrder(string orderID, string? status, DateTime? CreatedOn)
         {
@@ -50,7 +50,7 @@ namespace Market.Controllers
             return _response;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPut("DownloadArtWorkCheck")]
         public async Task<ResponseDTO> DownloadArtWorkCheck(string userID, string OrderID, string artID)
         {
@@ -67,7 +67,7 @@ namespace Market.Controllers
         }
 
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("CreateOrder")]
         public async Task<ResponseDTO> CreateOrder(OrderResponseDTO obj)
         {
@@ -83,7 +83,7 @@ namespace Market.Controllers
             return _response;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("GetHistoryOrder")]
         public async Task<ResponseDTO> GetHistoryOrder(string userID)
         {
@@ -99,7 +99,7 @@ namespace Market.Controllers
             return _response;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("CreatePaymentUrl")]
         public IActionResult CreatePaymentUrl(OrderDTO orderDTO)
         {

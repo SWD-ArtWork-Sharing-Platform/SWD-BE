@@ -33,7 +33,7 @@ namespace Management.Controllers
             return _response;
         }
 
-        [Authorize(Policy = "ARTWORKMANAGEMENT")]
+        //[Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpDelete("DeleteCategory")]
         public ResponseDTO DeleteCategory(string categoryId)
         {
@@ -49,8 +49,8 @@ namespace Management.Controllers
             return _response;
         }
 
-        [HttpPost("CreateCategory")]
-        [Authorize(Policy = "ARTWORKMANAGEMENT")]
+       [HttpPost("CreateCategory")]
+        //[Authorize(Policy = "ARTWORKMANAGEMENT")]
         public ResponseDTO CreateCategory(CategoryDTO categoryDTO)
         {
             try
@@ -81,7 +81,7 @@ namespace Management.Controllers
         }
 
         [HttpPut("UpdateCategory")]
-        [Authorize(Policy = "ARTWORKMANAGEMENT")]
+        //[Authorize(Policy = "ARTWORKMANAGEMENT")]
         public ResponseDTO UpdateCategory(CategoryDTO categoryDTO)
         {
             try

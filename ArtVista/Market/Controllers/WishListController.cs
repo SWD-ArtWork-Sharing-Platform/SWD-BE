@@ -34,7 +34,7 @@ namespace Market.Controllers
             return _response;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpDelete("RemoveArtWorkFromWishList")]
         public async Task<ResponseDTO> RemoveArtWorkFromWishList(string userID, string artworkID)
         {
@@ -50,7 +50,7 @@ namespace Market.Controllers
             return _response;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("AddArtWorkToWishList")]
         public async Task<ResponseDTO> AddArtWorkToWishList(string userID, string artwork, int quantity)
         {
@@ -66,7 +66,7 @@ namespace Market.Controllers
             return _response;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPut("UpdateWishList")]
         public async Task<ResponseDTO> UpdateWishList(string userID, WishList obj)
         {

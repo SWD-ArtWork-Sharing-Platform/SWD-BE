@@ -50,7 +50,7 @@ namespace Management.Controllers
         }
 
 
-        [Authorize (Roles = SD.ADMIN)]
+        //[Authorize (Roles = SD.ADMIN)]
         [HttpPost("CreateNewConfiguration")]
         public ResponseDTO CreateNewConfiguration(ConfigurationDTO configurationDTO)
         {
@@ -66,7 +66,7 @@ namespace Management.Controllers
             return _response;
         }
 
-        [Authorize (Roles = SD.ADMIN)]
+        //[Authorize (Roles = SD.ADMIN)]
         [HttpPut("UpdateConfiguration")]
         public ResponseDTO UpdateConfiguration(ConfigurationDTO configurationDTO)
         {
@@ -82,7 +82,7 @@ namespace Management.Controllers
             return _response;
         }
 
-        [Authorize (Roles = SD.ADMIN)]
+        //[Authorize (Roles = SD.ADMIN)]
         [HttpDelete("DeleteConfigurationByID")]
         public ResponseDTO DeleteConfigurationByID(string id, bool confirm)
         {

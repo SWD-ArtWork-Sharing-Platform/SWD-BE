@@ -14,22 +14,22 @@ namespace Market.Services
         private IMapper _mapper;
         private readonly ArtworkSharingPlatformContext _db;
         private IOrderRepository _orderRepository;
-        private IOrderDetailsRepository _orderDetailsRepository;    
+        private IOrderDetailsRepository _orderDetailsRepository;
         public OrderServices(ArtworkSharingPlatformContext db, IMapper mapper)
         {
             _db = db;
             _mapper = mapper;
             _orderRepository = new OrderRepository(_db);
-            _orderDetailsRepository = new OrderDetailsRepository(_db);   
+            _orderDetailsRepository = new OrderDetailsRepository(_db);
         }
 
         public async Task<OrderResponseDTO> GetOrder(string OrderID,
             string? status, DateTime? CreatedOn)
         {
-            FOrder? headerData = _db.FOrders.FirstOrDefault( u => u.OrderId == OrderID);
+            FOrder? headerData = _db.FOrders.FirstOrDefault(u => u.OrderId == OrderID);
             if (headerData != null)
             {
-                List<DOrderDetail>? detailsList = _db.DOrderDetails.Where(u=> u.OrderId == headerData.OrderId).ToList();
+                List<DOrderDetail>? detailsList = _db.DOrderDetails.Where(u => u.OrderId == headerData.OrderId).ToList();
                 OrderResponseDTO orderResponseDTO = new OrderResponseDTO()
                 {
                     Header = _mapper.Map<OrderDTO>(headerData),
@@ -50,7 +50,7 @@ namespace Market.Services
             {
                 headerData.NumberOfDowload += 1;
                 _db.FOrders.Update(headerData);
-                await _db.SaveChangesAsync();   
+                await _db.SaveChangesAsync();
 
                 return true;
             }
@@ -62,23 +62,24 @@ namespace Market.Services
 
         public async Task<bool> CreateOrder(OrderResponseDTO obj)
         {
-            
-                FOrder? headerData = _mapper.Map<FOrder>(obj.Header);
-                List<DOrderDetail>? details = _mapper.Map<List<DOrderDetail>>(obj.OrderDetails);
-                if (headerData != null && details != null)
+
+            FOrder? headerData = _mapper.Map<FOrder>(obj.Header);
+            List<DOrderDetail>? details = _mapper.Map<List<DOrderDetail>>(obj.OrderDetails);
+            if (headerData != null && details != null)
+            {
+                headerData.DOrderDetails = null;
+                _orderRepository.Add(headerData);
+                await _db.SaveChangesAsync();
+                foreach (DOrderDetail detail in details)
                 {
-                    headerData.DOrderDetails = null;
-                    _orderRepository.Add(headerData);
-                    await _db.SaveChangesAsync();
-                    foreach (DOrderDetail detail in details)
-                    {
-                        detail.Artwork = null;
-                        detail.Order = null;
-                        _orderDetailsRepository.Add(detail);
-                    }
-                    await _db.SaveChangesAsync();
-                    return true;
-                }elsecatch(Exception ex) 
+                    detail.Artwork = null;
+                    detail.Order = null;
+                    _orderDetailsRepository.Add(detail);
+                }
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            else
             {
                 return false;
             }
@@ -90,7 +91,8 @@ namespace Market.Services
             if (orderdata != null)
             {
                 return _mapper.Map<IEnumerable<OrderDTO>>(orderdata);
-            }else
+            }
+            else
             {
                 return null;
             }

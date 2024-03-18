@@ -134,13 +134,14 @@ namespace Market.Controllers
                 Success = true,
             };
 
-            if (string.IsNullOrEmpty(response.PaymentMethod) ||
-             string.IsNullOrEmpty(response.OrderDescription) ||
-             string.IsNullOrEmpty(response.Order_Id) ||
-             string.IsNullOrEmpty(response.PaymentId) ||
-             string.IsNullOrEmpty(response.TransactionId) ||
-             string.IsNullOrEmpty(response.Token) ||
-             string.IsNullOrEmpty(response.VnPayResponseCode))
+            if (
+                string.IsNullOrEmpty(response.OrderDescription) ||
+                string.IsNullOrEmpty(response.Order_Id) ||
+                string.IsNullOrEmpty(response.PaymentId) ||
+                string.IsNullOrEmpty(response.TransactionId) ||
+                string.IsNullOrEmpty(response.Token) ||
+                string.IsNullOrEmpty(response.VnPayResponseCode) 
+                )
             {
                 return BadRequest("Invalid payment data received");
             }
@@ -193,6 +194,7 @@ namespace Market.Controllers
                     await _db.DPaymentResponses.AddAsync(paymentResponse);
                     await _db.SaveChangesAsync();
 
+                    order.PaymentResponseId = paymentResponse.PaymentResponseId;    
                     order.OrderStatus = SD.OrderStatus.SUCCESS_PAY_VNPAY;
                     var userBank = _bankAccountRepository.Get(u => u.UserId == userId);
                     if (userBank != null)

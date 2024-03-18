@@ -24,4 +24,6 @@ public class DPaymentResponse
     public DateTime? PayDate { get; set; }
 
     public double? Amount { get; set; }
+
+    public int PaymentResponseId { get; set; }
 }

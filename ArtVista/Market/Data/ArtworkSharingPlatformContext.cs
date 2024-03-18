@@ -278,9 +278,9 @@ public partial class ArtworkSharingPlatformContext : IdentityDbContext<Applicati
 
         modelBuilder.Entity<DPaymentResponse>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("D_PaymentResponse");
+            entity.HasKey(e => e.PaymentResponseId).HasName("PK__D_Paymen__766E687AB63AE698");
+
+            entity.ToTable("D_PaymentResponse");
 
             entity.Property(e => e.OrderDescription)
                 .HasMaxLength(255)
@@ -305,7 +305,29 @@ public partial class ArtworkSharingPlatformContext : IdentityDbContext<Applicati
                 .HasMaxLength(50)
                 .IsUnicode(false);
         });
+        modelBuilder.Entity<DPaymentResponse>(entity =>
+        {
+            entity.HasKey(e => e.PaymentResponseId).HasName("PK__D_Paymen__766E687AB63AE698");
 
+            entity.ToTable("D_PaymentResponse");
+
+            entity.Property(e => e.OrderDescription)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.OrderId)
+                .HasMaxLength(50)
+                .HasColumnName("Order_Id");
+            entity.Property(e => e.PayDate).HasColumnType("date");
+            entity.Property(e => e.PaymentId)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.PaymentMethod)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.TransactionId)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+        });
         OnModelCreatingPartial(modelBuilder);
     }
 

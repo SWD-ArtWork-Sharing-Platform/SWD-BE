@@ -101,17 +101,17 @@ namespace Management
 
                 options.AddPolicy("ARTWORKMANAGEMENT", policy =>
                 {
-                    policy.RequireRole(SD.ADMIN,SD.MODERATOR,SD.CREATOR);
+                    policy.RequireRole(SD.ADMIN, SD.MODERATOR, SD.CREATOR);
                 });
 
                 options.AddPolicy("ORGANIZATION", policy =>
                 {
-                    policy.RequireRole(SD.ADMIN,SD.MODERATOR);
+                    policy.RequireRole(SD.ADMIN, SD.MODERATOR);
                 });
 
                 options.AddPolicy("CUSTOMER_USER", policy =>
                 {
-                    policy.RequireRole(SD.CUSTOMER,SD.CREATOR);
+                    policy.RequireRole(SD.CUSTOMER, SD.CREATOR);
                 });
             });
 

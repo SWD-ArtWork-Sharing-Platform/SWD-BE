@@ -19,17 +19,18 @@ namespace Market.Controllers
         protected ResponseDTO _response;
         private IPackageServices _package_services;
         private IVnPayService _vnPayService;
-        private readonly IConfiguration _configuration;
+        private  IConfiguration _configuration;
         private ArtworkSharingPlatformContext _db;
         private IBankAccountRepository _bankAccountRepository;
 
-        public PackagePurchaseController(IPackageServices wishlist_servoces, IVnPayService vnPayService, ArtworkSharingPlatformContext db, IBankAccountRepository bankAccountRepository)
+        public PackagePurchaseController(IPackageServices wishlist_servoces, IVnPayService vnPayService, ArtworkSharingPlatformContext db, IBankAccountRepository bankAccountRepository, IConfiguration configuration)
         {
             this._response = new ResponseDTO();
             _package_services = wishlist_servoces;
             _vnPayService = vnPayService;   
             _db = db;
             _bankAccountRepository = bankAccountRepository;
+            _configuration = configuration;
         }
 
 
@@ -141,7 +142,7 @@ namespace Market.Controllers
                 VnPayResponseCode = Request.Query["vnp_ResponseCode"],
                 Success = true,
             };
-            if (string.IsNullOrEmpty(response.PaymentMethod) ||
+            if (
               string.IsNullOrEmpty(response.OrderDescription) ||
               string.IsNullOrEmpty(response.Order_Id) ||
               string.IsNullOrEmpty(response.PaymentId) ||
@@ -195,6 +196,7 @@ namespace Market.Controllers
                     await _db.DPaymentResponses.AddAsync(paymentResponse);      
                     await _db.SaveChangesAsync();   
 
+                    packageOfCreator.PaymentResponseId = paymentResponse.PaymentResponseId;   
                     packageOfCreator.Status = SD.PackageStatus.ACTIVE; 
                     packageOfCreator.GraceDate = DateTime.Now;  
                 }

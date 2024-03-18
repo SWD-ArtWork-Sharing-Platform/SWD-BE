@@ -2,9 +2,9 @@
 {
     public class PackageOFCreatorDTO
     {
-        public string PackageId { get; set; } = "";
+        public string PackageId { get; set; } = null!;
 
-        public string Id { get; set; } = "";
+        public string Id { get; set; } = null!;
 
         public DateTime? ExpiredDate { get; set; }
 
@@ -13,6 +13,8 @@
         public decimal? Price { get; set; }
 
         public string? Status { get; set; }
+
         public int Remain { get; set; }
+
     }
 }

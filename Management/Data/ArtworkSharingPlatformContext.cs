@@ -73,7 +73,7 @@ public partial class ArtworkSharingPlatformContext : DbContext
         {
             entity.HasKey(e => new { e.PackageId, e.Id });
 
-            entity.ToTable("D_PackageOfCreator");
+            entity.ToTable("D_PackageOfCreator", tb => tb.HasTrigger("CalculateExpiry"));
 
             entity.Property(e => e.PackageId)
                 .HasMaxLength(50)
@@ -87,11 +87,6 @@ public partial class ArtworkSharingPlatformContext : DbContext
                 .HasColumnName("Grace_date");
             entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
             entity.Property(e => e.Status).HasMaxLength(50);
-
-            entity.HasOne(d => d.Package).WithMany(p => p.DPackageOfCreators)
-                .HasForeignKey(d => d.PackageId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_D_PackageOfCreator_F_Package");
         });
 
         modelBuilder.Entity<FArtwork>(entity =>

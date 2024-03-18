@@ -55,7 +55,7 @@ public partial class ArtworkSharingPlatformContext : IdentityDbContext<Applicati
         {
             entity.HasKey(e => new { e.PackageId, e.Id });
 
-            entity.ToTable("D_PackageOfCreator");
+            entity.ToTable("D_PackageOfCreator", tb => tb.HasTrigger("CalculateExpiry"));
 
             entity.Property(e => e.PackageId)
                 .HasMaxLength(50)
@@ -70,6 +70,7 @@ public partial class ArtworkSharingPlatformContext : IdentityDbContext<Applicati
             entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
             entity.Property(e => e.Status).HasMaxLength(50);
         });
+
         modelBuilder.Entity<DWishlistDetail>(entity =>
         {
             entity.HasKey(e => e.WishlistDetailId);

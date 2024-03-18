@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Management.Models;
+namespace Auth.Models;
 
 public partial class DPackageOfCreator
 {
@@ -18,7 +18,6 @@ public partial class DPackageOfCreator
     public string? Status { get; set; }
 
     public int? PaymentResponseId { get; set; }
-    public int? Remain { get; set; }
 
-    public virtual FPackage Package { get; set; } = null!;
+    public int? Remain { get; set; }
 }

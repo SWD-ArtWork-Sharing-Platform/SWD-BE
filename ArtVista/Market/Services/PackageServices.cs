@@ -52,14 +52,14 @@ namespace Market.Services
 
         }
 
-        public async Task<IEnumerable<PackageOFCreatorDTO>> GetAllPurchasePackagebyUserID(string userID)
+        public async Task<IEnumerable<DPackageOfCreator>> GetAllPurchasePackagebyUserID(string userID)
         {
             IEnumerable<DPackageOfCreator>? Datalist = _db.DPackageOfCreators.Where(u => u.Id == userID)
                     .OrderBy(u => u.GraceDate);
+
             if (Datalist != null)
             {
-                IEnumerable<PackageOFCreatorDTO> returnObj = _mapper.Map<IEnumerable<PackageOFCreatorDTO>>(Datalist);
-                return returnObj;
+                return Datalist;
             }
             else
             {

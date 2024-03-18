@@ -51,6 +51,25 @@ public partial class ArtworkSharingPlatformContext : IdentityDbContext<Applicati
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<ApplicationUser>();
+        modelBuilder.Entity<DPackageOfCreator>(entity =>
+        {
+            entity.HasKey(e => new { e.PackageId, e.Id });
+
+            entity.ToTable("D_PackageOfCreator");
+
+            entity.Property(e => e.PackageId)
+                .HasMaxLength(50)
+                .HasColumnName("Package_ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.ExpiredDate)
+                .HasColumnType("datetime")
+                .HasColumnName("Expired_date");
+            entity.Property(e => e.GraceDate)
+                .HasColumnType("datetime")
+                .HasColumnName("Grace_date");
+            entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.Status).HasMaxLength(50);
+        });
         modelBuilder.Entity<DWishlistDetail>(entity =>
         {
             entity.HasKey(e => e.WishlistDetailId);

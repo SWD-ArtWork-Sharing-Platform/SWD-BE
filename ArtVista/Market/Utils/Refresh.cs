@@ -23,7 +23,6 @@ namespace Market.Utils
         public static DPackageOfCreator DPackageOfCreator(DPackageOfCreator obj)
         {
             obj.Id = null;
-            obj.Package = null;
 
             return obj;
         }

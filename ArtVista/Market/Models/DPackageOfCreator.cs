@@ -16,7 +16,6 @@ public partial class DPackageOfCreator
     public decimal? Price { get; set; }
 
     public string? Status { get; set; }
-    public int Remain { get; set; }
 
-    public virtual FPackage Package { get; set; } = null!;
+    public int Remain { get; set; }
 }

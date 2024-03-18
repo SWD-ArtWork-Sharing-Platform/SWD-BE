@@ -91,28 +91,23 @@ namespace Market
                 // Other configurations...
             }));
 
-            //builder.Services.AddAuthorization(options =>
-            //{
+            builder.Services.AddAuthorization(options => {
 
-            //    options.AddPolicy("ARTWORKMANAGEMENT", policy =>
-            //    {
-            //        policy.RequireRole(SD.ADMIN);
-            //        policy.RequireRole(SD.MODERATOR);
-            //        policy.RequireRole(SD.CREATOR);
-            //    });
+                options.AddPolicy("ARTWORKMANAGEMENT", policy =>
+                {
+                    policy.RequireRole(SD.ADMIN, SD.MODERATOR, SD.CREATOR);
+                });
 
-            //    options.AddPolicy("ORGANIZATION", policy =>
-            //    {
-            //        policy.RequireRole(SD.ADMIN);
-            //        policy.RequireRole(SD.MODERATOR);
-            //    });
+                options.AddPolicy("ORGANIZATION", policy =>
+                {
+                    policy.RequireRole(SD.ADMIN, SD.MODERATOR);
+                });
 
-            //    options.AddPolicy("CUSTOMER_USER", policy =>
-            //    {
-            //        policy.RequireRole(SD.CUSTOMER);
-            //        policy.RequireRole(SD.CREATOR);
-            //    });
-            //});
+                options.AddPolicy("CUSTOMER_USER", policy =>
+                {
+                    policy.RequireRole(SD.CUSTOMER, SD.CREATOR);
+                });
+            });
 
             var app = builder.Build();
 

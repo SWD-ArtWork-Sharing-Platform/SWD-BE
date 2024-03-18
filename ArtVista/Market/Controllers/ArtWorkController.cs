@@ -37,7 +37,7 @@ namespace Market.Controllers
             return _response;
         }
 
-        //[Authorize(Policy = "ARTWORKMANAGEMENT")]
+        [Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpPost("CreateArtWork")]
         public async Task<ResponseDTO> CreateArtWork(string creatorID,ArtWorkDTO artworkDTO)
         {
@@ -53,7 +53,7 @@ namespace Market.Controllers
             return _response;
         }
 
-        //[Authorize(Policy = "ARTWORKMANAGEMENT")]
+        [Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpPut("UpdateArtWork")]
         public async Task<ResponseDTO> UpdateArtWork(ArtWorkDTO artworkDTO)
         {
@@ -69,7 +69,7 @@ namespace Market.Controllers
             return _response;
         }
 
-        //[Authorize(Policy = "ARTWORKMANAGEMENT")]
+        [Authorize(Policy = "ARTWORKMANAGEMENT")]
         [HttpDelete("DeleteArtWork")]
         public async Task<ResponseDTO> DeleteArtWork(string id)
         {

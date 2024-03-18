@@ -62,19 +62,23 @@ namespace Market.Services
 
         public async Task<bool> CreateOrder(OrderResponseDTO obj)
         {
-            FOrder? headerData = _mapper.Map<FOrder>(obj.Header);
-            List<DOrderDetail>? details = _mapper.Map<List<DOrderDetail>>(obj.OrderDetails);
-            if (headerData != null && details != null)
-            {
-                _orderRepository.Add(headerData);       
-                foreach(DOrderDetail detail in details)
+            
+                FOrder? headerData = _mapper.Map<FOrder>(obj.Header);
+                List<DOrderDetail>? details = _mapper.Map<List<DOrderDetail>>(obj.OrderDetails);
+                if (headerData != null && details != null)
                 {
-                    _orderDetailsRepository.Add(detail);
-                }
-                await _db.SaveChangesAsync();
-                return true;
-            }
-            else
+                    headerData.DOrderDetails = null;
+                    _orderRepository.Add(headerData);
+                    await _db.SaveChangesAsync();
+                    foreach (DOrderDetail detail in details)
+                    {
+                        detail.Artwork = null;
+                        detail.Order = null;
+                        _orderDetailsRepository.Add(detail);
+                    }
+                    await _db.SaveChangesAsync();
+                    return true;
+                }elsecatch(Exception ex) 
             {
                 return false;
             }

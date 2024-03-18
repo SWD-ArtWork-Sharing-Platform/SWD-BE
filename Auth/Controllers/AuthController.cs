@@ -46,8 +46,8 @@ namespace Auth.Controllers
         public async Task<ResponseDTO> Register([FromBody] RegisterationRequestDTO model)
         {
             //PhoneCheck
-            
-            string url = "https://phonevalidation.abstractapi.com/v1/?api_key=0b4a7b91b44e40648af2b59fb2e8190c&phone=" +model.PhoneNumber;
+
+            string url = "https://phonevalidation.abstractapi.com/v1/?api_key=0b4a7b91b44e40648af2b59fb2e8190c&phone=" + model.PhoneNumber;
             var client = _httpClientFactory.CreateClient("PhoneCheck");
             var response = await client.GetAsync(url);
             var apiContent = await response.Content.ReadAsStringAsync();
@@ -83,7 +83,7 @@ namespace Auth.Controllers
                 NormalizedEmail = model.Email.ToUpper(),
                 Name = model.Name,
                 PhoneNumber = model.PhoneNumber,
-                Status =  SD.INACTIVE
+                Status = SD.INACTIVE
             };
             try
             {
@@ -98,14 +98,14 @@ namespace Auth.Controllers
                         Id = userToReturn.Id,
                         Name = userToReturn.Name,
                         PhoneNumber = userToReturn.PhoneNumber ?? "",
-                        
+
                     };
                     string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     //var callbackUrl = Url.Action(nameof(ConfirmEmail), "Auth", new { token, email = userDto.Email }, HttpContext.Request.Scheme);
-                    string returnUrl = "http://localhost:3000/ConfirmEmail/"+userDto.Email +"/" + token;
+                    string returnUrl = "http://localhost:3000/ConfirmEmail/" + userDto.Email + "/" + token;
 
                     string content = ContentMailUtil.GetContentRegisterAccount(returnUrl);
-                    string sendMail = SendMail.SendEmail(user.Email, "Confirm your account",content, "");
+                    string sendMail = SendMail.SendEmail(user.Email, "Confirm your account", content, "");
                     if (sendMail != "")
                     {
                         _response.IsSuccess = false;
@@ -154,13 +154,14 @@ namespace Auth.Controllers
                 _response.IsSuccess = false;
                 _response.Message = "Username or password is incorrect";
                 return BadRequest(_response);
-            }else if(loginResponse.User.Status == SD.INACTIVE)
+            }
+            else if (loginResponse.User.Status == SD.INACTIVE)
             {
                 _response.IsSuccess = false;
                 _response.Message = "Account is inactive!";
                 return BadRequest(_response);
             }
-            
+
             _response.Result = loginResponse;
             return Ok(_response);
         }
@@ -186,7 +187,22 @@ namespace Auth.Controllers
             return Ok(_response);
         }
 
-
+        [HttpPost("GetUserInfo")]
+        public async Task<IActionResult> GetUserInfo(string userID)
+        {
+            ApplicationUser assignRole = _db.ApplicationUsers.FirstOrDefault(u => u.Id == userID);
+            if (assignRole == null)
+            {
+                _response.IsSuccess = false;
+                _response.Message = "User not found!";
+                return BadRequest(_response);
+            }
+            else
+            {
+                _response.Result = assignRole;
+            }
+            return Ok(_response);
+        }
 
         [HttpPost("AssignRole")]
         public async Task<IActionResult> AssignRole([FromBody] RegisterationRequestDTO model)
@@ -209,10 +225,10 @@ namespace Auth.Controllers
                 var user = await _userManager.FindByEmailAsync(email);
                 if (user != null && user.Email != null)
                 {
-                    
-                     Random rand = new Random();
+
+                    Random rand = new Random();
                     int randomNumber = rand.Next(10000, 99999);
-                    string callbackurl ="http://localhost:3000/ResetPassword/" + email + "/" + randomNumber;
+                    string callbackurl = "http://localhost:3000/ResetPassword/" + email + "/" + randomNumber;
 
                     ID_F_ResetPass? reset = _db.ResetPasses.Find(email);
                     if (reset != null)
@@ -238,7 +254,7 @@ namespace Auth.Controllers
                         _response.IsSuccess = false;
                         _response.Message = sendMail;
                     }
-                   // _response.Result = Ok(_response);
+                    // _response.Result = Ok(_response);
                 }
                 else
                 {
@@ -254,7 +270,7 @@ namespace Auth.Controllers
             return _response;
         }
 
-      
+
         [HttpPost("ChangePasswordWithOldPass")]
         public async Task<IActionResult> ChangePasswordWithOldPass(ChangePasswordDTO model)
         {
@@ -272,17 +288,18 @@ namespace Auth.Controllers
         {
             try
             {
-                ID_F_ResetPass? confirm = _db.ResetPasses.FirstOrDefault( u=> u.Gmail == email);
-                if (confirm == null|| confirm.exprired_time >DateTime.Now || confirm.Code != code)
+                ID_F_ResetPass? confirm = _db.ResetPasses.FirstOrDefault(u => u.Gmail == email);
+                if (confirm == null || confirm.exprired_time > DateTime.Now || confirm.Code != code)
                 {
-                    return new ResponseDTO() { 
-                    IsSuccess = false,
-                    Message = "Token is not valid! "
+                    return new ResponseDTO()
+                    {
+                        IsSuccess = false,
+                        Message = "Token is not valid! "
                     };
                 }
                 else
                 {
-                    
+
 
                     _db.ResetPasses.Remove(confirm);
                     _db.SaveChanges();
@@ -296,7 +313,7 @@ namespace Auth.Controllers
                     {
                         IsSuccess = false,
                         Message = "User not found!"
-                    }; 
+                    };
                 }
 
                 // Thực hiện thay đổi mật khẩu
@@ -307,25 +324,26 @@ namespace Auth.Controllers
                 if (changePasswordResult.Succeeded)
                 {
                     _response.Message = "Change successfully!";
-                    return _response ;
+                    return _response;
                 }
-                else {
+                else
+                {
                     return new ResponseDTO()
                     {
                         IsSuccess = false,
                         Message = "Change unsuccessfully!"
                     };
                 }
-                
+
             }
             catch (Exception ex)
             {
                 _response.Message = ex.Message;
                 return _response;
             }
-        
+
         }
-        
+
         [HttpPut("UpdateAccount")]
         public async Task<ResponseDTO> UpdateAccount(ApplicationUser applicationUser)
         {
@@ -333,12 +351,12 @@ namespace Auth.Controllers
             try
             {
                 ApplicationUser? user = _db.ApplicationUsers.AsNoTracking().FirstOrDefault(
-                    u=>u.Id == applicationUser.Id);
+                    u => u.Id == applicationUser.Id);
                 if (user == null)
                 {
                     return new ResponseDTO()
                     {
-                        IsSuccess=false,
+                        IsSuccess = false,
                         Message = "User ID not found!"
                     };
                 }
@@ -357,9 +375,26 @@ namespace Auth.Controllers
             return _response;
         }
 
-       
+        [HttpPut("ChangeAccountStatus")]
+        public async Task<ResponseDTO> ChangeAccountStatus(string userID, string Status)
+        {
 
-
+            ApplicationUser? user = _db.ApplicationUsers.AsNoTracking().FirstOrDefault(
+                    u => u.Id ==userID);
+            if (user == null)
+            {
+                return new ResponseDTO()
+                {
+                    IsSuccess = false,
+                    Message = "User ID not found!"
+                };
+            }
+            user.Status = Status;
+            _db.ApplicationUsers.Update(user);
+            await _db.SaveChangesAsync();
+            _response.Message = "Updated successfully";
+            return _response;
+        }
     }
 }
 

@@ -7,6 +7,7 @@ using Market.Repository;
 using Market.Repository.IRepository;
 using Market.Services.IServices;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Market.Services
 {
@@ -31,18 +32,18 @@ namespace Market.Services
             }
             else
             {
-                string confirmCode = await GenerateVerifyCode(user.Email);
-                if (code == confirmCode)
-                {
+              
                     DBankAccount bankAccount = _mapper.Map<DBankAccount>(model);
                     if (bankAccount != null)
                     {
-                        bankAccount.Confirmed = true;
                         _bankAccountRepository.Add(bankAccount);
-                        _bankAccountRepository.Save();
-                        return true;
+                        if (bankAccount.ConfirmCode == code)
+                        {
+                            bankAccount.Confirmed = true;
+                            _bankAccountRepository.Save();
+                        return true
+                        }
                     }
-                }
                 else
                 {
                     return false;
@@ -54,13 +55,16 @@ namespace Market.Services
 
         public async Task<string> GenerateVerifyCode(string email)
         {
-            var user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
-            if (user != null)
+            var user = await _db.ApplicationUsers.FirstOrDefaultAsync(u => u.Email == email);
+            var userBank = _bankAccountRepository.Get(u => u.UserId == user.Id);
+            if (user != null && userBank !=  null)
             {
                 string code = Guid.NewGuid().ToString("N").Substring(0, 6);
                 string sendMail = SendMail.SendEmail(user.Email, "Confirm your bank account",
                                        "Your code to confirm bank account: " +
                                        code , "");
+                userBank.ConfirmCode = code;
+                await _db.SaveChangesAsync();       
                 return code;
             }
             else

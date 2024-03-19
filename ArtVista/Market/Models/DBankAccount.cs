@@ -13,6 +13,9 @@ public partial class DBankAccount
 
     public string AccountType { get; set; } = null!;
 
-    public decimal? Balance { get; set; }
-    public bool Confirmed { get; set; } 
+    public decimal Balance { get; set; }
+
+    public bool Confirmed { get; set; }
+
+    public string? ConfirmCode { get; set; }
 }

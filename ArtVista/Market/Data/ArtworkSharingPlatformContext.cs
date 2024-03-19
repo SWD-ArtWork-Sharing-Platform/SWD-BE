@@ -294,6 +294,7 @@ public partial class ArtworkSharingPlatformContext : IdentityDbContext<Applicati
             entity.Property(e => e.AccountNumber).HasMaxLength(50);
             entity.Property(e => e.AccountType).HasMaxLength(50);
             entity.Property(e => e.Balance).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.ConfirmCode).HasMaxLength(20);
         });
 
         modelBuilder.Entity<DPaymentResponse>(entity =>

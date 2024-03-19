@@ -49,6 +49,20 @@ namespace Market.Controllers
             return _response;
         }
 
+        [HttpPost("GenerateCode")]
+        public ResponseDTO GenerateCode(string userEmail)
+        {
+            try
+            {
+                _response.Result = _bankAccountService.GenerateVerifyCode(userEmail);
+            } catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+            }
+            return _response;
+        }
+
         [HttpGet("GetAllBankAccount")]
         public ResponseDTO GetAllBankAccount(string userId, string accountType)
         {

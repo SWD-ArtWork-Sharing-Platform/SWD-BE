@@ -41,7 +41,7 @@ namespace Market.Services
                         {
                             bankAccount.Confirmed = true;
                             _bankAccountRepository.Save();
-                        return true
+                        return true;
                         }
                     }
                 else

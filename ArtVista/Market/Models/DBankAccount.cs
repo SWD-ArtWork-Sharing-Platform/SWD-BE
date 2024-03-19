@@ -17,5 +17,4 @@ public partial class DBankAccount
 
     public bool Confirmed { get; set; }
 
-    public string? ConfirmCode { get; set; }
 }

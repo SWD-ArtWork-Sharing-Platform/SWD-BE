@@ -1,5 +1,6 @@
 
 using AutoMapper;
+using Management.AppHub;
 using Management.Data;
 using Management.Extension;
 using Management.Models;
@@ -114,6 +115,7 @@ namespace Management
                     policy.RequireRole(SD.CUSTOMER, SD.CREATOR);
                 });
             });
+            builder.Services.AddSignalR();
 
             var app = builder.Build();
 
@@ -126,11 +128,15 @@ namespace Management
                     c.RoutePrefix = string.Empty;
                 }
             });
+
+
             app.UseHttpsRedirection();
             app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthentication();
             app.UseAuthorization();
 
+            // Hub
+            app.MapHub<UserStatusHub>("/appHub/userStatusHub");
 
             app.MapControllers();
 

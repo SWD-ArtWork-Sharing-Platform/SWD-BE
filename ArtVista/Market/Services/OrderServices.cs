@@ -6,6 +6,7 @@ using Market.Repository;
 using Market.Repository.IRepository;
 using Market.Services.IServices;
 using Market.Utils;
+using System.Linq.Expressions;
 
 namespace Market.Services
 {
@@ -77,8 +78,9 @@ namespace Market.Services
                         _orderDetailsRepository.Add(detail);
                     }
                     await _db.SaveChangesAsync();
-                    return true;
-                }elsecatch(Exception ex) 
+                return true;
+                }
+            else
             {
                 return false;
             }

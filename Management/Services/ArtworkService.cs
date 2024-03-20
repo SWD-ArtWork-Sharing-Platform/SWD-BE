@@ -193,8 +193,7 @@ namespace Management.Services
                             file.Delete();
                         }
                         string fileName = artwork.ArtworkId + Path.GetExtension(Directory.GetCurrentDirectory());
-                        var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), fileName);
-                        using (var fileStream = new FileStream(filePathDirectory, FileMode.Create))
+                        using (var fileStream = new FileStream(fileName, FileMode.Create))
                         {
                             artworkDTO.Image.CopyTo(fileStream);
                         }

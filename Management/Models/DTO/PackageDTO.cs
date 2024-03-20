@@ -14,6 +14,5 @@
 
         public string? PackageTime { get; set; }    
 
-        public IEnumerable<PackageOfCreatorDTO>? PackageOfCreatorDTOs { get; set; }      
     }
 }

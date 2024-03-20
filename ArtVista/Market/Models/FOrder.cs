@@ -21,5 +21,7 @@ public partial class FOrder
 
     public DateTime? SoldDate { get; set; }
 
+    public int? PaymentResponseId { get; set; }
+
     public virtual ICollection<DOrderDetail> DOrderDetails { get; set; } = new List<DOrderDetail>();
 }

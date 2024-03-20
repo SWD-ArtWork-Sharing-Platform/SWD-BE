@@ -17,5 +17,7 @@ public partial class DPackageOfCreator
 
     public string? Status { get; set; }
 
-    public int Remain { get; set; }
+    public int? Remain { get; set; }
+    public int? PaymentResponseId { get; set; }
+
 }

@@ -7,6 +7,7 @@ using Market.Repository;
 using Market.Repository.IRepository;
 using Market.Services.IServices;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Market.Services
 {
@@ -15,12 +16,12 @@ namespace Market.Services
         private IMapper _mapper;
         private ArtworkSharingPlatformContext _db;
         private IBankAccountRepository _bankAccountRepository;
-        private UserManager<ApplicationUser> _userManager;  
+        private UserManager<ApplicationUser> _userManager;
         public BankAccountService(IMapper mapper, ArtworkSharingPlatformContext db, UserManager<ApplicationUser> userManager)
         {
-            _db = db;   
+            _db = db;
             _bankAccountRepository = new BankAccountRepository(_db);
-            _mapper = mapper;   
+            _mapper = mapper;
         }
         public async Task<bool> AddBankAccount(string userId, BankAccountDTO model, string code)
         {
@@ -31,14 +32,14 @@ namespace Market.Services
             }
             else
             {
-                string confirmCode = await GenerateVerifyCode(user.Email);
-                if (code == confirmCode)
+
+                DBankAccount bankAccount = _mapper.Map<DBankAccount>(model);
+                if (bankAccount != null)
                 {
-                    DBankAccount bankAccount = _mapper.Map<DBankAccount>(model);
-                    if (bankAccount != null)
+                    _bankAccountRepository.Add(bankAccount);
+                    if (user.ConfirmCode == code)
                     {
                         bankAccount.Confirmed = true;
-                        _bankAccountRepository.Add(bankAccount);
                         _bankAccountRepository.Save();
                         return true;
                     }
@@ -54,19 +55,18 @@ namespace Market.Services
 
         public async Task<string> GenerateVerifyCode(string email)
         {
-            var user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == email);
+            var user = _db.ApplicationUsers.FirstOrDefault(u => (u.Email ?? "").ToLower() == email.ToLower());
             if (user != null)
             {
                 string code = Guid.NewGuid().ToString("N").Substring(0, 6);
                 string sendMail = SendMail.SendEmail(user.Email, "Confirm your bank account",
                                        "Your code to confirm bank account: " +
-                                       code , "");
+                                       code, "");
+                user.ConfirmCode = code;
+                await _db.SaveChangesAsync();
                 return code;
             }
-            else
-            {
-                return string.Empty;
-            }
+            return string.Empty;
         }
 
         public async Task<IEnumerable<BankAccountDTO>> GetAllBankAccount(string? userId, string? accountType)
@@ -75,7 +75,7 @@ namespace Market.Services
             IEnumerable<BankAccountDTO> bankAccountDTOs = new List<BankAccountDTO>();
             if (!string.IsNullOrEmpty(userId))
             {
-                dataList = dataList.Where(u => u.UserId == userId); 
+                dataList = dataList.Where(u => u.UserId == userId);
             }
             if (!string.IsNullOrEmpty(accountType))
             {
@@ -123,8 +123,8 @@ namespace Market.Services
             DBankAccount updateObj = _mapper.Map<DBankAccount>(bankAccountDTO);
             if (bankAccount != null && updateObj != null)
             {
-                bankAccount = updateObj;    
-                _bankAccountRepository.Update(bankAccount); 
+                bankAccount = updateObj;
+                _bankAccountRepository.Update(bankAccount);
                 _bankAccountRepository.Save();
                 return true;
             }
@@ -134,12 +134,12 @@ namespace Market.Services
             }
         }
 
-        public async Task<bool> WithdrawMoney(string userId,decimal ammount)
+        public async Task<bool> WithdrawMoney(string userId, decimal ammount)
         {
             var user = _bankAccountRepository.Get(u => u.UserId == userId);
             if (user != null)
             {
-               user.Balance -= ammount;
+                user.Balance -= ammount;
                 _bankAccountRepository.Save();
                 return true;
             }

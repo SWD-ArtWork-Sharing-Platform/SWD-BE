@@ -55,7 +55,7 @@ public partial class ArtworkSharingPlatformContext : IdentityDbContext<Applicati
         {
             entity.HasKey(e => new { e.PackageId, e.Id });
 
-            entity.ToTable("D_PackageOfCreator");
+            entity.ToTable("D_PackageOfCreator", tb => tb.HasTrigger("CalculateExpiry"));
 
             entity.Property(e => e.PackageId)
                 .HasMaxLength(50)
@@ -70,6 +70,7 @@ public partial class ArtworkSharingPlatformContext : IdentityDbContext<Applicati
             entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
             entity.Property(e => e.Status).HasMaxLength(50);
         });
+
         modelBuilder.Entity<DWishlistDetail>(entity =>
         {
             entity.HasKey(e => e.WishlistDetailId);
@@ -293,13 +294,14 @@ public partial class ArtworkSharingPlatformContext : IdentityDbContext<Applicati
             entity.Property(e => e.AccountNumber).HasMaxLength(50);
             entity.Property(e => e.AccountType).HasMaxLength(50);
             entity.Property(e => e.Balance).HasColumnType("decimal(18, 2)");
+           
         });
 
         modelBuilder.Entity<DPaymentResponse>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("D_PaymentResponse");
+            entity.HasKey(e => e.PaymentResponseId).HasName("PK__D_Paymen__766E687AB63AE698");
+
+            entity.ToTable("D_PaymentResponse");
 
             entity.Property(e => e.OrderDescription)
                 .HasMaxLength(255)
@@ -324,7 +326,29 @@ public partial class ArtworkSharingPlatformContext : IdentityDbContext<Applicati
                 .HasMaxLength(50)
                 .IsUnicode(false);
         });
+        modelBuilder.Entity<DPaymentResponse>(entity =>
+        {
+            entity.HasKey(e => e.PaymentResponseId).HasName("PK__D_Paymen__766E687AB63AE698");
 
+            entity.ToTable("D_PaymentResponse");
+
+            entity.Property(e => e.OrderDescription)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.OrderId)
+                .HasMaxLength(50)
+                .HasColumnName("Order_Id");
+            entity.Property(e => e.PayDate).HasColumnType("date");
+            entity.Property(e => e.PaymentId)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.PaymentMethod)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.TransactionId)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+        });
         OnModelCreatingPartial(modelBuilder);
     }
 

@@ -86,7 +86,7 @@ namespace Management.Services
             try
             {
                 DInteraction interaction = _mapper.Map<DInteraction>(interactionDTO);
-                interaction.InteractionId = DateTime.Now.ToString();
+                interaction.InteractionId = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"); ;
                 _interactionRepository.Add(interaction);
                 _interactionRepository.Save();
                 _response.Result = _mapper.Map<InteractionDTO>(interaction);

@@ -84,7 +84,7 @@ namespace Market.Services
                 }
                 if (packageData != null)
                 {
-                    package.PackageId = DateTime.Now.ToString();
+                    package.PackageId = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
                     _db.DPackageOfCreators.Add(packageData);
                     _db.SaveChanges();
                     return true;

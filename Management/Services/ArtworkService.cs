@@ -39,7 +39,7 @@ namespace Management.Services
                     };
                 }
                 FArtwork artwork = _mapper.Map<FArtwork>(model);
-                artwork.ArtworkId = DateTime.Now.ToString();
+                artwork.ArtworkId = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
                 if (model.Image != null)
                 {
                     string fileName = artwork.Id + Path.GetExtension(model.Image.FileName);

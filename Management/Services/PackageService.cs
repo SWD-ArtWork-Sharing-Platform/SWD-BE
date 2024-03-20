@@ -25,7 +25,7 @@ namespace Management.Services
             try
             {
                 FPackage package = _mapper.Map<FPackage>(packageDTO);
-                package.PackageId = DateTime.Now.ToString();
+                package.PackageId = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"); ;
                 _packageRepository.Add(package);
                 _packageRepository.Save();
                 _response.Result = _mapper.Map<PackageDTO>(package);

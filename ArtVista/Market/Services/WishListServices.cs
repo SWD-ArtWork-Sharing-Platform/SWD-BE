@@ -64,7 +64,7 @@ namespace Market.Services
                 {
                     DWishlistDetail add = new DWishlistDetail()
                     {
-                        WishlistDetailId = DateTime.Now.ToString(),
+                        WishlistDetailId = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"),
                         ArtworkId = artwork,
                         WishlistId = HeaderData.WishlistId
                     };
@@ -78,7 +78,7 @@ namespace Market.Services
                 {
                     FWishlist header = new FWishlist()
                     {
-                        WishlistId = DateTime.Now.ToString(),
+                        WishlistId = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"),
                         Id = userID,
                         Total = 1,
                         Note = ""
@@ -88,7 +88,7 @@ namespace Market.Services
 
                     DWishlistDetail add = new DWishlistDetail()
                     {
-                        WishlistDetailId = DateTime.Now.ToString(),
+                        WishlistDetailId = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"),
                         ArtworkId = artwork,
                         WishlistId = header.WishlistId
                     };

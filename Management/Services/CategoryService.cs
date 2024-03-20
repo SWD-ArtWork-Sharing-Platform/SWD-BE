@@ -26,7 +26,7 @@ namespace Management.Services
             try
             {
                 DCategory category = _mapper.Map<DCategory>(categoryDTO);
-                category.CategoryId  = DateTime.Now.ToString();
+                category.CategoryId  = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"); ;
                 _categoryRepository.Add(category);
                 _categoryRepository.Save();
                 _response.Result = _mapper.Map<CategoryDTO>(category);

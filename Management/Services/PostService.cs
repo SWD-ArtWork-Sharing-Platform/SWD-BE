@@ -26,7 +26,7 @@ namespace Management.Services
             try
             {
                 FPost post = _mapper.Map<FPost>(postDTO);
-                post.PostId = DateTime.Now.ToString();
+                post.PostId = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"); ;
                 _postRepository.Add(post);
                 _postRepository.Save();
                 _response.Result = _mapper.Map<PostDTO>(post);

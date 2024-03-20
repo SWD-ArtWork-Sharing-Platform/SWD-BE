@@ -76,7 +76,7 @@ namespace Management.Services
                     Message = "Object not exist!"
                 };
             }
-            updateObj.ReportId = DateTime.Now.ToString();
+            updateObj.ReportId = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"); ;
             _reportRepository.Add(updateObj);
             _reportRepository.Save();
             return _response;

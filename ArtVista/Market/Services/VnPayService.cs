@@ -28,7 +28,7 @@ namespace Market.Services
             pay.AddRequestData("vnp_CurrCode", _configuration["Vnpay:CurrCode"]);
             pay.AddRequestData("vnp_IpAddr", pay.GetIpAddress(context));
             pay.AddRequestData("vnp_Locale", _configuration["Vnpay:Locale"]);
-            pay.AddRequestData("vnp_OrderInfo", $"{model.Id} {model.Total} {model.OrderId} {model.NumberOfDowload}");
+            pay.AddRequestData("vnp_OrderInfo", $"{model.Id} {model.Total * 100} {model.OrderId} {model.NumberOfDowload}");
             pay.AddRequestData("vnp_OrderType", "other");
 
             pay.AddRequestData("vnp_ReturnUrl", urlCallBack);
@@ -56,7 +56,7 @@ namespace Market.Services
             pay.AddRequestData("vnp_CurrCode", _configuration["Vnpay:CurrCode"]);
             pay.AddRequestData("vnp_IpAddr", pay.GetIpAddress(context));
             pay.AddRequestData("vnp_Locale", _configuration["Vnpay:Locale"]);
-            pay.AddRequestData("vnp_OrderInfo", $"{model.PackageId} {model.Price} {model.Id}");
+            pay.AddRequestData("vnp_OrderInfo", $"{model.PackageId} {model.Price * 100} {model.Id}");
             pay.AddRequestData("vnp_OrderType", "other");
 
             pay.AddRequestData("vnp_ReturnUrl", urlCallBack);

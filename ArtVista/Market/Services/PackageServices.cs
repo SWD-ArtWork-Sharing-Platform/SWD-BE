@@ -69,28 +69,30 @@ namespace Market.Services
 
         public async Task<bool> BuyPackage(string userID, PackageOFCreatorDTO obj)
         {
-            DPackageOfCreator packageData = _mapper.Map<DPackageOfCreator>(obj);
-            FPackage? package = _db.FPackages.FirstOrDefault(u => u.PackageId == obj.PackageId);
-            if (package == null)
-            {
-                //here
-                packageData.Remain = package.MaximumArtworks ?? 0;
-            }
-            else
-            {
-                packageData.Status = "0";
-            }
-            if (packageData != null)
-            {
-                _db.DPackageOfCreators.Add(packageData);
+            
+                DPackageOfCreator packageData = _mapper.Map<DPackageOfCreator>(obj);
+                FPackage? package = _db.FPackages.FirstOrDefault(u => u.PackageId == obj.PackageId);
+                if (package == null)
+                {
+                    //here
 
-                return true;
-            }
-            else
+                    packageData.Remain = package.MaximumArtworks ?? 0;
+                }
+                else
+                {
+                    packageData.Status = "0";
+                }
+                if (packageData != null)
+                {
+                    package.PackageId = DateTime.Now.ToString();
+                    _db.DPackageOfCreators.Add(packageData);
+                    _db.SaveChanges();
+                    return true;
+                }
+            // else
             {
                 return false;
             }
-
         }
 
 

@@ -42,7 +42,7 @@ namespace Management.Services
                 artwork.ArtworkId = DateTime.Now.ToString();
                 if (model.Image != null)
                 {
-                    string fileName = artwork.Id + Path.GetExtension(model.Image.FileName);
+                    string fileName =  Path.GetExtension(model.Image.FileName);
 
                     string[] fileNameParts = fileName.Split('/');
                     fileName = fileNameParts[fileNameParts.Length - 1];
@@ -52,7 +52,7 @@ namespace Management.Services
                     {
                         model.Image.CopyTo(fileStream);
                     }
-                    artwork.ImageUrl = "/ArtworkImages/" + fileName;
+                    artwork.ImageUrl =fileName;
                 }
 
                 _artworkRepository.Add(artwork);

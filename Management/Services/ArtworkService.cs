@@ -42,7 +42,7 @@ namespace Management.Services
                 artwork.ArtworkId = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
                 if (model.Image != null)
                 {
-                    string fileName =  Path.GetExtension(model.Image.FileName);
+                    string fileName = artwork.ArtworkName + Path.GetExtension(model.Image.FileName);
 
                     var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), fileName);
                     using (var fileStream = new FileStream(filePathDirectory, FileMode.Create))

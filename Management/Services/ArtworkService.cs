@@ -44,9 +44,6 @@ namespace Management.Services
                 {
                     string fileName =  Path.GetExtension(model.Image.FileName);
 
-                    string[] fileNameParts = fileName.Split('/');
-                    fileName = fileNameParts[fileNameParts.Length - 1];
-
                     var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), fileName);
                     using (var fileStream = new FileStream(filePathDirectory, FileMode.Create))
                     {

@@ -50,11 +50,11 @@ namespace Market.Controllers
         }
 
         [HttpPost("GenerateCode")]
-        public ResponseDTO GenerateCode(string userEmail)
+        public async Task<ResponseDTO> GenerateCode(string userEmail)
         {
             try
             {
-                _response.Result = _bankAccountService.GenerateVerifyCode(userEmail);
+                _response.Result = await _bankAccountService.GenerateVerifyCode(userEmail);
             } catch (Exception ex)
             {
                 _response.IsSuccess = false;

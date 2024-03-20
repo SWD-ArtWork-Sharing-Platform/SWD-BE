@@ -16,16 +16,17 @@ namespace Market.Services
         private IMapper _mapper;
         private ArtworkSharingPlatformContext _db;
         private IBankAccountRepository _bankAccountRepository;
-        private UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         public BankAccountService(IMapper mapper, ArtworkSharingPlatformContext db, UserManager<ApplicationUser> userManager)
         {
             _db = db;
             _bankAccountRepository = new BankAccountRepository(_db);
             _mapper = mapper;
+            _userManager = userManager; 
         }
         public async Task<bool> AddBankAccount(string userId, BankAccountDTO model, string code)
         {
-            ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Id == userId);
+            ApplicationUser? user = _db.ApplicationUsers.FirstOrDefault(u => u.Id == userId);
             if (user == null)
             {
                 return false;
@@ -53,20 +54,21 @@ namespace Market.Services
         }
 
 
-        public async Task<string> GenerateVerifyCode(string email)
+        public  async Task<string> GenerateVerifyCode(string email)
         {
-            var user = _db.ApplicationUsers.FirstOrDefault(u => (u.Email ?? "").ToLower() == email.ToLower());
-            if (user != null)
-            {
-                string code = Guid.NewGuid().ToString("N").Substring(0, 6);
-                string sendMail = SendMail.SendEmail(user.Email, "Confirm your bank account",
-                                       "Your code to confirm bank account: " +
-                                       code, "");
-                user.ConfirmCode = code;
-                await _db.SaveChangesAsync();
-                return code;
-            }
-            return string.Empty;
+            ApplicationUser? user = _db.ApplicationUsers.FirstOrDefault(u => (u.Email ?? "").ToLower() == email.ToLower());
+               
+                 if (user != null)
+                 {
+                     string code = Guid.NewGuid().ToString("N").Substring(0, 6);
+                     SendMail.SendEmail(user.Email, "Confirm your bank account",
+                                            "Your code to confirm bank account: " +
+                                            code, "");
+                     user.ConfirmCode = code;
+                      _db.SaveChangesAsync();
+                     return code;
+                 }
+                return string.Empty;
         }
 
         public async Task<IEnumerable<BankAccountDTO>> GetAllBankAccount(string? userId, string? accountType)

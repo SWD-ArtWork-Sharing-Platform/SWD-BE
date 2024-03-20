@@ -84,11 +84,11 @@ namespace Management.Controllers
 
         //[Authorize (Roles = SD.ADMIN)]
         [HttpDelete("DeleteConfigurationByID")]
-        public ResponseDTO DeleteConfigurationByID(string id, bool confirm)
+        public ResponseDTO DeleteConfigurationByID(string id)
         {
             try
             {
-                _response.Result =  _configurationService.DeleteConfigurationByID(id,confirm);
+                _response.Result =  _configurationService.DeleteConfigurationByID(id);
             }
             catch (Exception ex)
             {

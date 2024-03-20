@@ -41,17 +41,14 @@ namespace Management.Services
             return _response;
         }
 
-        public ResponseDTO DeleteConfigurationByID(string id, bool confirm)
+        public ResponseDTO DeleteConfigurationByID(string id)
         {
             try
             {
-                if (confirm == true)
-                {
-                    FConfiguration configuration = _db.FConfigurations.First(u => u.ConfigurationId == id);
-                    _configurationRepository.Remove(configuration);
-                    _configurationRepository.Save();
-                    _response.Result = _mapper.Map<ConfigurationDTO>(configuration);
-                }
+                FConfiguration configuration = _db.FConfigurations.First(u => u.ConfigurationId == id);
+                _configurationRepository.Remove(configuration);
+                _configurationRepository.Save();
+                _response.Result = _mapper.Map<ConfigurationDTO>(configuration);
             }
             catch (Exception ex)
             {

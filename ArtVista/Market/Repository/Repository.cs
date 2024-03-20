@@ -23,7 +23,7 @@ namespace Market.Repository
         {
             IQueryable<T> query = Dbset;
             query = query.Where(filter);
-            return query.FirstOrDefault();
+            return query.AsNoTracking().FirstOrDefault();
         }
 
         public IEnumerable<T> GetAll()

@@ -4,6 +4,7 @@ using Management.Models;
 using Management.Models.DTO;
 using Management.Repository.IRepository;
 using Management.Services.IService;
+using Microsoft.EntityFrameworkCore;
 
 namespace Management.Services
 {
@@ -39,15 +40,26 @@ namespace Management.Services
         {
             try
             {
-                DCategory category = _categoryRepository.Get(u => u.CategoryId == categoryId);
-                _categoryRepository.Remove(category);
-                _categoryRepository.Save();
-                _response.Result = _mapper.Map<CategoryDTO>(category);
+               
+                DCategory? category = _db.DCategory.AsNoTracking().FirstOrDefault(u => u.CategoryId == categoryId);
+
+                if (category == null)
+                {
+                    _response.IsSuccess = false;
+                    _response.Message = "No category found!";
+                }
+                else
+                {
+                    _db.DCategory.Remove(category);
+                    _db.SaveChanges();
+                    _response.Message = "Delete successfully!";
+                }                
             }
             catch (Exception ex)
             {
+                _response.Result = _db.FArtworks.Where( u => u.CategoryId == categoryId);
                 _response.IsSuccess = false;
-                _response.Message = ex.Message;
+                _response.Message = "Another artwork belong to this category!";
             }
             return _response;
         }
@@ -101,7 +113,8 @@ namespace Management.Services
             try
             {
                 DCategory category = _mapper.Map<DCategory>(categoryDTO);
-                DCategory oldCategory = _categoryRepository.Get(u => u.CategoryId == categoryDTO.CategoryId);
+                DCategory? oldCategory = _db.DCategory.AsNoTracking().FirstOrDefault(u => u.CategoryId == categoryDTO.CategoryId);
+
                 if (oldCategory == null)
                 {
                     _response.IsSuccess = false;

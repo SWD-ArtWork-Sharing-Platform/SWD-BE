@@ -70,7 +70,7 @@ namespace Management.Controllers
         {
             try
             {
-                _response.Result = _categoryService.GetCategoryByCondition(name, type);     
+                _response = _categoryService.GetCategoryByCondition(name, type);     
             }
             catch (Exception ex)
             {

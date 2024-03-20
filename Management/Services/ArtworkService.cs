@@ -46,14 +46,12 @@ namespace Management.Services
                     string[] fileNameParts = fileName.Split('/');
                     fileName = fileNameParts[fileNameParts.Length - 1];
 
-                    string localPathDirector = @"wwwroot\ArtworkImages\" + fileName;
-                    var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), localPathDirector);
+                    var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), fileName);
                     using (var fileStream = new FileStream(filePathDirectory, FileMode.Create))
                     {
                         model.Image.CopyTo(fileStream);
                     }
                     artwork.ImageUrl = "/ArtworkImages/" + fileName;
-                    artwork.ImageLocalPath = localPathDirector;
                 }
 
                 _artworkRepository.Add(artwork);
@@ -76,15 +74,6 @@ namespace Management.Services
                 {
                     FArtwork artwork =  _db.FArtworks.First(u => u.Id == id);
 
-                    if (!string.IsNullOrEmpty(artwork.ImageLocalPath))
-                    {
-                        var oldFilePathLocalDirectory = Path.Combine(Directory.GetCurrentDirectory(), artwork.ImageLocalPath);
-                        FileInfo file = new FileInfo(oldFilePathLocalDirectory);
-                        if (file.Exists)
-                        {
-                            file.Delete();
-                        }
-                    }
 
                     _artworkRepository.Remove(artwork);
                     _artworkRepository.Save();

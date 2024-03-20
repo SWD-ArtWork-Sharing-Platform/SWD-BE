@@ -2,7 +2,7 @@
 {
     public class ConfigurationDTO
     {
-        public string ConfigurationId { get; set; } = null!;
+        public string? ConfigurationId { get; set; }
 
         public decimal? CommisionFee { get; set; }
 

@@ -97,7 +97,7 @@ namespace Management.Services
             try
             {
                 FConfiguration configuration = _mapper.Map<FConfiguration>(configurationDTO);
-                FConfiguration oldConfiguration = _db.FConfigurations.First(u => u.ConfigurationId == configurationDTO.ConfigurationId);
+                FConfiguration oldConfiguration = _db.FConfigurations.AsNoTracking().First(u => u.ConfigurationId == configurationDTO.ConfigurationId);
                 if (oldConfiguration == null)
                 {
                     _response.IsSuccess = false;

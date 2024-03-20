@@ -5,7 +5,7 @@ namespace Management.Models;
 
 public partial class FConfiguration
 {
-    public string ConfigurationId { get; set; } = null!;
+    public string? ConfigurationId { get; set; } 
 
     public decimal? CommisionFee { get; set; }
 

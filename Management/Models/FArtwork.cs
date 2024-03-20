@@ -19,7 +19,6 @@ public partial class FArtwork
 
     public string? CategoryId { get; set; }
     public string? ImageUrl { get; set; }
-    public string? ImageLocalPath { get; set; }
 
     public virtual ICollection<FPost> FPosts { get; set; } = new List<FPost>();
 

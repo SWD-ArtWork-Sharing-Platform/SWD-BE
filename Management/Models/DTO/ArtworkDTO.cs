@@ -18,7 +18,6 @@ namespace Management.Models.DTO
 
         public string? CategoryId { get; set; }
         public string? ImageUrl { get; set; }
-        public string? ImageLocalPath { get; set; }
         public IFormFile? Image { get; set; }
         public IEnumerable<PostDTO>? PostDTOs { get; set; }
         public IEnumerable<ReportDTO>? ReportDTOs { get; set; }

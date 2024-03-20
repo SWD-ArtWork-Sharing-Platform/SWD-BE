@@ -27,6 +27,7 @@ namespace Management.Services
             {
                 DCategory category = _mapper.Map<DCategory>(categoryDTO);
                 _categoryRepository.Add(category);
+                _categoryRepository.Save();
                 _response.Result = _mapper.Map<CategoryDTO>(category);
             } catch (Exception ex)
             {

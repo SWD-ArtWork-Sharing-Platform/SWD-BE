@@ -39,7 +39,7 @@ namespace Management.Controllers
         {
             try
             {
-                _response.Result = _categoryService.DeleteCategory(categoryId);     
+                _response = _categoryService.DeleteCategory(categoryId);     
             }
             catch (Exception ex)
             {

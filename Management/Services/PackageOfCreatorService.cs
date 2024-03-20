@@ -26,6 +26,7 @@ namespace Management.Services
             try
             {
                 DPackageOfCreator packageOfCreator = _mapper.Map<DPackageOfCreator>(packageOfCreatorDTO);
+
                 _packageOfCreatorRepository.Add(packageOfCreator);
                 _packageOfCreatorRepository.Save();
                 _response.Result = _mapper.Map<PackageOfCreatorDTO>(packageOfCreator);

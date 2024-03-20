@@ -76,6 +76,7 @@ namespace Management.Services
                     Message = "Object not exist!"
                 };
             }
+            updateObj.ReportId = DateTime.Now.ToString();
             _reportRepository.Add(updateObj);
             _reportRepository.Save();
             return _response;
@@ -94,6 +95,7 @@ namespace Management.Services
                 };
             }
             data = updateObj;
+            data.Artwork = null;
             _reportRepository.Update(data);
             _reportRepository.Save();
             return _response;

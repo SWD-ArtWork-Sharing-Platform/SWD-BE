@@ -135,6 +135,7 @@ namespace Management.Services
                 else
                 {
                     oldPost = post;
+                    oldPost.Artwork = null;
                     _postRepository.Update(post);
                     _postRepository.Save();
                     _response.Result = _mapper.Map<PostDTO>(post);

@@ -26,6 +26,7 @@ namespace Management.Services
             try
             {
                 DCategory category = _mapper.Map<DCategory>(categoryDTO);
+                category.CategoryId  = DateTime.Now.ToString();
                 _categoryRepository.Add(category);
                 _categoryRepository.Save();
                 _response.Result = _mapper.Map<CategoryDTO>(category);
@@ -124,6 +125,7 @@ namespace Management.Services
                 else
                 {
                     oldCategory = category;
+                    
                     _categoryRepository.Update(oldCategory);
                     _categoryRepository.Save();
                     _response.Message = "Update successfully!";

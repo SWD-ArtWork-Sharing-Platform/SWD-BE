@@ -86,6 +86,7 @@ namespace Management.Services
             try
             {
                 DInteraction interaction = _mapper.Map<DInteraction>(interactionDTO);
+                interaction.InteractionId = DateTime.Now.ToString();
                 _interactionRepository.Add(interaction);
                 _interactionRepository.Save();
                 _response.Result = _mapper.Map<InteractionDTO>(interaction);
@@ -112,6 +113,7 @@ namespace Management.Services
                 else
                 {
                     oldInteraction = interaction;
+                    oldInteraction.Post = null;
                     _interactionRepository.Update(oldInteraction);
                     _interactionRepository.Save();
                     _response.Message = "Update successfully!";

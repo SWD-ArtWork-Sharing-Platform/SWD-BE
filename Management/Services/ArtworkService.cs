@@ -39,6 +39,7 @@ namespace Management.Services
                     };
                 }
                 FArtwork artwork = _mapper.Map<FArtwork>(model);
+                artwork.ArtworkId = DateTime.Now.ToString();
                 if (model.Image != null)
                 {
                     string fileName = artwork.Id + Path.GetExtension(model.Image.FileName);
@@ -173,6 +174,7 @@ namespace Management.Services
                 }
                 else
                 {
+                    
                     if (artworkDTO.Image != null)
                     {
                         var oldfilePathDirectory = Path.Combine(Directory.GetCurrentDirectory());
@@ -190,7 +192,8 @@ namespace Management.Services
                     }
 
                     oldArtwork = artwork;
-
+                    oldArtwork.FPosts = null;
+                    oldArtwork.FReports = null;
                     _artworkRepository.Update(oldArtwork);
                     _artworkRepository.Save();
                     _response.Message = "Update successfully!";

@@ -28,6 +28,7 @@ namespace Management.Services
             try
             {
                 FConfiguration configuration = _mapper.Map<FConfiguration>(configurationDTO);
+                configuration.ConfigurationId = DateTime.Now.ToString();
                 _configurationRepository.Add(configuration);
                 _configurationRepository.Save();
                 _response.Result = _mapper.Map<ConfigurationDTO>(configuration);

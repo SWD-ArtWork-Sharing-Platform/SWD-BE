@@ -25,6 +25,7 @@ namespace Management.Services
             try
             {
                 FPackage package = _mapper.Map<FPackage>(packageDTO);
+                package.PackageId = DateTime.Now.ToString();
                 _packageRepository.Add(package);
                 _packageRepository.Save();
                 _response.Result = _mapper.Map<PackageDTO>(package);
@@ -142,6 +143,7 @@ namespace Management.Services
                 else
                 {
                     oldPackage = package;
+                    oldPackage.DPackageOfCreators = null;
                     _packageRepository.Update(oldPackage);
                     _packageRepository.Save();
                     _response.Message = "Package updated successfully!";

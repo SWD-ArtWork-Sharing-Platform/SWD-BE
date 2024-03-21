@@ -122,6 +122,7 @@ namespace Market.Controllers
 
 
             var urlCallBack = _configuration["PaymentCallBack:ReturnUrl"];
+            var urlToCallBack = "https://artvista-website.vercel.app/user/order";
 
             var response = new PaymentResponse
             {
@@ -207,7 +208,7 @@ namespace Market.Controllers
             _response.Result = vnPayResponse;
             _db.SaveChanges();
 
-            return Redirect(urlCallBack);
+            return Redirect(urlToCallBack);
         }
 
     }

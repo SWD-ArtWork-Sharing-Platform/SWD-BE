@@ -47,19 +47,19 @@ namespace Auth.Controllers
         {
             //PhoneCheck
 
-            string url = "https://phonevalidation.abstractapi.com/v1/?api_key=0b4a7b91b44e40648af2b59fb2e8190c&phone=" + model.PhoneNumber;
-            var client = _httpClientFactory.CreateClient("PhoneCheck");
-            var response = await client.GetAsync(url);
-            var apiContent = await response.Content.ReadAsStringAsync();
-            var resp = JsonConvert.DeserializeObject<PhoneCheckDTO>(apiContent);
-            if (!resp.valid)
-            {
-                return new ResponseDTO
-                {
-                    IsSuccess = false,
-                    Message = "Not valid phone number"
-                };
-            }
+            //string url = "https://phonevalidation.abstractapi.com/v1/?api_key=0b4a7b91b44e40648af2b59fb2e8190c&phone=" + model.PhoneNumber;
+            //var client = _httpClientFactory.CreateClient("PhoneCheck");
+            //var response = await client.GetAsync(url);
+            //var apiContent = await response.Content.ReadAsStringAsync();
+            //var resp = JsonConvert.DeserializeObject<PhoneCheckDTO>(apiContent);
+            //if (!resp.valid)
+            //{
+            //    return new ResponseDTO
+            //    {
+            //        IsSuccess = false,
+            //        Message = "Not valid phone number"
+            //    };
+            //}
 
             string Eurl = "https://emailvalidation.abstractapi.com/v1/?api_key=6d23c9a3595f4aecbce5bffbeb1cd8e4&email=" + model.Email;
             var Eclient = _httpClientFactory.CreateClient("MailCheck");

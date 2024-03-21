@@ -40,18 +40,16 @@ namespace Management.Services
                 //}
                 FArtwork artwork = _mapper.Map<FArtwork>(model);
                 artwork.ArtworkId = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
-                if (model.Image != null)
+               /* if (model.Image != null)
                 {
                     string fileName = artwork.ArtworkName + Path.GetExtension(model.Image.FileName);
-                    string filePath = @"wwwroot\ArtworkImages\" + fileName;
-                    var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), filePath);
+                    var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), fileName);
                     using (var fileStream = new FileStream(filePathDirectory, FileMode.Create))
                     {
                         model.Image.CopyTo(fileStream);
                     }
                     artwork.ImageUrl =fileName;
-                    artwork.ImageLocalPath = filePath;  
-                }
+                }*/
 
                 _artworkRepository.Add(artwork);
                 _artworkRepository.Save();

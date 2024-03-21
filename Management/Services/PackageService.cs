@@ -4,6 +4,7 @@ using Management.Models;
 using Management.Models.DTO;
 using Management.Repository.IRepository;
 using Management.Services.IService;
+using Microsoft.EntityFrameworkCore;
 
 namespace Management.Services
 {
@@ -134,7 +135,7 @@ namespace Management.Services
             try
             {
                 FPackage package = _mapper.Map<FPackage>(packageDTO);
-                FPackage oldPackage = _packageRepository.Get(u => u.PackageId == packageDTO.PackageId);
+                FPackage oldPackage = _db.FPackages.AsNoTracking().FirstOrDefault(u => u.PackageId == packageDTO.PackageId);
                 if (oldPackage == null)
                 {
                     _response.IsSuccess = false;

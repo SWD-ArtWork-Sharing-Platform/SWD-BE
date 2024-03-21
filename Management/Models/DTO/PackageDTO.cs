@@ -2,7 +2,7 @@
 {
     public class PackageDTO
     {
-        public string PackageId { get; set; } = null!;
+        public string? PackageId { get; set; }
 
         public string? PackageName { get; set; }
 
@@ -14,6 +14,5 @@
 
         public string? PackageTime { get; set; }    
 
-        public IEnumerable<PackageOfCreatorDTO>? PackageOfCreatorDTOs { get; set; }      
     }
 }

@@ -29,27 +29,28 @@ namespace Management.Services
         {
             try
             {
-                DPackageOfCreator? currentPackage = _db.DPackageOfCreators.Where(u => u.Id == model.Id).OrderByDescending(item => item.ExpiredDate).FirstOrDefault();
-                if (currentPackage == null || currentPackage.Remain < 1)
-                {
-                    return new ResponseDTO()
-                    {
-                        IsSuccess = false,
-                        Message = "Creator must buy package to create artwork!"
-                    };
-                }
+                //DPackageOfCreator? currentPackage = _db.DPackageOfCreators.Where(u => u.Id == model.Id).OrderByDescending(item => item.ExpiredDate).FirstOrDefault();
+                //if (currentPackage == null || currentPackage.Remain < 1)
+                //{
+                //    return new ResponseDTO()
+                //    {
+                //        IsSuccess = false,
+                //        Message = "Creator must buy package to create artwork!"
+                //    };
+                //}
                 FArtwork artwork = _mapper.Map<FArtwork>(model);
                 artwork.ArtworkId = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
                 if (model.Image != null)
                 {
-                    string fileName =  Path.GetExtension(model.Image.FileName);
-
-                    var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+                    string fileName = artwork.ArtworkName + Path.GetExtension(model.Image.FileName);
+                    string filePath = @"wwwroot\ArtworkImages\" + fileName;
+                    var filePathDirectory = Path.Combine(Directory.GetCurrentDirectory(), filePath);
                     using (var fileStream = new FileStream(filePathDirectory, FileMode.Create))
                     {
                         model.Image.CopyTo(fileStream);
                     }
                     artwork.ImageUrl =fileName;
+                    artwork.ImageLocalPath = filePath;  
                 }
 
                 _artworkRepository.Add(artwork);

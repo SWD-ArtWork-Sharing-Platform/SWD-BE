@@ -132,6 +132,8 @@ namespace Market.Controllers
         public async Task<IActionResult> PaymentCallBackPackage()
         {
             var urlCallBack = _configuration["PaymentCallBackForPackage:ReturnUrl"];
+
+            var urlToCallBack = "https://artvista-website.vercel.app/user/order";
             var response = new PaymentResponse
             {
                 OrderDescription = Request.Query["vnp_OrderInfo"],
@@ -205,7 +207,7 @@ namespace Market.Controllers
             var vnPayResponse = _vnPayService.PaymentExecute(Request.Query);
             await _db.SaveChangesAsync();
 
-            return Redirect(urlCallBack);
+            return Redirect(urlToCallBack);
         }
     }
 }

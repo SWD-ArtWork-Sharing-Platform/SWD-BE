@@ -20,7 +20,7 @@
 
     public class Value_Text
     {
-        public bool value { get; set; } = false;
+        public bool? value { get; set; } = false;
         public string text { get; set; }
     }
 }
